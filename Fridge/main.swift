@@ -9,21 +9,33 @@
 import Foundation
 
 
-print("About to start downloading Fridge items")
+print("WELCOME TO FRIDGE")
 
 
 let target = URL(string: "https://www.google.rs")   //experiment with different soures
 var dlo = DownloadableObject(withURL: target!)
 dlo.onComplete = {
-    print("<Main.swift> Download of this object completed, called onComplete()")
+    print("Successfully loaded google.rs website")
+}
+
+var dlo1 = DownloadableObject()
+dlo1.objectURL = URL(string: "https://www.apple.com")!
+dlo1.onComplete = {
+    print("Successfully loaded apple.com website")
+}
+
+var dlo2 = DownloadableObject()
+dlo2.objectURL = URL(string: "https://www.facebook.com")!
+dlo2.onComplete = {
+    print("Successfully loaded facebook.com website")
 }
 
 //create downloader
-let d = Downloader(withObject: dlo)
+//let d = Downloader(withObject: dlo)
+let d = Downloader(withObjects: [dlo, dlo1, dlo2])
 d.download()
 
-//RunLoop.main.run()
-
+//hard stop app after 20 seconds...
 RunLoop.main.run(until: Date(timeIntervalSinceNow: 15))
 
 
