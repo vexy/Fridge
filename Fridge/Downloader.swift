@@ -27,69 +27,65 @@ struct DownloadableObject {
     
     init(withURL u : URL) {
         objectURL = u
-//        onComplete
+    }
+    
+    init(){
+        objectURL = URL(string: "https://www.google.com")!
     }
 }
 
-class Downloader {
-    private var object : DownloadableObject
+class Downloader : NSObject, URLSessionDownloadDelegate {
+    private var objects : [DownloadableObject]
 
 //    private let queue = DispatchQueue(label: "com.vexscited.fridge.downloader")
-//    private let customSession = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
+    private let q = OperationQueue()
+    private var background : URLSessionConfiguration?
+    private var downloadSession : URLSession?
     
-//    let o = URLSessionConfiguration.
-    
+    private var taskIDs : Dictionary<Int, DownloadableObject> = Dictionary<Int,DownloadableObject>()
+    
     init(withObject o : DownloadableObject) {
-        object = o
+        objects = [DownloadableObject()]
+        objects[0] = o
+        
+        background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
+        super.init()
+        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: nil)
+    }
+    
+    init(withObjects o : [DownloadableObject]) {
+        objects = o
+        background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
+        super.init()
+        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: nil)
+    }
+    
+    private func sessionSetup() {
+        background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
+        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: nil)
     }
     
     func download() {
-//        let sema = DispatchSemaphore(value: 1)
+        //cycle through entire collection of DownloadableObjects
+        print("<Downloader> Total objects to be downloaded : \(objects.count)")
+        for item in objects {
+            let downloadTask = downloadSession!.downloadTask(with: item.objectURL)
+            taskIDs[downloadTask.taskIdentifier] = item
+            //
+            downloadTask.resume()
+        }
+    }
+    
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        //print the path of the downloaded file
+        let downloadableObject = taskIDs[downloadTask.taskIdentifier]
         
-        //create download task based on our URL
-        print("<DLO> Starting download of : \(object.objectURL.absoluteString) .....")
+        print("DownloadTask URL is : \(downloadableObject?.objectURL.absoluteString)")
+     
         
-//        let s = URLSession(configuration: customSession)
-//        let s = URLSession()
-        let dlt = URLSession.shared.downloadTask(with: object.objectURL, completionHandler :
-        {
-            (fileURL : URL?, serverResponse : URLResponse?, errorCollection : Error?) -> Void in
-            
-            print("<DLO> Download complete, errors : \(errorCollection?.localizedDescription)")
-            
-            //examine errors if any (TODO: later !!)
-            guard errorCollection == nil else {
-                print("<DLO> Error occured, exiting...")
-                return
-            }
-            
-            //checkout path to our downloaded resource
-            if let f = fileURL {
-                print("<DLO> Object located at : \(f.absoluteURL)")
-            } else {
-                print("<DLO> Object is : \(fileURL?.absoluteURL)")
-            }
-            
-            OperationQueue.main.addOperation {
-                print("<DLO> dispatching closure to main queue !")
-                self.object.onComplete()
-            }
-            
-            
-            //signal semaphore
-            print("Signaling semaphore...")
-//            sema.signal()
-        })
-        dlt.resume()    //start actuall download
-//        sema.wait(timeout: .distantFuture)
-        
-        /*
-        URLSession().dataTask(with: object.objectURL, completionHandler: {
-            (d : Data?, respo : URLResponse?, somerrors : Error?) -> Void in
-            
-            
-        })
-        */
+        print("Downloaded file path : \(location.absoluteString), calling onComplete closure...")
+        downloadableObject?.onComplete()
     }
 }
 
