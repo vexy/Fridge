@@ -1,0 +1,9 @@
+language: objective-c
+
+osx_image: xcode8.1
+
+xcode_project: Fridge.xcodeproj
+
+xcode_scheme: Fridge
+
+xcode_sdk: iphonesimulator10.2
