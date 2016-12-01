@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C553FBE51DEDC58A000798D8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE41DEDC58A000798D8 /* main.swift */; };
 		C553FBEA1DEDC9FA000798D8 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Downloader.swift */; };
+		C56923651DF076AD0023DF0E /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* DownloadItem.swift */; };
+		C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C505E0611DEFAFE600442DDE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C553FBE11DEDC58A000798D8 /* Fridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fridge; sourceTree = BUILT_PRODUCTS_DIR; };
 		C553FBE41DEDC58A000798D8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C553FBE91DEDC9FA000798D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		C56923641DF076AD0023DF0E /* DownloadItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
+		C56923661DF077CA0023DF0E /* FridgeErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C505E0601DEFAFC700442DDE /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				C505E0611DEFAFE600442DDE /* README.md */,
+			);
+			name = Docs;
+			sourceTree = "<group>";
+		};
 		C553FBD61DEDC540000798D8 = {
 			isa = PBXGroup;
 			children = (
@@ -59,7 +72,10 @@
 		C553FBE31DEDC58A000798D8 /* Fridge */ = {
 			isa = PBXGroup;
 			children = (
+				C505E0601DEFAFC700442DDE /* Docs */,
 				C553FBE41DEDC58A000798D8 /* main.swift */,
+				C56923641DF076AD0023DF0E /* DownloadItem.swift */,
+				C56923661DF077CA0023DF0E /* FridgeErrors.swift */,
 				C553FBE91DEDC9FA000798D8 /* Downloader.swift */,
 			);
 			path = Fridge;
@@ -124,6 +140,8 @@
 			files = (
 				C553FBEA1DEDC9FA000798D8 /* Downloader.swift in Sources */,
 				C553FBE51DEDC58A000798D8 /* main.swift in Sources */,
+				C56923651DF076AD0023DF0E /* DownloadItem.swift in Sources */,
+				C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +204,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.12;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -229,7 +247,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.12;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -253,6 +271,7 @@
 				C553FBE81DEDC58A000798D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
