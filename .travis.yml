@@ -8,6 +8,9 @@ xcode_sdk: macosx10.12
 branches:
   only:
   - master
+  
+script:
+- xcodebuild clean build -project Fridge.xcodeproj -scheme Fridge
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
