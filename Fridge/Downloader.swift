@@ -11,15 +11,6 @@
 
 import Foundation
 
-//define custom DispatchQueue
-
-//define work item
-
-//accept URL to download
-
-//execute download
-
-//send back downloaded URL object
 
 struct DownloadableObject {
     var objectURL : URL
@@ -34,30 +25,39 @@ struct DownloadableObject {
     }
 }
 
+/** Class used to asynchronously download object from the internet in the background */
 class Downloader : NSObject, URLSessionDownloadDelegate {
     private var objects : [DownloadableObject]
 
-//    private let queue = DispatchQueue(label: "com.vexscited.fridge.downloader")
-    private let q = OperationQueue()
+    private let queue = DispatchQueue(label: "com.vexscited.fridge.downloader", qos: DispatchQoS.utility)
+    private let opQueue = OperationQueue()
+    //
     private var background : URLSessionConfiguration?
     private var downloadSession : URLSession?
     
     private var taskIDs : Dictionary<Int, DownloadableObject> = Dictionary<Int,DownloadableObject>()
-    
+    
     init(withObject o : DownloadableObject) {
         objects = [DownloadableObject()]
         objects[0] = o
         
         background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
         super.init()
-        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: nil)
+        
+        
+        opQueue.qualityOfService = .background
+        opQueue.maxConcurrentOperationCount = 4
+        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
     }
     
     init(withObjects o : [DownloadableObject]) {
         objects = o
         background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
         super.init()
-        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: nil)
+        
+        opQueue.qualityOfService = .background
+        opQueue.maxConcurrentOperationCount = 4
+        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
     }
     
     private func sessionSetup() {
@@ -70,9 +70,15 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
         print("<Downloader> Total objects to be downloaded : \(objects.count)")
         for item in objects {
             let downloadTask = downloadSession!.downloadTask(with: item.objectURL)
+            
+            //add this downloadable to tracker
             taskIDs[downloadTask.taskIdentifier] = item
-            //
-            downloadTask.resume()
+            
+            //start download task asynchronously
+            queue.async {
+                print("💣 <Downloader> Queuing task # \(downloadTask.taskIdentifier)")
+                downloadTask.resume()
+            }
         }
     }
     
@@ -81,10 +87,19 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
         //print the path of the downloaded file
         let downloadableObject = taskIDs[downloadTask.taskIdentifier]
         
-        print("DownloadTask URL is : \(downloadableObject?.objectURL.absoluteString)")
-     
+        print("⏺ Task #\(downloadTask.taskIdentifier) completed.\nDownloaded file path : \(location.absoluteString) -> onComplete()...")
         
-        print("Downloaded file path : \(location.absoluteString), calling onComplete closure...")
+        //dumb compy of this object to /Desktop directory
+        let desktopDirectoryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.desktopDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+        let newFileName = desktopDirectoryPath + "/Fridge/tempFile" + downloadTask.taskIdentifier.description + ".png"
+        let destinationURL = URL(fileURLWithPath: newFileName)
+        
+        do {
+            try FileManager.default.copyItem(at: location, to: destinationURL)
+        }catch {
+            print("Error copying file to destination ; \(error.localizedDescription)")
+        }
+        
         downloadableObject?.onComplete()
     }
 }
