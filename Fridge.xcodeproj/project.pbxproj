@@ -24,6 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C505E0611DEFAFE600442DDE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C553FBE11DEDC58A000798D8 /* Fridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fridge; sourceTree = BUILT_PRODUCTS_DIR; };
 		C553FBE41DEDC58A000798D8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C553FBE91DEDC9FA000798D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
@@ -40,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C505E0601DEFAFC700442DDE /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				C505E0611DEFAFE600442DDE /* README.md */,
+			);
+			name = Docs;
+			sourceTree = "<group>";
+		};
 		C553FBD61DEDC540000798D8 = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +68,7 @@
 		C553FBE31DEDC58A000798D8 /* Fridge */ = {
 			isa = PBXGroup;
 			children = (
+				C505E0601DEFAFC700442DDE /* Docs */,
 				C553FBE41DEDC58A000798D8 /* main.swift */,
 				C553FBE91DEDC9FA000798D8 /* Downloader.swift */,
 			);
@@ -253,6 +263,7 @@
 				C553FBE81DEDC58A000798D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
