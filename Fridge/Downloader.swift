@@ -12,22 +12,9 @@
 import Foundation
 
 
-struct DownloadableObject {
-    var objectURL : URL
-    var onComplete : () -> () = {}
-    
-    init(withURL u : URL) {
-        objectURL = u
-    }
-    
-    init(){
-        objectURL = URL(string: "https://www.google.com")!
-    }
-}
-
 /** Class used to asynchronously download object from the internet in the background */
 class Downloader : NSObject, URLSessionDownloadDelegate {
-    private var objects : [DownloadableObject]
+    private var objects : [DownloadItem]
 
     private let queue = DispatchQueue(label: "com.vexscited.fridge.downloader", qos: DispatchQoS.utility)
     private let opQueue = OperationQueue()
@@ -35,10 +22,10 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     private var background : URLSessionConfiguration?
     private var downloadSession : URLSession?
     
-    private var taskIDs : Dictionary<Int, DownloadableObject> = Dictionary<Int,DownloadableObject>()
+    private var taskIDs : Dictionary<Int, DownloadItem> = Dictionary<Int,DownloadItem>()
     
-    init(withObject o : DownloadableObject) {
-        objects = [DownloadableObject()]
+    init(withObject o : DownloadItem) {
+        objects = [DownloadItem()]
         objects[0] = o
         
         background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
@@ -50,7 +37,7 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
         downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
     }
     
-    init(withObjects o : [DownloadableObject]) {
+    init(withObjects o : [DownloadItem]) {
         objects = o
         background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
         super.init()
@@ -66,10 +53,10 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     }
     
     func download() {
-        //cycle through entire collection of DownloadableObjects
+        //cycle through entire collection of DownloadItems
         print("<Downloader> Total objects to be downloaded : \(objects.count)")
         for item in objects {
-            let downloadTask = downloadSession!.downloadTask(with: item.objectURL)
+            let downloadTask = downloadSession!.downloadTask(with: item.itemURL)
             
             //add this downloadable to tracker
             taskIDs[downloadTask.taskIdentifier] = item
@@ -85,7 +72,7 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         //print the path of the downloaded file
-        let downloadableObject = taskIDs[downloadTask.taskIdentifier]
+        let DownloadItem = taskIDs[downloadTask.taskIdentifier]
         
         print("⏺ Task #\(downloadTask.taskIdentifier) completed.\nDownloaded file path : \(location.absoluteString) -> onComplete()...")
         
@@ -96,11 +83,13 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
         
         do {
             try FileManager.default.copyItem(at: location, to: destinationURL)
+            
+            //report success
+            DownloadItem?.onComplete(destinationURL)
         }catch {
             print("Error copying file to destination ; \(error.localizedDescription)")
+            DownloadItem?.onFailure(FridgeError.generalError)
         }
-        
-        downloadableObject?.onComplete()
     }
 }
 

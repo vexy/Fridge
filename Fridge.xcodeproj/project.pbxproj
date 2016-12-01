@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C553FBE51DEDC58A000798D8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE41DEDC58A000798D8 /* main.swift */; };
 		C553FBEA1DEDC9FA000798D8 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Downloader.swift */; };
+		C56923651DF076AD0023DF0E /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* DownloadItem.swift */; };
+		C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,8 @@
 		C553FBE11DEDC58A000798D8 /* Fridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fridge; sourceTree = BUILT_PRODUCTS_DIR; };
 		C553FBE41DEDC58A000798D8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C553FBE91DEDC9FA000798D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		C56923641DF076AD0023DF0E /* DownloadItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
+		C56923661DF077CA0023DF0E /* FridgeErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 			children = (
 				C505E0601DEFAFC700442DDE /* Docs */,
 				C553FBE41DEDC58A000798D8 /* main.swift */,
+				C56923641DF076AD0023DF0E /* DownloadItem.swift */,
+				C56923661DF077CA0023DF0E /* FridgeErrors.swift */,
 				C553FBE91DEDC9FA000798D8 /* Downloader.swift */,
 			);
 			path = Fridge;
@@ -134,6 +140,8 @@
 			files = (
 				C553FBEA1DEDC9FA000798D8 /* Downloader.swift in Sources */,
 				C553FBE51DEDC58A000798D8 /* main.swift in Sources */,
+				C56923651DF076AD0023DF0E /* DownloadItem.swift in Sources */,
+				C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
