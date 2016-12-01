@@ -3,28 +3,31 @@
 [![codecov](https://codecov.io/gh/vexy/Fridge/branch/master/graph/badge.svg)](https://codecov.io/gh/vexy/Fridge)
 
 
-**STILL UNDER HEAVY DEVELOPMENT**
+**Fridge** is simple and uber easy to use background object downloader. And it's 100% Siwft3 !!
 
-Fridge is uber easy to use background object downloader.
-
----
 
 ## Basic usage example :
 
 ```Swift
-//declare object you want to download
-let target = URL(string: "https://www.google.com")!  //experiment with different soures or real files
-var dlo = DownloadableObject(withURL: target)
+//#1: declare object you want to download
+var item = DownloadItem()
 
-dlo.onComplete = {
-    print("◉ Successfully downloaded google.com page")
+item.itemURL = URL(string: "http://www.google.com")!
+
+//#2: declare action (closures) that will be performed after download  (psst.. things will work just fine even if you don't do this !! 😜)
+item.onComplete = { (object) in
+    print("💪 Download complete ! File is permanently stored at : \(object.absoluteString)")
+}
+item.onFailure = { (error) in
+    print("👎 Unable to complete download ! Following error occured \(error.localizedDescription)")
 }
 
-
-//..and download it !!
-let d = Downloader(withObject: dlo)
-d.download()
+//#3: kick-off your download !!
+let d = Downloader.shared
+d.download(item: item)
 ```
 
+
+**STILL UNDER HEAVY DEVELOPMENT**
 
 Stay tunned for more !!

@@ -11,6 +11,7 @@ import Foundation
 /** Collection of errors that can arise during download process */
 public enum FridgeError : Error {
     case notEnoughSpace
+    case invalidScheme
     case permissionsError
     case generalError
 }

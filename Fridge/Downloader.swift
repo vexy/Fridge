@@ -14,9 +14,9 @@ import Foundation
 
 /** Class used to asynchronously download object from the internet in the background */
 class Downloader : NSObject, URLSessionDownloadDelegate {
-    private var objects : [DownloadItem]
+    private var objects : [DownloadItem] = [DownloadItem()]
 
-    private let queue = DispatchQueue(label: "com.vexscited.fridge.downloader", qos: DispatchQoS.utility)
+    private let queue = DispatchQueue(label: "com.vexscited.fridge.dispatcher", qos: DispatchQoS.utility)
     private let opQueue = OperationQueue()
     //
     private var background : URLSessionConfiguration?
@@ -24,46 +24,45 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     
     private var taskIDs : Dictionary<Int, DownloadItem> = Dictionary<Int,DownloadItem>()
     
-    init(withObject o : DownloadItem) {
-        objects = [DownloadItem()]
-        objects[0] = o
-        
-        background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
-        super.init()
-        
-        
-        opQueue.qualityOfService = .background
-        opQueue.maxConcurrentOperationCount = 4
-        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
-    }
+    //shared singleton instance
+    public static let shared = Downloader()
     
-    init(withObjects o : [DownloadItem]) {
-        objects = o
-        background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
+    //default initializer
+    private override init() {
         super.init()
         
         opQueue.qualityOfService = .background
         opQueue.maxConcurrentOperationCount = 4
-        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
-    }
-    
-    private func sessionSetup() {
+        
         background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
-        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: nil)
+        downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
+        
+//        downloadSession?.finishTasksAndInvalidate()
+        
+        taskIDs.removeAll()
     }
     
-    func download() {
-        //cycle through entire collection of DownloadItems
-        print("<Downloader> Total objects to be downloaded : \(objects.count)")
-        for item in objects {
+    /** Starts downloading an item */
+    func download(item : DownloadItem) {
+        let downloadTask = downloadSession!.downloadTask(with: item.itemURL)
+        
+        print("⚙<Downloader> Adding single task #\(downloadTask.taskIdentifier)")
+        
+        taskIDs[downloadTask.taskIdentifier] = item
+        downloadTask.resume()
+    }
+    
+    /** Starts downloading array of items */
+    func download(items : [DownloadItem]) {
+        for item in items {
             let downloadTask = downloadSession!.downloadTask(with: item.itemURL)
             
             //add this downloadable to tracker
             taskIDs[downloadTask.taskIdentifier] = item
             
-            //start download task asynchronously
+            //start downloading tasks asynchronously
             queue.async {
-                print("💣 <Downloader> Queuing task # \(downloadTask.taskIdentifier)")
+                print("⚙<Downloader> Adding task #\(downloadTask.taskIdentifier)")
                 downloadTask.resume()
             }
         }
@@ -71,25 +70,54 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        //print the path of the downloaded file
-        let DownloadItem = taskIDs[downloadTask.taskIdentifier]
+        let downloadedItem = taskIDs[downloadTask.taskIdentifier]
         
-        print("⏺ Task #\(downloadTask.taskIdentifier) completed.\nDownloaded file path : \(location.absoluteString) -> onComplete()...")
+        guard downloadedItem != nil else { print("Unable to obtain download task"); return }
         
-        //dumb compy of this object to /Desktop directory
-        let desktopDirectoryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.desktopDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
-        let newFileName = desktopDirectoryPath + "/Fridge/tempFile" + downloadTask.taskIdentifier.description + ".png"
-        let destinationURL = URL(fileURLWithPath: newFileName)
+        print("⏺ Task #\(downloadTask.taskIdentifier) completed.\nTemporary file path : \(location.absoluteString)")
         
         do {
-            try FileManager.default.copyItem(at: location, to: destinationURL)
+            let result = try permaCopy(item: downloadedItem!, at: location)
+            print("Temp file copied to : \(result.absoluteString)")
             
-            //report success
-            DownloadItem?.onComplete(destinationURL)
-        }catch {
-            print("Error copying file to destination ; \(error.localizedDescription)")
-            DownloadItem?.onFailure(FridgeError.generalError)
+            DispatchQueue.main.sync {
+                downloadedItem?.onComplete(result)
+            }
+        } catch {
+            print("Unable to copy item to it's destination !\nError : \(error.localizedDescription)")
+            DispatchQueue.main.sync {
+                downloadedItem?.onFailure(FridgeError.generalError)
+            }
         }
+    }
+    
+    
+    
+    /** Utility function used to copy downloaded object to disk */
+    private func permaCopy(item : DownloadItem, at location : URL) throws -> URL {
+        //if item has desired location use that as final destination, otherwise copy to Caches folder
+        let finalDestination : URL
+        let fileName : String = UUID().uuidString + ".tmp"
+        var finalFilePath : URL
+        
+        if let _ = item.desiredLocation {
+            finalDestination = item.desiredLocation!
+            
+            finalFilePath = URL(fileURLWithPath: finalDestination.absoluteString + "/" + fileName)
+        } else {
+            let cacheDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] + "/Fridge/"
+         
+            finalFilePath = URL(fileURLWithPath: cacheDirectory + fileName)
+        }
+        
+        do {
+            try FileManager.default.copyItem(at: location, to: finalFilePath)
+        } catch {
+            print("ERROR : Unable to copy file to final destination !")
+            throw FridgeError.generalError
+        }
+        
+        return finalFilePath
     }
 }
 

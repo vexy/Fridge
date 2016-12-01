@@ -13,8 +13,21 @@ import Foundation
 typealias success = (_ item: URL) -> ()
 typealias failure = (_ error : FridgeError) -> ()
 
+/** Represents an item that should be downloaded from internet */
 struct DownloadItem {
-    var itemURL : URL
+    var itemURL : URL {
+        willSet {
+            if let _ = newValue.scheme {
+                if !(newValue.scheme!.contains("http") || newValue.scheme!.contains("https")) {
+                    assertionFailure("Only http and https schemes are allowed")
+                }
+            } else {
+                assertionFailure("Only http and https schemes are allowed")
+            }
+        }
+    }
+    var desiredLocation : URL?
+    
     var onComplete : success = {_ in return}
     var onFailure : failure = {_ in return}
     
@@ -27,13 +40,12 @@ struct DownloadItem {
     }
     
     init(withString s : String) throws {
-        //check if we have valid scheme for this string
-        //valid schemes : http and https
+        //check if we have valid scheme for this string ; valid schemes are http and https
         
         if s.contains("http") || s.contains("https") {
             itemURL = URL(string: s)!
         } else {
-            throw FridgeError.generalError
+            throw FridgeError.invalidScheme
         }
     }
 }

@@ -11,53 +11,36 @@ import Foundation
 
 print("WELCOME TO ❄️FRIDGE❄️")
 
+//initalize shared downloader
 
-let target = URL(string: "tps://www.google.rs")!   //experiment with different soures
-var dlo = DownloadItem(withURL: target)
-dlo.onComplete = { (object) in
-    print("◉ Successfully loaded google.rs website")
-}
-
-var dlo1 = DownloadItem()
-dlo1.itemURL = URL(string: "https://www.apple.com")!
-dlo1.onComplete = { (object) in
-    print("◉ Successfully loaded apple.com website, downloaded object can be found in : \(object.absoluteString)")
-}
-
-var dlo2 = DownloadItem()
-dlo2.itemURL = URL(string: "https://www.facebook.com")!
-dlo2.onComplete = { (object) in
-    print("◉ Successfully loaded facebook.com website")
-}
-
-//create downloader
-//let d = Downloader(withObject: dlo)
-///*
-let d = Downloader(withObjects: [dlo, dlo1, dlo2])
-d.download()
-//*/
-
-//check the throwing init
 do {
-    let itm = try DownloadItem(withString: "ht//someBadString")
-    d.download()
-} catch FridgeError.generalError {
-    print("✋ Unable to create download item, check your schemes !!")
+//    var item = try DownloadItem(withString: "www.google.com")
+    var item = DownloadItem()
+    
+    item.itemURL = URL(string: "http://www.google.com")!
+    item.onComplete = { (object) in
+        print("💪 Download complete ! File is permanently stored at : \(object.absoluteString)")
+    }
+    item.onFailure = { (error) in
+        print("✋ Unable to complete download ! Following error occured \(error.localizedDescription)")
+    }
+    
+    let d = Downloader.shared
+    d.download(item: item)
+    
+    ///*
+    let imageFile = try DownloadItem(withString: "http://localhost:8888/images/Red.png")
+    let imageFile2 = try DownloadItem(withString: "http://localhost:8888/images/Blue.png")
+    let imageFile3 = try DownloadItem(withString: "http://localhost:8888/images/Yellow.png")
+    let imageFile4 = try DownloadItem(withString: "http://localhost:8888/images/Violet.png")
+    let imageFile5 = try DownloadItem(withString: "http://localhost:8888/images/Pattern.png")
+
+    d.download(items: [imageFile, imageFile2, imageFile3, imageFile4, imageFile5])
+    //*/
+    
+} catch {
+    print("Unable to create Download item")
 }
-
-// d.download(object(s))
-
-/*
-let imageFile = DownloadItem(withURL: URL(string: "http://localhost:8888/images/Red.png")!)
-let imageFile2 = DownloadItem(withURL: URL(string: "http://localhost:8888/images/Blue.png")!)
-let imageFile3 = DownloadItem(withURL: URL(string: "http://localhost:8888/images/Yellow.png")!)
-let imageFile4 = DownloadItem(withURL: URL(string: "http://localhost:8888/images/Violet.png")!)
-let imageFile5 = DownloadItem(withURL: URL(string: "http://localhost:8888/images/Pattern.png")!)
-
-let d1 = Downloader(withObjects: [imageFile, imageFile2, imageFile3, imageFile4, imageFile5])
-
-d1.download()
- */
 
 //hard stop app after 10 seconds...
 RunLoop.main.run(until: Date(timeIntervalSinceNow: 10))
