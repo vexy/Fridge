@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/vexy/Fridge.svg?branch=master)](https://travis-ci.org/vexy/Fridge)
 [![codecov](https://codecov.io/gh/vexy/Fridge/branch/master/graph/badge.svg)](https://codecov.io/gh/vexy/Fridge)
 
-
 **Fridge** is simple and uber easy to use background object downloader. And it's 100% Siwft3 !!
 
 ## Basic usage example :
