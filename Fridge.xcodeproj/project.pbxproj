@@ -32,6 +32,7 @@
 		C553FBE91DEDC9FA000798D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		C56923641DF076AD0023DF0E /* DownloadItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
 		C56923661DF077CA0023DF0E /* FridgeErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeErrors.swift; sourceTree = "<group>"; };
+		C5D0E6B91DF449A400BA1716 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,12 +46,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C505E0601DEFAFC700442DDE /* Docs */ = {
+		C505E0601DEFAFC700442DDE /* Helper files */ = {
 			isa = PBXGroup;
 			children = (
+				C5D0E6B91DF449A400BA1716 /* .travis.yml */,
 				C505E0611DEFAFE600442DDE /* README.md */,
 			);
-			name = Docs;
+			name = "Helper files";
 			sourceTree = "<group>";
 		};
 		C553FBD61DEDC540000798D8 = {
@@ -72,7 +74,7 @@
 		C553FBE31DEDC58A000798D8 /* Fridge */ = {
 			isa = PBXGroup;
 			children = (
-				C505E0601DEFAFC700442DDE /* Docs */,
+				C505E0601DEFAFC700442DDE /* Helper files */,
 				C553FBE41DEDC58A000798D8 /* main.swift */,
 				C56923641DF076AD0023DF0E /* DownloadItem.swift */,
 				C56923661DF077CA0023DF0E /* FridgeErrors.swift */,
