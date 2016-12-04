@@ -25,6 +25,9 @@ item.onFailure = { (error) in
 //#3: kick-off your download !!
 let d = Downloader.shared
 d.download(item: item)
+
+//small bonus as of v0.55 :
+d.cacheDestination = "/some/folder/that/iwant/"
 ```
 
 
