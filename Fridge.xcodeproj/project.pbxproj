@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C553FBE51DEDC58A000798D8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE41DEDC58A000798D8 /* main.swift */; };
 		C553FBEA1DEDC9FA000798D8 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Downloader.swift */; };
+		C5576B2F1DF5EF08002F5D9F /* License.md in Sources */ = {isa = PBXBuildFile; fileRef = C5576B2E1DF5EF08002F5D9F /* License.md */; };
 		C56923651DF076AD0023DF0E /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* DownloadItem.swift */; };
 		C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		C553FBE11DEDC58A000798D8 /* Fridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fridge; sourceTree = BUILT_PRODUCTS_DIR; };
 		C553FBE41DEDC58A000798D8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C553FBE91DEDC9FA000798D8 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		C5576B2E1DF5EF08002F5D9F /* License.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = License.md; sourceTree = SOURCE_ROOT; };
 		C56923641DF076AD0023DF0E /* DownloadItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
 		C56923661DF077CA0023DF0E /* FridgeErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeErrors.swift; sourceTree = "<group>"; };
 		C5D0E6B91DF449A400BA1716 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
@@ -49,6 +51,7 @@
 		C505E0601DEFAFC700442DDE /* Helper files */ = {
 			isa = PBXGroup;
 			children = (
+				C5576B2E1DF5EF08002F5D9F /* License.md */,
 				C5D0E6B91DF449A400BA1716 /* .travis.yml */,
 				C505E0611DEFAFE600442DDE /* README.md */,
 			);
@@ -144,6 +147,7 @@
 				C553FBE51DEDC58A000798D8 /* main.swift in Sources */,
 				C56923651DF076AD0023DF0E /* DownloadItem.swift in Sources */,
 				C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */,
+				C5576B2F1DF5EF08002F5D9F /* License.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
