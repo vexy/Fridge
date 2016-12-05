@@ -34,9 +34,9 @@ d.cacheDestination = "/some/folder/that/iwant/"
 - Easy declaration of file/image/object to be downloaded
 - Asynchronous object download on background threads
 - Assign 'completion' and 'failure' closures to perform your custom work after download
-  --  or you can just ignore this and access your object directly after it has been downloaded
+  - or you can just ignore this and access your object directly after it has been downloaded
 - Customizable destination for downloading objects
-  -- you can always use default system provided Caches folder
+  - you can always use default system provided Caches folder
 
 Stay tunned for more !!
 
