@@ -231,10 +231,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C591C6471E0AA9C100A92A8C /* FridgeItemTests.swift in Sources */,
 				C591C64C1E0AB1BC00A92A8C /* FridgeItem.swift in Sources */,
 				C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */,
 				C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */,
-				C591C6471E0AA9C100A92A8C /* FridgeItemTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
