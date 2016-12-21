@@ -15,6 +15,8 @@
 		C591C64C1E0AB1BC00A92A8C /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* FridgeItem.swift */; };
 		C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
 		C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Fridge.swift */; };
+		C591C6571E0B2E5600A92A8C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C591C6561E0B2E5600A92A8C /* XCTest.framework */; };
+		C591C6591E0B2E6900A92A8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C591C6581E0B2E6900A92A8C /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		C591C6441E0AA9C100A92A8C /* FridgeItemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FridgeItemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C591C6461E0AA9C100A92A8C /* FridgeItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeItemTests.swift; sourceTree = "<group>"; };
 		C591C6481E0AA9C100A92A8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C591C6561E0B2E5600A92A8C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C591C6581E0B2E6900A92A8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C5D0E6B91DF449A400BA1716 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -65,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C591C6591E0B2E6900A92A8C /* Foundation.framework in Frameworks */,
+				C591C6571E0B2E5600A92A8C /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +95,7 @@
 				C591C64F1E0AB5AC00A92A8C /* Tests */,
 				C505E0601DEFAFC700442DDE /* Helper files */,
 				C553FBE21DEDC58A000798D8 /* Products */,
+				C591C6551E0B2E5600A92A8C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +135,15 @@
 				C591C6451E0AA9C100A92A8C /* FridgeItem */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		C591C6551E0B2E5600A92A8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C591C6581E0B2E6900A92A8C /* Foundation.framework */,
+				C591C6561E0B2E5600A92A8C /* XCTest.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

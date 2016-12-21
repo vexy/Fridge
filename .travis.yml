@@ -11,7 +11,7 @@ branches:
 
 script:
 - xcodebuild clean build -project Fridge.xcodeproj -scheme Fridge
-- xcodebuild test -project Fridge.xcodeproj -scheme Fridge
+- xcodebuild test -project Fridge.xcodeproj -scheme FridgeItemTest
 
 after_success:
 ## we're trying to Test if build passes
