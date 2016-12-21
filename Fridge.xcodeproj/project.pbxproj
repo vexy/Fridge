@@ -17,6 +17,16 @@
 		C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Fridge.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C591C6501E0ABEDF00A92A8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C553FBD71DEDC540000798D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C553FBE01DEDC58A000798D8;
+			remoteInfo = Fridge;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		C553FBDF1DEDC58A000798D8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -151,6 +161,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C591C6511E0ABEDF00A92A8C /* PBXTargetDependency */,
 			);
 			name = FridgeItemTests;
 			productName = FridgeTests;
@@ -228,6 +239,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C591C6511E0ABEDF00A92A8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C553FBE01DEDC58A000798D8 /* Fridge */;
+			targetProxy = C591C6501E0ABEDF00A92A8C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C553FBDB1DEDC540000798D8 /* Debug */ = {
@@ -464,6 +483,7 @@
 				C591C64A1E0AA9C100A92A8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
