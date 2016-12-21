@@ -1,10 +1,8 @@
 # ❄️ Fridge ❄️ v0.6
-**Fridge** is simple and uber easy to use background object downloader. And it's 100% Siwft3 !!
+**Fridge** is simple and uber easy to use background object downloader written entirely in Swift
 
 [![Build Status](https://travis-ci.org/vexy/Fridge.svg?branch=master)](https://travis-ci.org/vexy/Fridge)
 [![codecov](https://codecov.io/gh/vexy/Fridge/branch/master/graph/badge.svg)](https://codecov.io/gh/vexy/Fridge)
-
----
 
 ## Main features :
 - Easy declaration of file/image/object to be downloaded
@@ -13,10 +11,8 @@
   - or you can just ignore this and access your object directly after it has been downloaded
 - Customizable destination for downloading objects
   - you can always use default system provided `Cache` folder
-
+   
 Stay tunned for more !!   
-
----
 
 ## Instalation guide
 There is no need to clone entire repo. Entire Fridge logic is packed into 3 files you need to use.
