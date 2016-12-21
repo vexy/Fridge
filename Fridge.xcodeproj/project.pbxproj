@@ -25,13 +25,6 @@
 			remoteGlobalIDString = C553FBE01DEDC58A000798D8;
 			remoteInfo = Fridge;
 		};
-		C591C6521E0ABFEC00A92A8C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C553FBD71DEDC540000798D8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C591C6431E0AA9C100A92A8C;
-			remoteInfo = FridgeItemTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -151,7 +144,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C591C6531E0ABFEC00A92A8C /* PBXTargetDependency */,
 			);
 			name = Fridge;
 			productName = Fridge;
@@ -253,11 +245,6 @@
 			isa = PBXTargetDependency;
 			target = C553FBE01DEDC58A000798D8 /* Fridge */;
 			targetProxy = C591C6501E0ABEDF00A92A8C /* PBXContainerItemProxy */;
-		};
-		C591C6531E0ABFEC00A92A8C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C591C6431E0AA9C100A92A8C /* FridgeItemTests */;
-			targetProxy = C591C6521E0ABFEC00A92A8C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
