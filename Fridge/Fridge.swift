@@ -41,7 +41,7 @@ import Foundation
 
 
 /** Class used to asynchronously download object from the internet in the background */
-class Downloader : NSObject, URLSessionDownloadDelegate {
+class Fridge : NSObject, URLSessionDownloadDelegate {
     
     //serial queue used for storing/retreiving taskIDs
     private let synchronizer = DispatchQueue(label: "com.vexscited.fridge.synchronizer", qos: DispatchQoS.userInitiated)
@@ -54,12 +54,12 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     private var downloadSession : URLSession?
     
     //dictionary of DownloadTask(s) and appropriate DownloadItem(s)
-    private var taskIDs : Dictionary<Int, DownloadItem> = Dictionary<Int,DownloadItem>()
+    private var taskIDs : Dictionary<Int, FridgeItem> = Dictionary<Int,FridgeItem>()
     
     private var cachePath : String = ""
     
     //shared singleton instance
-    public static let shared = Downloader()
+    public static let shared = Fridge()
     
     //default initializer
     private override init() {
@@ -83,8 +83,8 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
         - parameters:
             - item: DownloadItem to be downloaded
     */
-    func download(item : DownloadItem) {
-        let downloadTask = downloadSession!.downloadTask(with: item.itemURL)
+    func download(item : FridgeItem) {
+        let downloadTask = downloadSession!.downloadTask(with: item.url)
         
         print("⚙<Downloader> Adding single task #\(downloadTask.taskIdentifier)")
         
@@ -104,9 +104,9 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
         - parameters:
             - items: array of DownloadItems
     */
-    func download(items : [DownloadItem]) {
+    func download(items : [FridgeItem]) {
         for item in items {
-            let downloadTask = downloadSession!.downloadTask(with: item.itemURL)
+            let downloadTask = downloadSession!.downloadTask(with: item.url)
             
             //add this downloadable to tracker
             synchronizer.sync {
@@ -123,7 +123,7 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     
     
     internal func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        var downloadItem : DownloadItem?
+        var downloadItem : FridgeItem?
         
         synchronizer.sync {
             downloadItem = taskIDs[downloadTask.taskIdentifier]
@@ -176,7 +176,7 @@ class Downloader : NSObject, URLSessionDownloadDelegate {
     }
     
     /** Utility function used to copy downloaded object to specified location */
-    private func permaCopy(item : DownloadItem, at location : URL) throws -> URL {
+    private func permaCopy(item : FridgeItem, at location : URL) throws -> URL {
         //if item has desired location use that as final destination, otherwise copy to (default) Caches folder
         let finalDestination : URL
         let fileName : String = UUID().uuidString + ".tmp"
