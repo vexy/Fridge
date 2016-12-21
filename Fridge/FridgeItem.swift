@@ -56,17 +56,20 @@ struct FridgeItem {
         url = URL(string: "https://www.google.com")!
     }
     
-    init(withURL u : URL) {
-        url = u
+    init(withURL u : URL?) {
+        url = (u ?? URL(string:"https://www.google.com")!)
     }
     
     init(withString s : String) throws {
         //check if we have valid scheme for this string ; valid schemes are http and https
-        
-        if s.contains("http") || s.contains("https") {
-            url = URL(string: s)!
-        } else {
+        guard (s.contains("http") || s.contains("https")) else {
             throw FridgeError.invalidScheme
         }
+        
+        url = URL(string: s)!
+    }
+    
+    static func isValidScheme(_ scheme : String) -> Bool {
+        return (scheme.contains("http") || scheme.contains("https"))
     }
 }

@@ -31,13 +31,13 @@ Navigate to `Fridge` folder, select and add following files to your project :
 //#1: declare object you want to download
 var item = FridgeItem()
 
-item.itemURL = URL(string: "http://www.google.com")!
+item.url = URL(string: "http://www.google.com")!
 
 //#2: declare action (closures) that will be performed after download  (psst.. things will work just fine even if you don't do this !! 😜)
-item.onComplete = { (object) in
+item.onComplete = { object in
     print("💪 Download complete ! File is permanently stored at : \(object.absoluteString)")
 }
-item.onFailure = { (error) in
+item.onFailure = { error in
     print("👎 Unable to complete download ! Following error occured \(error.localizedDescription)")
 }
 

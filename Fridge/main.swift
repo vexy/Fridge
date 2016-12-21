@@ -19,10 +19,10 @@ do {
     var item = FridgeItem()
     
     item.url = URL(string: "http://www.google.com")!
-    item.onComplete = { (object) in
+    item.onComplete = { object in
         print("💪 Download complete ! File is permanently stored at : \(object.absoluteString)")
     }
-    item.onFailure = { (error) in
+    item.onFailure = { error in
         print("✋ Unable to complete download ! Following error occured \(error.localizedDescription)")
     }
     

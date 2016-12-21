@@ -7,48 +7,34 @@
 //
 
 import XCTest
-//@testable import FridgeItem
+import Darwin
 
-class FridgeTests: XCTestCase {
+class FridgeItemTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testEmptyStringThrows() {
+        XCTAssertThrowsError(_  = try FridgeItem(withString: ""))
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testRandomStringThrows() {
+        XCTAssertThrowsError(_ = try FridgeItem(withString: "someString"))
     }
     
-    func testEmptyString() {
+    func testFTPStringThrows() {
+        XCTAssertThrowsError(_ = try FridgeItem(withString: "ftp://foo.bar"))
+    }
+    
+    func testValidStringPasses() {
         do {
-            _  = try FridgeItem(withString: "")
-            
-            XCTFail("Empty FridgeItem does not throws !")
+            _ = try FridgeItem(withString: "https://www.google.com")
         } catch {
-            XCTAssert(1 == 1, "Fail in throwing clause")
+            XCTFail("Regular URL item throws error !")
         }
     }
     
-    func testInvalidFridgeItemThrows() {
-        do {
-            _ = try FridgeItem(withString: "someString")
-            
-            XCTFail("Invalid string items does not throw")
-        } catch {
-            XCTAssert(1 == 1)
-        }
-    }
-    
-    func testValidFridgeItemPasses() {
-        do {
-            let itm = try FridgeItem(withString: "http://www.google.com")
-            let tempUrl = URL(string: "http://www.google.com")!
-            
-            XCTAssert(itm.url == tempUrl, "Valid https scheme was unable to process !")
-        } catch {
-            XCTAssert(1 == 1)
-        }
+    func testFakeURLObject() {
+        let fake = URL(string: "someString")
+        let t = FridgeItem(withURL: fake)
+        
+        XCTAssert(t.url.absoluteString == fake!.absoluteString)
     }
 }
