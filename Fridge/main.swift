@@ -16,9 +16,9 @@ let appTimeout : TimeInterval = TimeInterval(15) //seconds
 
 do {
 //    var item = try DownloadItem(withString: "www.google.com")
-    var item = DownloadItem()
+    var item = FridgeItem()
     
-    item.itemURL = URL(string: "http://www.google.com")!
+    item.url = URL(string: "http://www.google.com")!
     item.onComplete = { (object) in
         print("💪 Download complete ! File is permanently stored at : \(object.absoluteString)")
     }
@@ -26,7 +26,7 @@ do {
         print("✋ Unable to complete download ! Following error occured \(error.localizedDescription)")
     }
     
-    let d = Downloader.shared
+    let d = Fridge.shared
     
     //setup custom 'caches' directory
     
@@ -55,16 +55,16 @@ do {
     */
     
     ///*
-    let imageFile0 = try DownloadItem(withString: "http://www.bigfoto.com/airplane.jpg")
-    let imageFile1 = try DownloadItem(withString: "http://www.bigfoto.com/image-park-lake.jpg")
-    let imageFile2 = try DownloadItem(withString: "http://www.bigfoto.com/dog-animal.jpg")
-    let imageFile3 = try DownloadItem(withString: "http://www.bigfoto.com/alps-mythen-image.jpg")
-    let imageFile4 = try DownloadItem(withString: "http://www.bigfoto.com/snow-mountains.jpg")
-    let imageFile5 = try DownloadItem(withString: "http://www.bigfoto.com/fruits-picture.jpg")
-    let imageFile6 = try DownloadItem(withString: "http://www.bigfoto.com/sunset-photo.jpg")
-    let imageFile7 = try DownloadItem(withString: "http://www.bigfoto.com/coast.jpg")
-    let imageFile8 = try DownloadItem(withString: "http://www.bigfoto.com/image-leaves.jpg")
-    let imageFile9 = try DownloadItem(withString: "http://www.bigfoto.com/sites/main/aegeri-lake-switzerland.JPG")
+    let imageFile0 = try FridgeItem(withString: "http://www.bigfoto.com/airplane.jpg")
+    let imageFile1 = try FridgeItem(withString: "http://www.bigfoto.com/image-park-lake.jpg")
+    let imageFile2 = try FridgeItem(withString: "http://www.bigfoto.com/dog-animal.jpg")
+    let imageFile3 = try FridgeItem(withString: "http://www.bigfoto.com/alps-mythen-image.jpg")
+    let imageFile4 = try FridgeItem(withString: "http://www.bigfoto.com/snow-mountains.jpg")
+    let imageFile5 = try FridgeItem(withString: "http://www.bigfoto.com/fruits-picture.jpg")
+    let imageFile6 = try FridgeItem(withString: "http://www.bigfoto.com/sunset-photo.jpg")
+    let imageFile7 = try FridgeItem(withString: "http://www.bigfoto.com/coast.jpg")
+    let imageFile8 = try FridgeItem(withString: "http://www.bigfoto.com/image-leaves.jpg")
+    let imageFile9 = try FridgeItem(withString: "http://www.bigfoto.com/sites/main/aegeri-lake-switzerland.JPG")
     
 
     d.download(items: [imageFile0, imageFile1, imageFile2, imageFile3, imageFile4, imageFile5, imageFile6, imageFile7, imageFile8, imageFile9])

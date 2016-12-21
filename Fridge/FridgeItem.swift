@@ -35,8 +35,8 @@ typealias success = (_ item: URL) -> ()
 typealias failure = (_ error : FridgeError) -> ()
 
 /** Represents an item that should be downloaded from internet */
-struct DownloadItem {
-    var itemURL : URL {
+struct FridgeItem {
+    var url : URL {
         willSet {
             if let _ = newValue.scheme {
                 if !(newValue.scheme!.contains("http") || newValue.scheme!.contains("https")) {
@@ -53,18 +53,18 @@ struct DownloadItem {
     var onFailure : failure = {_ in return}
     
     init() {
-        itemURL = URL(string: "https://www.google.com")!
+        url = URL(string: "https://www.google.com")!
     }
     
     init(withURL u : URL) {
-        itemURL = u
+        url = u
     }
     
     init(withString s : String) throws {
         //check if we have valid scheme for this string ; valid schemes are http and https
         
         if s.contains("http") || s.contains("https") {
-            itemURL = URL(string: s)!
+            url = URL(string: s)!
         } else {
             throw FridgeError.invalidScheme
         }

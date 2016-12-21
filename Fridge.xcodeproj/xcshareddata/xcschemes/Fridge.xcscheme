@@ -29,6 +29,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C591C6431E0AA9C100A92A8C"
+               BuildableName = "FridgeItemTests.xctest"
+               BlueprintName = "FridgeItemTests"
+               ReferencedContainer = "container:Fridge.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
