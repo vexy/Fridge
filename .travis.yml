@@ -1,22 +1,29 @@
-language: objective-c
-osx_image: xcode8
+language: objective-c #swift
+osx_image: xcode8.1
 xcode_project: Fridge.xcodeproj
 xcode_scheme: Fridge
 xcode_sdk: macosx10.12
 
-# safelist
+# put back to only: - master later
 branches:
-  only:
+##  only:
   - master
+  - development
+  - travis_jurney
+
+before_install:
+  - brew update
+  - xcodebuild
 
 script:
 - xcodebuild clean build -project Fridge.xcodeproj -scheme Fridge
-- xcodebuild -project Fridge.xcodeproj -scheme Fridge -sdk macosx -configuration Debug -enableCodeCoverage YES ENABLE_TESTABILITY=YES build test
-
-# Following breaks build : - xcodebuild test -project Fridge.xcodeproj -scheme FridgeItemTest
+- xcodebuild test -project Fridge.xcodeproj -scheme Fridge -sdk macosx -configuration Debug -enableCodeCoverage YES ENABLE_TESTABILITY=YES
 
 after_success:
-## we're trying to Test if build passes
+##upload coverage data to codecov
+- bash <(curl -s https://codecov.io/bash)
+
+after_failure:
+## check what's available and how
 - xcodebuild -project Fridge.xcodeproj -scheme Fridge -list
 - xcodebuild -project Fridge.xcodeproj -scheme Fridge -showBuildSettings
-- bash <(curl -s https://codecov.io/bash)
