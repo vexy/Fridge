@@ -13,10 +13,11 @@ branches:
 
 before_install:
   - brew update
+  - xcodebuild
 
 script:
 - xcodebuild clean build -project Fridge.xcodeproj -scheme Fridge
-- xcodebuild build test -project Fridge.xcodeproj -scheme Fridge -sdk macosx -configuration Debug -enableCodeCoverage YES ENABLE_TESTABILITY YES
+- xcodebuild test -project Fridge.xcodeproj -scheme Fridge -sdk macosx -configuration Debug -enableCodeCoverage YES ENABLE_TESTABILITY=YES
 
 after_success:
 ##upload coverage data to codecov
