@@ -11,6 +11,7 @@ branches:
 
 script:
 - xcodebuild clean build -project Fridge.xcodeproj -scheme Fridge
+- xcodebuild -project Fridge.xcodeproj -scheme Fridge -sdk macosx -configuration Debug -enableCodeCoverage YES test
 
 # Following breaks build : - xcodebuild test -project Fridge.xcodeproj -scheme FridgeItemTest
 
@@ -18,5 +19,4 @@ after_success:
 ## we're trying to Test if build passes
 - xcodebuild -project Fridge.xcodeproj -scheme Fridge -list
 - xcodebuild -project Fridge.xcodeproj -scheme Fridge -showBuildSettings
-- xcodebuild test -project Fridge.xcodeproj -scheme Fridge
 - bash <(curl -s https://codecov.io/bash)
