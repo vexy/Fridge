@@ -1,4 +1,4 @@
-# ❄️ Fridge ❄️ v0.6
+# ❄️ Fridge ❄️ v0.64
 **Fridge** is simple and uber easy to use background object downloader written entirely in Swift
 
 [![Build Status](https://travis-ci.org/vexy/Fridge.svg?branch=master)](https://travis-ci.org/vexy/Fridge)
@@ -52,9 +52,8 @@ myFridge.download(item: item)
 
 ---
 
-If you experience some problems, feel free to fire an [issue](https://github.com/vexy/Fridge/issues).  
-Feel free to contribute at *any time* by forking the repo or just ⭐️ the repo to support !
-
+If you experience some problems, feel free to fire an [issue](https://github.com/vexy/Fridge/issues).   
+Feel free to contribute at *any time* by forking the repo or just ⭐️ the repo to support !   
 
 
 Developed under MIT license   

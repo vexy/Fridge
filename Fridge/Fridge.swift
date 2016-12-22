@@ -86,7 +86,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     func download(item : FridgeItem) {
         let downloadTask = downloadSession!.downloadTask(with: item.url)
         
-        print("⚙<Downloader> Adding single task #\(downloadTask.taskIdentifier)")
+        print("⚙<Downloader> Adding single task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
         
         //add this download task to our protected collection
         synchronizer.sync {
@@ -115,7 +115,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
             
             //start downloading tasks asynchronously
             dispatcher.async {
-                print("⚙<Downloader> Adding task #\(downloadTask.taskIdentifier)")
+                print("⚙<Downloader> Adding task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
                 downloadTask.resume()
             }
         }
@@ -132,22 +132,28 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         
         guard downloadItem != nil else { print("Unable to obtain download item"); return }
         
-        print("⏺ Task #\(downloadTask.taskIdentifier) completed.\nTemporary file path : \(location.absoluteString)")
+        let taskID = downloadTask.taskIdentifier
+        print("⏺ Task #\(taskID) completed :\nTemporary file path : \(location.absoluteString)")
         
-        do {
-            //TODO : think of kicking off another thread here !!
-            let result = try permaCopy(item: downloadItem!, at: location)
-            print("Temp file copied to : \(result.absoluteString)")
-            
-            DispatchQueue.main.sync {
-                downloadItem?.onComplete(result)
-            }
-        } catch {
-            print("Unable to copy item to it's destination !\nError : \(error.localizedDescription)")
-            DispatchQueue.main.sync {
-                downloadItem?.onFailure(FridgeError.generalError)
+        synchronizer.sync {
+            print("⏺(#\(taskID)) <-> 📂 Task #\(downloadTask.taskIdentifier), kicking off file manager duties (SYNC)")
+            do {
+                //TODO : think of kicking off another thread here !!
+                let result = try self.permaCopy(item: downloadItem!, at: location)
+                print("⏺(#\(taskID)) Temporary file copied to perma location : \(result.absoluteString)")
+                
+                DispatchQueue.main.sync {
+                    downloadItem?.onComplete(result)
+                }
+            } catch {
+                print("⏺(#\(taskID)) Unable to copy item to it's destination !\nError : \(error.localizedDescription)")
+                DispatchQueue.main.sync {
+                    downloadItem?.onFailure(FridgeError.generalError)
+                }
             }
         }
+        
+        print("⏺ Task #\(taskID) is DONE\n----------")
     }
     
     //protected addition of DownloadTask
@@ -179,8 +185,14 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     private func permaCopy(item : FridgeItem, at location : URL) throws -> URL {
         //if item has desired location use that as final destination, otherwise copy to (default) Caches folder
         let finalDestination : URL
-        let fileName : String = UUID().uuidString + ".tmp"
+        var fileName : String = ""
         var finalFilePath : URL
+        
+        if item.url.lastPathComponent == "/"  {
+            fileName = UUID().uuidString + ".tmp"
+        } else {
+            fileName = item.url.lastPathComponent
+        }
         
         if let _ = item.desiredLocation {
             finalDestination = item.desiredLocation!
@@ -190,10 +202,24 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
             finalFilePath = URL(fileURLWithPath: cachePath + fileName)
         }
         
+        print("📂 Checking file existance at : \(finalFilePath.path)")
+        if FileManager.default.fileExists(atPath: finalFilePath.path) {
+            do {
+                try FileManager.default.removeItem(atPath: finalFilePath.path)
+                
+                print("📂🗑 Object previously existed and is now deleted !")
+            } catch {
+                print("📂🗑 ERROR : Unable to remove item at \(finalFilePath.path)")
+                throw FridgeError.generalError
+            }
+        } else {
+            print("📂✅ Filename doesn't exist at path")
+        }
+        
         do {
             try FileManager.default.copyItem(at: location, to: finalFilePath)
         } catch {
-            print("ERROR : Unable to copy file to final destination !")
+            print("📂 ERROR : Unable to copy file to final destination ! Reason : \(error.localizedDescription)")
             throw FridgeError.generalError
         }
         

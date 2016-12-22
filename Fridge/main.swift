@@ -12,13 +12,13 @@ import Foundation
 print("WELCOME TO ❄️FRIDGE❄️")
 
 //santa's little helper ;)
-let appTimeout : TimeInterval = TimeInterval(15) //seconds
+let appTimeout : TimeInterval = TimeInterval(30) //seconds
 
 do {
 //    var item = try DownloadItem(withString: "www.google.com")
     var item = FridgeItem()
     
-    item.url = URL(string: "http://www.google.com")!
+    item.url = URL(string: "http://www.google.com/")!
     item.onComplete = { object in
         print("💪 Download complete ! File is permanently stored at : \(object.absoluteString)")
     }
@@ -34,7 +34,7 @@ do {
     d.cacheDestination = "/Users/vexy/Desktop/Fridge/"
     
     
-    d.download(item: item)
+    //d.download(item: item)
     
     
     /*
@@ -52,23 +52,71 @@ do {
             - http://www.bigfoto.com/sites/main/aegeri-lake-switzerland.JPG     #9
      
         Copyright © BigFoto.com
+     
+        And some 4k example images :
+     
+            - http://4k.com/wp-content/uploads/2014/06/4k-image-tiger-jumping.jpg
+            - http://cdn.wallpapersafari.com/48/32/AHtKXu.jpg
+            - http://www.hd-wallpaper1.com/images/red-macaw-4k.jpeg
+            - http://i.rtings.com/images/reviews/m-series-2015/m-series-2015-upscaling-4k-large.jpg
     */
+    let bigOnes0 = try FridgeItem(withString: "http://4k.com/wp-content/uploads/2014/06/4k-image-tiger-jumping.jpg")
+    let bigOnes1 = try FridgeItem(withString: "http://cdn.wallpapersafari.com/48/32/AHtKXu.jpg")
+    let bigOnes2 = try FridgeItem(withString: "http://www.hd-wallpaper1.com/images/red-macaw-4k.jpeg")
+    var bigOnes3 = try FridgeItem(withString: "http://i.rtings.com/images/reviews/m-series-2015/m-series-2015-upscaling-4k-large.jpg")
+    
+    bigOnes3.onComplete = { object in
+        do {
+            let dataObject : Data = try Data(contentsOf: object)
+            
+            print("🐋 The big one just finished, our size is : \(dataObject.count) bytes")
+        } catch {
+            print("🐋😔 Unable to create Data object from this item")
+        }
+    }
+    
     
     ///*
     let imageFile0 = try FridgeItem(withString: "http://www.bigfoto.com/airplane.jpg")
     let imageFile1 = try FridgeItem(withString: "http://www.bigfoto.com/image-park-lake.jpg")
-    let imageFile2 = try FridgeItem(withString: "http://www.bigfoto.com/dog-animal.jpg")
+    var imageFile2 = try FridgeItem(withString: "http://www.bigfoto.com/dog-animal.jpg")
     let imageFile3 = try FridgeItem(withString: "http://www.bigfoto.com/alps-mythen-image.jpg")
     let imageFile4 = try FridgeItem(withString: "http://www.bigfoto.com/snow-mountains.jpg")
     let imageFile5 = try FridgeItem(withString: "http://www.bigfoto.com/fruits-picture.jpg")
     let imageFile6 = try FridgeItem(withString: "http://www.bigfoto.com/sunset-photo.jpg")
     let imageFile7 = try FridgeItem(withString: "http://www.bigfoto.com/coast.jpg")
     let imageFile8 = try FridgeItem(withString: "http://www.bigfoto.com/image-leaves.jpg")
-    let imageFile9 = try FridgeItem(withString: "http://www.bigfoto.com/sites/main/aegeri-lake-switzerland.JPG")
+    var imageFile9 = try FridgeItem(withString: "http://www.bigfoto.com/sites/main/aegeri-lake-switzerland.JPG")
+    
+    imageFile9.onComplete = { object in
+        print("~ This is dispatched on main thread ~")
+        
+        //try to manipulate this object in terms of creating an Image object
+        
+        do {
+            let dataObject : Data = try Data(contentsOf: object)
+            
+            print("💪 After creating Data object, the size is : \(dataObject.count) bytes")
+        } catch {
+            print("😔 Unable to create Data object from this item")
+        }
+    }
     
 
-    d.download(items: [imageFile0, imageFile1, imageFile2, imageFile3, imageFile4, imageFile5, imageFile6, imageFile7, imageFile8, imageFile9])
+    //d.download(items: [item, imageFile0, imageFile1, imageFile2, imageFile3, imageFile4, imageFile5, imageFile6, imageFile7, imageFile8, imageFile9])
     //*/
+    
+    imageFile2.onComplete = { object in
+        print("💪 This item (\(imageFile2.url.absoluteString)) was downloaded to \(object.absoluteString)")
+    }
+    
+    //d.download(items: [imageFile0, item, imageFile4, imageFile2, imageFile7, imageFile9])
+    
+    d.download(items: [item, imageFile0, imageFile1, imageFile2, imageFile3, imageFile4, imageFile5, imageFile6, imageFile7, imageFile8, imageFile9])
+    
+    
+    print("🐋 ... 💪 now while this is downloading, we're kicking off BIG ONES !! ")
+    d.download(items: [bigOnes0, bigOnes1, bigOnes2, bigOnes3])
     
 } catch {
     print("😔 Unable to create Download item")
