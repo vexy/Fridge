@@ -1,4 +1,4 @@
-language: swift #objective-c
+language: objective-c
 osx_image: xcode8.2
 xcode_project: Fridge.xcodeproj
 xcode_scheme: Fridge
