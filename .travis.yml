@@ -9,6 +9,7 @@ branches:
 ##  only:
   - master
   - development
+  - travis_jurney
 
 before_install:
   - brew update
