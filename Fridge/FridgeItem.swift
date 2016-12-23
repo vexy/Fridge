@@ -36,40 +36,56 @@ typealias failure = (_ error : FridgeError) -> ()
 
 /** Represents an item that should be downloaded from internet */
 struct FridgeItem {
+    private var defaultURL = URL(string: "http://www.google.com")!
+    
     var url : URL {
-        willSet {
-            if let _ = newValue.scheme {
-                if !(newValue.scheme!.contains("http") || newValue.scheme!.contains("https")) {
-                    assertionFailure("Only http and https schemes are allowed")
-                }
-            } else {
-                assertionFailure("Only http and https schemes are allowed")
+        didSet {
+            guard url.scheme != nil, isValidScheme(url.scheme!) else {
+                print("URL is \(url.description), which is not appropriate. Defaulting...")
+                self.url = defaultURL
+                return
             }
         }
     }
+    
     var desiredLocation : URL?
     
     var onComplete : success = {_ in return}
     var onFailure : failure = {_ in return}
     
     init() {
-        url = URL(string: "https://www.google.com")!
+        url = defaultURL
     }
     
-    init(withURL u : URL?) {
-        url = (u ?? URL(string:"https://www.google.com")!)
+    init(withURL u : URL?) throws {
+        //guard against 'empty' URL
+        guard u != nil else { throw FridgeError.generalError }
+        
+        //default assignment first !
+        url = u ?? URL(string: "http://www.google.com")!
+        
+        if let sch = u?.scheme {
+            if !isValidScheme(sch) {
+               throw FridgeError.invalidScheme
+            }
+        } else {
+            throw FridgeError.invalidScheme
+        }
     }
     
     init(withString s : String) throws {
-        //check if we have valid scheme for this string ; valid schemes are http and https
-        guard (s.contains("http") || s.contains("https")) else {
+        url = defaultURL   //assign default value first !
+        
+        //check if we have valid scheme for this string
+        guard isValidScheme(s) else {
             throw FridgeError.invalidScheme
         }
         
+        //finally :
         url = URL(string: s)!
     }
     
-    static func isValidScheme(_ scheme : String) -> Bool {
+    private func isValidScheme(_ scheme : String) -> Bool {
         return (scheme.contains("http") || scheme.contains("https"))
     }
 }
