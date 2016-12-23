@@ -16,6 +16,9 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+## any Instruments related files
+*.trace
+*.run
 
 # Images and helper files
 *.png

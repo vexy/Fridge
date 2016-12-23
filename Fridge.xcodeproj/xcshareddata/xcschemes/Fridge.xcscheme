@@ -97,6 +97,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Fridgev64"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
