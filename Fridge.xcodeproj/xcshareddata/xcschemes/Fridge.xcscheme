@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -34,10 +34,18 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C591C6431E0AA9C100A92A8C"
-               BuildableName = "FridgeItemTests.xctest"
-               BlueprintName = "FridgeItemTests"
+               BuildableName = "FridgeTestsCollection.xctest"
+               BlueprintName = "FridgeTestsCollection"
                ReferencedContainer = "container:Fridge.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "FridgeItemTests">
+               </Test>
+               <Test
+                  Identifier = "FridgeTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

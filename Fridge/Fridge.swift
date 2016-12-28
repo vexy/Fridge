@@ -35,7 +35,7 @@
 //
 //  - CLASS MAIN RESPONSIBILITY -
 //
-//  Download an item from the network, and provide the URL of downloaded object
+//  Provide wrapper around Fridge actions
 
 import Foundation
 
@@ -56,7 +56,6 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     //dictionary of DownloadTask(s) and appropriate DownloadItem(s)
     private var taskIDs : Dictionary<Int, FridgeItem> = Dictionary<Int,FridgeItem>()
     
-    private var cachePath : String = ""
     
     //shared singleton instance
     public static let shared = Fridge()
@@ -71,9 +70,6 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
         downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
         
-        //use default system cache directory for this :
-        cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] + "/Fridge"
-        
         taskIDs.removeAll()
     }
     
@@ -81,12 +77,12 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         Starts downloading an item
      
         - parameters:
-            - item: DownloadItem to be downloaded
+            - item: `FridgeItem` to be downloaded
     */
     func download(item : FridgeItem) {
         let downloadTask = downloadSession!.downloadTask(with: item.url)
         
-        print("⚙<Downloader> Adding single task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
+        print("<⚙> Adding single task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
         
         //add this download task to our protected collection
         synchronizer.sync {
@@ -102,7 +98,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         Starts downloading array of items
  
         - parameters:
-            - items: array of DownloadItems
+            - items: array of `FridgeItem`s to be downloaded
     */
     func download(items : [FridgeItem]) {
         for item in items {
@@ -115,7 +111,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
             
             //start downloading tasks asynchronously
             dispatcher.async {
-                print("⚙<Downloader> Adding task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
+                print("<⚙> Adding task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
                 downloadTask.resume()
             }
         }
@@ -125,35 +121,52 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     internal func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         var downloadItem : FridgeItem?
         
+        //get FridgeItem from synchronizer
         synchronizer.sync {
             downloadItem = taskIDs[downloadTask.taskIdentifier]
         }
-//        let downloadedItem = taskIDs[downloadTask.taskIdentifier]
         
         guard downloadItem != nil else { print("Unable to obtain download item"); return }
         
         let taskID = downloadTask.taskIdentifier
-        print("⏺ Task #\(taskID) completed :\nTemporary file path : \(location.absoluteString)")
+        print("⏺ Task #\(taskID): Download completed, temporary file path : \(location.absoluteString)")
+        print("⏺ Task #\(taskID): Kicking off file manager duties (SYNC) ~~")
         
         synchronizer.sync {
-            print("⏺(#\(taskID)) <-> 📂 Task #\(downloadTask.taskIdentifier), kicking off file manager duties (SYNC)")
+            //initialize itemFileManager with downloaded file
+            let manager = ItemFileManger(file: location)
+            
             do {
-                //TODO : think of kicking off another thread here !!
-                let result = try self.permaCopy(item: downloadItem!, at: location)
-                print("⏺(#\(taskID)) Temporary file copied to perma location : \(result.absoluteString)")
+                var permaLocation : URL
                 
+                //check if our FridgeItem has downloadLocation
+                if let downloadPath = downloadItem?.downloadDestination {
+                    permaLocation = try manager.permaCopy(to: downloadPath)
+                } else {
+                    permaLocation = try manager.permaCopy(to: URL(string: manager.systemCacheFolder)!)
+                }
+                
+                //perform FridgeItem closure if exists
                 DispatchQueue.main.sync {
-                    downloadItem?.onComplete(result)
+                    downloadItem?.onComplete(permaLocation)
+                }
+            } catch FridgeError.fileManagementError {
+                print("⏺ Task #\(taskID): ERRORED (FILE TROUBLE) -> proceeding with onFailure closure")
+                DispatchQueue.main.sync {
+                    downloadItem?.onFailure( .fileManagementError )
+                }
+            } catch FridgeError.generalError {
+                print("⏺ Task #\(taskID): ERRORED (GENERAL) -> proceesing with onFailure closure")
+                DispatchQueue.main.sync {
+                    downloadItem?.onFailure( .generalError )
                 }
             } catch {
-                print("⏺(#\(taskID)) Unable to copy item to it's destination !\nError : \(error.localizedDescription)")
-                DispatchQueue.main.sync {
-                    downloadItem?.onFailure(FridgeError.generalError)
-                }
+                print("⏺ Task #\(taskID) : ERRORED(UNKNOWN), proceesing with onFailure closure")
+                assertionFailure("General error occured !")
             }
         }
         
-        print("⏺ Task #\(taskID) is DONE\n----------")
+        print("⏺ Task #\(taskID):FINISHED\n----------")
     }
     
     //protected addition of DownloadTask
@@ -164,66 +177,6 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     //protected removal of DownloadTasks
     private func remove(task : URLSessionDownloadTask) {
         
-    }
-    
-    /** Specifies cache destination for downloaded object(s).
-     
-        If not path is specified, system default cache will be used
-    */
-    public var cacheDestination : String {
-        get {
-            return cachePath
-        }
-        
-        set (v) {
-            cachePath = v
-            print("<Downloader> This is a new value: \(v)")
-        }
-    }
-    
-    /** Utility function used to copy downloaded object to specified location */
-    private func permaCopy(item : FridgeItem, at location : URL) throws -> URL {
-        //if item has desired location use that as final destination, otherwise copy to (default) Caches folder
-        let finalDestination : URL
-        var fileName : String = ""
-        var finalFilePath : URL
-        
-        if item.url.lastPathComponent == "/"  {
-            fileName = UUID().uuidString + ".tmp"
-        } else {
-            fileName = item.url.lastPathComponent
-        }
-        
-        if let _ = item.desiredLocation {
-            finalDestination = item.desiredLocation!
-            
-            finalFilePath = URL(fileURLWithPath: finalDestination.absoluteString + "/" + fileName)
-        } else {
-            finalFilePath = URL(fileURLWithPath: cachePath + fileName)
-        }
-        
-        print("📂 Checking file existance at : \(finalFilePath.path)")
-        if FileManager.default.fileExists(atPath: finalFilePath.path) {
-            do {
-                try FileManager.default.removeItem(atPath: finalFilePath.path)
-                
-                print("📂🗑 Object previously existed and is now deleted !")
-            } catch {
-                print("📂🗑 ERROR : Unable to remove item at \(finalFilePath.path)")
-                throw FridgeError.generalError
-            }
-        } else {
-            print("📂✅ Filename doesn't exist at path")
-        }
-        
-        do {
-            try FileManager.default.copyItem(at: location, to: finalFilePath)
-        } catch {
-            print("📂 ERROR : Unable to copy file to final destination ! Reason : \(error.localizedDescription)")
-            throw FridgeError.generalError
-        }
-        
-        return finalFilePath
     }
 }
 

@@ -19,6 +19,7 @@ do {
     var item = FridgeItem()
     
     item.url = URL(string: "http://www.google.com/")!
+    item.downloadDestination = URL(string: "/Users/vexy/Desktop/Fridge/")
     item.onComplete = { object in
         print("💪 Download complete ! File is permanently stored at : \(object.absoluteString)")
     }
@@ -27,11 +28,6 @@ do {
     }
     
     let d = Fridge.shared
-    
-    //setup custom 'caches' directory
-    
-    // SETUP YOUR FINAL DESTINATIONS HERE !!!
-    d.cacheDestination = "/Users/vexy/Desktop/Fridge/"
     
     
     //d.download(item: item)
