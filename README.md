@@ -1,6 +1,7 @@
 # ❄️ Fridge ❄️ v0.64
 **Fridge** is simple and uber easy to use background object downloader written entirely in Swift
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/24b9cd48be1d4d5487c68e0acf796f50)](https://www.codacy.com/app/veljko-tekelerovic/Fridge?utm_source=github.com&utm_medium=referral&utm_content=vexy/Fridge&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/vexy/Fridge.svg?branch=master)](https://travis-ci.org/vexy/Fridge)
 [![codecov](https://codecov.io/gh/vexy/Fridge/branch/master/graph/badge.svg)](https://codecov.io/gh/vexy/Fridge)
 
