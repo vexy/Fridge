@@ -3,6 +3,10 @@
 
 [![Build Status](https://travis-ci.org/vexy/Fridge.svg?branch=master)](https://travis-ci.org/vexy/Fridge)
 [![codecov](https://codecov.io/gh/vexy/Fridge/branch/master/graph/badge.svg)](https://codecov.io/gh/vexy/Fridge)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/24b9cd48be1d4d5487c68e0acf796f50)](https://www.codacy.com/app/veljko-tekelerovic/Fridge?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vexy/Fridge&amp;utm_campaign=Badge_Grade)   
+
+![package_manager](https://img.shields.io/badge/SPM-comming%20soon-red.svg)
+[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()      
 
 ## Features
 - Easy declaration of file/image/object to be downloaded
