@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C529D4711E129CF70047CC7B /* ItemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C529D4701E129CF70047CC7B /* ItemFileManager.swift */; };
+		C52AD4011E13F88700A20622 /* ItemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C529D4701E129CF70047CC7B /* ItemFileManager.swift */; };
+		C52AD4041E14326500A20622 /* ItemFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */; };
 		C553FBE51DEDC58A000798D8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE41DEDC58A000798D8 /* main.swift */; };
 		C553FBEA1DEDC9FA000798D8 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Fridge.swift */; };
 		C56923651DF076AD0023DF0E /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* FridgeItem.swift */; };
@@ -15,6 +18,7 @@
 		C591C64C1E0AB1BC00A92A8C /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* FridgeItem.swift */; };
 		C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
 		C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Fridge.swift */; };
+		C5CC276F1E128A52003CA17F /* FridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CC276E1E128A52003CA17F /* FridgeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,15 +45,18 @@
 
 /* Begin PBXFileReference section */
 		C505E0611DEFAFE600442DDE /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; fileEncoding = 4; path = README.md; sourceTree = SOURCE_ROOT; };
+		C529D4701E129CF70047CC7B /* ItemFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFileManager.swift; sourceTree = "<group>"; };
+		C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemFileManagerTests.swift; path = FridgeTests/ItemFileManagerTests.swift; sourceTree = "<group>"; };
 		C553FBE11DEDC58A000798D8 /* Fridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fridge; sourceTree = BUILT_PRODUCTS_DIR; };
 		C553FBE41DEDC58A000798D8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C553FBE91DEDC9FA000798D8 /* Fridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
 		C5576B2E1DF5EF08002F5D9F /* License.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = License.md; sourceTree = SOURCE_ROOT; };
 		C56923641DF076AD0023DF0E /* FridgeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeItem.swift; sourceTree = "<group>"; };
 		C56923661DF077CA0023DF0E /* FridgeErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeErrors.swift; sourceTree = "<group>"; };
-		C591C6441E0AA9C100A92A8C /* FridgeItemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FridgeItemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C591C6441E0AA9C100A92A8C /* FridgeTestsCollection.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FridgeTestsCollection.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C591C6461E0AA9C100A92A8C /* FridgeItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeItemTests.swift; sourceTree = "<group>"; };
-		C591C6481E0AA9C100A92A8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C591C6481E0AA9C100A92A8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = FridgeTests/Info.plist; sourceTree = "<group>"; };
+		C5CC276E1E128A52003CA17F /* FridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FridgeTests.swift; path = FridgeTests/FridgeTests.swift; sourceTree = "<group>"; };
 		C5D0E6B91DF449A400BA1716 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -86,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				C553FBE31DEDC58A000798D8 /* Fridge */,
-				C591C64F1E0AB5AC00A92A8C /* Tests */,
+				C591C64F1E0AB5AC00A92A8C /* TestSuites */,
 				C505E0601DEFAFC700442DDE /* Helper files */,
 				C553FBE21DEDC58A000798D8 /* Products */,
 			);
@@ -96,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				C553FBE11DEDC58A000798D8 /* Fridge */,
-				C591C6441E0AA9C100A92A8C /* FridgeItemTests.xctest */,
+				C591C6441E0AA9C100A92A8C /* FridgeTestsCollection.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +115,7 @@
 				C56923641DF076AD0023DF0E /* FridgeItem.swift */,
 				C56923661DF077CA0023DF0E /* FridgeErrors.swift */,
 				C553FBE91DEDC9FA000798D8 /* Fridge.swift */,
+				C529D4701E129CF70047CC7B /* ItemFileManager.swift */,
 			);
 			path = Fridge;
 			sourceTree = "<group>";
@@ -116,18 +124,28 @@
 			isa = PBXGroup;
 			children = (
 				C591C6461E0AA9C100A92A8C /* FridgeItemTests.swift */,
-				C591C6481E0AA9C100A92A8C /* Info.plist */,
 			);
 			name = FridgeItem;
 			path = FridgeTests;
 			sourceTree = "<group>";
 		};
-		C591C64F1E0AB5AC00A92A8C /* Tests */ = {
+		C591C64F1E0AB5AC00A92A8C /* TestSuites */ = {
 			isa = PBXGroup;
 			children = (
+				C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */,
+				C591C6481E0AA9C100A92A8C /* Info.plist */,
+				C5CC276D1E1285D6003CA17F /* Fridge */,
 				C591C6451E0AA9C100A92A8C /* FridgeItem */,
 			);
-			name = Tests;
+			name = TestSuites;
+			sourceTree = "<group>";
+		};
+		C5CC276D1E1285D6003CA17F /* Fridge */ = {
+			isa = PBXGroup;
+			children = (
+				C5CC276E1E128A52003CA17F /* FridgeTests.swift */,
+			);
+			name = Fridge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,9 +168,9 @@
 			productReference = C553FBE11DEDC58A000798D8 /* Fridge */;
 			productType = "com.apple.product-type.tool";
 		};
-		C591C6431E0AA9C100A92A8C /* FridgeItemTests */ = {
+		C591C6431E0AA9C100A92A8C /* FridgeTestsCollection */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C591C64B1E0AA9C100A92A8C /* Build configuration list for PBXNativeTarget "FridgeItemTests" */;
+			buildConfigurationList = C591C64B1E0AA9C100A92A8C /* Build configuration list for PBXNativeTarget "FridgeTestsCollection" */;
 			buildPhases = (
 				C591C6401E0AA9C100A92A8C /* Sources */,
 				C591C6411E0AA9C100A92A8C /* Frameworks */,
@@ -163,9 +181,9 @@
 			dependencies = (
 				C591C6511E0ABEDF00A92A8C /* PBXTargetDependency */,
 			);
-			name = FridgeItemTests;
+			name = FridgeTestsCollection;
 			productName = FridgeTests;
-			productReference = C591C6441E0AA9C100A92A8C /* FridgeItemTests.xctest */;
+			productReference = C591C6441E0AA9C100A92A8C /* FridgeTestsCollection.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -175,7 +193,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				TargetAttributes = {
 					C553FBE01DEDC58A000798D8 = {
 						CreatedOnToolsVersion = 8.1;
@@ -200,7 +218,7 @@
 			projectRoot = "";
 			targets = (
 				C553FBE01DEDC58A000798D8 /* Fridge */,
-				C591C6431E0AA9C100A92A8C /* FridgeItemTests */,
+				C591C6431E0AA9C100A92A8C /* FridgeTestsCollection */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +241,7 @@
 				C553FBEA1DEDC9FA000798D8 /* Fridge.swift in Sources */,
 				C553FBE51DEDC58A000798D8 /* main.swift in Sources */,
 				C56923651DF076AD0023DF0E /* FridgeItem.swift in Sources */,
+				C529D4711E129CF70047CC7B /* ItemFileManager.swift in Sources */,
 				C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,9 +250,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C52AD4041E14326500A20622 /* ItemFileManagerTests.swift in Sources */,
+				C5CC276F1E128A52003CA17F /* FridgeTests.swift in Sources */,
 				C591C6471E0AA9C100A92A8C /* FridgeItemTests.swift in Sources */,
 				C591C64C1E0AB1BC00A92A8C /* FridgeItem.swift in Sources */,
 				C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */,
+				C52AD4011E13F88700A20622 /* ItemFileManager.swift in Sources */,
 				C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,12 +274,49 @@
 		C553FBDB1DEDC540000798D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		C553FBDC1DEDC540000798D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -301,6 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -345,6 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -396,6 +457,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = FridgeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -445,6 +507,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = FridgeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vexscited.FridgeTests;
@@ -476,7 +539,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C591C64B1E0AA9C100A92A8C /* Build configuration list for PBXNativeTarget "FridgeItemTests" */ = {
+		C591C64B1E0AA9C100A92A8C /* Build configuration list for PBXNativeTarget "FridgeTestsCollection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C591C6491E0AA9C100A92A8C /* Debug */,

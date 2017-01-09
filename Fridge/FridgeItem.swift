@@ -48,7 +48,7 @@ struct FridgeItem {
         }
     }
     
-    var desiredLocation : URL?
+    var downloadDestination : URL?
     
     var onComplete : success = {_ in return}
     var onFailure : failure = {_ in return}
