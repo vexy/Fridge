@@ -55,11 +55,11 @@ item.onFailure = { error in
     print("👎 Unable to complete download ! Following error occured \(error.localizedDescription)")
 }
 
+// optionally set you download object destination path
+item.downloadDestination = URL(string: "/some/folder/that/iwant/")!
+
 //#3: create your Fridge
 let myFridge = Fridge.shared
-
-// optionally set you download object destination path
-myFridge.cacheDestination = "/some/folder/that/iwant/"
 
 //...and kick-off your download !!
 myFridge.download(item: item)
