@@ -16,7 +16,7 @@ class FridgeTests : XCTestCase {
     var fi = try! FridgeItem(withString: "http://httpbin.org/get")
     let sharedFridge = Fridge.shared
     
-    let globalTimeoutSeconds : TimeInterval = TimeInterval(5)
+    let globalTimeoutSeconds : TimeInterval = TimeInterval(7)
     
     func testCanDownloadItem(){
         let testExpectation = expectation(description: "Fridge can download item")
@@ -24,6 +24,9 @@ class FridgeTests : XCTestCase {
         fi.onComplete = { object in
             XCTAssertNotNil(object, "Fridge item is not downloaded")
             testExpectation.fulfill()
+        }
+        fi.onFailure = { (err) in
+            print("Error : \(err)")
         }
         sharedFridge.download(item: fi)
         
@@ -35,15 +38,53 @@ class FridgeTests : XCTestCase {
     func testFridgeCallsOnCompleteClosure() {
         let expect = expectation(description: "Fridge can call onComplete() closure")
         
-        fi.onComplete = { _ in
-            print("On complete closure called")
-//            XCTAssertNotNil(downloadedObject, "Download object is NIL after download")
+        fi.onComplete = { (someObject) in
+            XCTAssertNotNil(someObject, "Download object is NIL after download")
             expect.fulfill()
         }
         sharedFridge.download(item: fi)
         
         waitForExpectations(timeout: globalTimeoutSeconds) { (err) in
             XCTAssertNil(err, "Fridge doesn't call onComplete() closure")
+        }
+    }
+    
+    func testFridgeGracefullyFails() {
+        let expect = expectation(description: "Fridge can fail gracefully")
+        fi.downloadDestination = URL(string: "/Users/vexy/non_existing_folder")!
+        
+        fi.onFailure = { (error) in
+            
+            print("Error is : \(error)")
+            XCTAssertNotNil(error, "An error is thrown")
+            
+            expect.fulfill()
+        }
+        
+        sharedFridge.download(item: fi)
+        
+        waitForExpectations(timeout: globalTimeoutSeconds) { (someErr) in
+            XCTAssertNil(someErr)
+        }
+    }
+    
+    func testFridgeDownloadsToCachesDirectory() {
+        let test_expect = expectation(description: "Fridge can download to Caches directory")
+        
+        let fridgeCacheFolder = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] + "/Fridge/"
+        
+        fi.onComplete = { (object) in
+            let validator = fridgeCacheFolder.appending(object.lastPathComponent)
+            
+            //check if object is located at Fridge.systemCacheDirectory
+            XCTAssertTrue(FileManager.default.fileExists(atPath: validator))
+            test_expect.fulfill()
+        }
+        
+        sharedFridge.download(item: fi)
+        
+        waitForExpectations(timeout: globalTimeoutSeconds) { (someErr) in
+            XCTAssertNil(someErr, "Some error raised during downloading an item to Fridge cache")
         }
     }
     

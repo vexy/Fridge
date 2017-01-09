@@ -8,9 +8,10 @@
 
 import Foundation
 
-/// Utility class used to handle file operations
+/// Utility class used to handle file operations of given `FridgeItem`
 class ItemFileManger {
-    private var fridgeFile : URL
+    private var fridgeFile : FridgeItem
+    private var sourceFile : URL
     
     //FileManager singleton reference
     fileprivate let fileManager = FileManager.default
@@ -18,11 +19,36 @@ class ItemFileManger {
     //Cache destination folder path
     private var cachePath : String = ""
     
-    init(file : URL) {
+    /* 
+        Creates new instance of `ItemFileManager`
+     
+        - parameters:
+          - file: `FirdgeItem` that needs file operation
+          - source: `URL` file containing data that needs manipulation
+     
+    */
+    init(file : FridgeItem, source: URL) {
         fridgeFile = file
+        sourceFile = source
         
         //use default system cache directory for this :
         cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] + "/Fridge/"
+        handleCacheExistance()
+    }
+    
+    private func handleCacheExistance() {
+        //make sure our own cache folder exists
+        if !exists(path: cachePath) {
+            //create this folder
+            do {
+                try fileManager.createDirectory(at: URL(fileURLWithPath: cachePath), withIntermediateDirectories: false, attributes: nil)
+                print("<📁> Fridge cache folder exists !!")
+            } catch {
+                print("<📁> UNABLE TO CREATE CACHE DIRECTORY !! !!")
+            }
+        } else {
+            print("<📁> Fridge cache folder exists !!")
+        }
     }
     
     /// Returns system provided Cache folder
@@ -33,24 +59,28 @@ class ItemFileManger {
     }
     
     /**
-        Utility function used to copy downloaded object to specified location.
+        Utility function that tries to copy downloaded `FridgeItem` to *appropriate* destination
         
         - parameters:
           - destination: `URL` object where to place this item
      
         - note:
-        You can use system provided Cache folder using `ItemFileManager.cachePath`
+        This class will try to copy given `FridgeItem` to `FridgeItem.downloadDestination` (if exists) otherwise it will try to copy the given item to system provided **Cache folder** .
+        Cache folder path is computed in `systemCacheFolder` property
      
         - throws:
         `FridgeError.fileManagementError` if any file related action won't complete
     */
-    func permaCopy(to destination : URL) throws -> URL {
+    func itemPermaCopy() throws -> URL {
         var fileName : String = ""
         var finalFilePath : URL
         
         fileName = constructFileName()
-//        finalFilePath = URL(string: destination.absoluteString + fileName)!
-        finalFilePath = URL(fileURLWithPath: destination.absoluteString + fileName)
+        if let _ = fridgeFile.downloadDestination {
+            finalFilePath = fridgeFile.downloadDestination!.appendingPathComponent(fileName)
+        } else {
+            finalFilePath = URL(fileURLWithPath: systemCacheFolder).appendingPathComponent(fileName)
+        }
         
         print("<📁> Checking file existance at : \(finalFilePath.path)")
         do {
@@ -62,8 +92,9 @@ class ItemFileManger {
             }
 
             //finally try to copy this item to desired destination
-            print("<📂> Copying \(fridgeFile.description) to \(finalFilePath.description)")
-            try fileManager.copyItem(at: fridgeFile, to: finalFilePath)
+            print("<📂> Copying :\n\tFROM: \(sourceFile.description)\n\tTO : \(finalFilePath.description)...")
+            try fileManager.copyItem(at: sourceFile, to: finalFilePath)
+//            try fileManager.moveItem(at: sourceFile, to: finalFilePath)
         } catch {
             print("<📂> ERROR : Unable to copy file to final destination ! Reason : \(error.localizedDescription)")
             throw FridgeError.fileManagementError
@@ -78,26 +109,13 @@ class ItemFileManger {
     func constructFileName() -> String {
         var validFileName : String = ""
         
-        if fridgeFile.lastPathComponent == "/"  {
-            //this could be like : http://www.google.com
-            validFileName = UUID().uuidString + ".tmp"
+        if fridgeFile.url.lastPathComponent.contains(".") {
+            validFileName = fridgeFile.url.lastPathComponent
         } else {
-            //check if we're dealing with 'naked' file names
-            //  eg. /some/folder/withNakedFile
-            //  eg. http://foo.bar/request
-
-            if fridgeFile.lastPathComponent.contains(".") {
-                validFileName = UUID().uuidString + ".tmp"
-            } else {
-                validFileName = fridgeFile.lastPathComponent + ".tmp"
-            }
+            validFileName = UUID().uuidString + ".tmp"
         }
         
         return validFileName
-    }
-    
-    private func constructFolderPath() -> String {
-        return ""
     }
     
     private func exists(path : String) -> Bool {

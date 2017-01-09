@@ -38,14 +38,6 @@
                BlueprintName = "FridgeTestsCollection"
                ReferencedContainer = "container:Fridge.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "FridgeItemTests">
-               </Test>
-               <Test
-                  Identifier = "FridgeTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

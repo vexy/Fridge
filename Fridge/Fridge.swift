@@ -82,7 +82,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     func download(item : FridgeItem) {
         let downloadTask = downloadSession!.downloadTask(with: item.url)
         
-        print("<⚙> Adding single task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
+        print("<⚙> Adding single task #\(downloadTask.taskIdentifier) (URL : \(item.url.absoluteString))")
         
         //add this download task to our protected collection
         synchronizer.sync {
@@ -111,7 +111,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
             
             //start downloading tasks asynchronously
             dispatcher.async {
-                print("<⚙> Adding task #\(downloadTask.taskIdentifier) (destination : \(item.url.absoluteString))")
+                print("<⚙> Adding task #\(downloadTask.taskIdentifier) (URL : \(item.url.absoluteString))")
                 downloadTask.resume()
             }
         }
@@ -122,6 +122,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         var downloadItem : FridgeItem?
         
         //get FridgeItem from synchronizer
+        ///*
         synchronizer.sync {
             downloadItem = taskIDs[downloadTask.taskIdentifier]
         }
@@ -131,42 +132,40 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         let taskID = downloadTask.taskIdentifier
         print("⏺ Task #\(taskID): Download completed, temporary file path : \(location.absoluteString)")
         print("⏺ Task #\(taskID): Kicking off file manager duties (SYNC) ~~")
+        //*/
         
         synchronizer.sync {
-            //initialize itemFileManager with downloaded file
-            let manager = ItemFileManger(file: location)
+            //initialize itemFileManager with this FridgeItem
+            let manager = ItemFileManger(file: downloadItem!, source: location)
             
             do {
-                var permaLocation : URL
                 
-                //check if our FridgeItem has downloadLocation
-                if let downloadPath = downloadItem?.downloadDestination {
-                    permaLocation = try manager.permaCopy(to: downloadPath)
-                } else {
-                    permaLocation = try manager.permaCopy(to: URL(string: manager.systemCacheFolder)!)
-                }
+                let permaLocation = try manager.itemPermaCopy()
                 
                 //perform FridgeItem closure if exists
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     downloadItem?.onComplete(permaLocation)
                 }
             } catch FridgeError.fileManagementError {
                 print("⏺ Task #\(taskID): ERRORED (FILE TROUBLE) -> proceeding with onFailure closure")
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     downloadItem?.onFailure( .fileManagementError )
                 }
             } catch FridgeError.generalError {
-                print("⏺ Task #\(taskID): ERRORED (GENERAL) -> proceesing with onFailure closure")
-                DispatchQueue.main.sync {
+                print("⏺ Task #\(taskID): ERRORED (GENERAL) -> proceeding with onFailure closure")
+                DispatchQueue.main.async {
                     downloadItem?.onFailure( .generalError )
                 }
             } catch {
-                print("⏺ Task #\(taskID) : ERRORED(UNKNOWN), proceesing with onFailure closure")
-                assertionFailure("General error occured !")
+                print("⏺ Task #\(taskID) : ERRORED(UNKNOWN), proceeding with onFailure closure")
+//                assertionFailure("General error occured !")
+                DispatchQueue.main.async {
+                    downloadItem?.onFailure( .generalError )
+                }
             }
+            
+            print("⏺ Task #\(taskID):FINISHED\n----------")
         }
-        
-        print("⏺ Task #\(taskID):FINISHED\n----------")
     }
     
     //protected addition of DownloadTask
