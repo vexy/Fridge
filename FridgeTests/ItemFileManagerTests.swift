@@ -19,7 +19,15 @@ class ItemFileMangerTests : XCTestCase {
         let expect = expectation(description: "Fridge can copy downloaded file to destination after download")
         
         fi.url = URL(string: "http://www.bigfoto.com/dog-animal.jpg")!
-        fi.downloadDestination = URL(fileURLWithPath: "/Users/vexy/Desktop/Fridge/")
+        //because tests will be executed on CI, make sure we have test directory
+        do {
+            fi.downloadDestination = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("Fridge", isDirectory: true)
+        } catch {
+            print("TESTS : Unable to create test directory !!")
+        }
+        
+        print("TESTS : Download destination is : \(fi.downloadDestination!)")
+        
         fi.onComplete = { (photo) in
             //photo is our destination, we should inspect if it matches desired directory
             let operationPath = photo.path
