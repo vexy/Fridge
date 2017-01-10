@@ -49,24 +49,6 @@ class FridgeTests : XCTestCase {
         }
     }
     
-    func testFridgeGracefullyFails() {
-        let expect = expectation(description: "Fridge can fail gracefully")
-        fi.downloadDestination = URL(string: "/Users/vexy/non_existing_folder")!
-        
-        fi.onFailure = { (error) in
-            
-            print("Error is : \(error)")
-            XCTAssertNotNil(error, "An error is thrown")
-            
-            expect.fulfill()
-        }
-        
-        sharedFridge.download(item: fi)
-        
-        waitForExpectations(timeout: globalTimeoutSeconds) { (someErr) in
-            XCTAssertNil(someErr)
-        }
-    }
     
     func testFridgeDownloadsToCachesDirectory() {
         let test_expect = expectation(description: "Fridge can download to Caches directory")
@@ -88,17 +70,42 @@ class FridgeTests : XCTestCase {
         }
     }
     
-    func testFridgeDownloadsToDesiredLocation() {
-        let expect = expectation(description: "Fridge places item in desired location path")
+    func testFridgeDownloadsToDesiredLocation_ThatExist() {
+        let expect = expectation(description: "Fridge places item in custom location path that exists")
         
-        let path = "/Users/vexy/Desktop/Fridge/"
-        fi.downloadDestination = URL(fileURLWithPath: path)
+        //because tests will be executed on CI, make sure we have test directory
+        do {
+            fi.downloadDestination = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("Fridge", isDirectory: true)
+        } catch {
+            print("TESTS : Unable to create test directory !!")
+        }
+        
+        print("TESTS: custom download destination is : \(fi.downloadDestination!.path)")
         
         fi.onComplete = { (object) in
             //check if an item exists at this location
             let boolResult : Bool = FileManager.default.fileExists(atPath: object.path)
             
-            XCTAssertTrue(boolResult)
+            XCTAssertTrue(boolResult, "Downloaded file isn't copied to custom location")
+            expect.fulfill()
+        }
+        sharedFridge.download(item: fi)
+        
+        waitForExpectations(timeout: globalTimeoutSeconds) { (error) in
+            XCTAssertNil(error)
+        }
+    }
+    
+    func testFridgeDownloadsToDesiredLocation_ThatDontExist() {
+        let expect = expectation(description: "Fridge defaults to FridgeCache if using non existing custom destination")
+        
+        fi.downloadDestination = URL(string: "/some/non_existing_folder/")
+        
+        fi.onComplete = { (object) in
+            //check if an item exists at this location
+            let boolResult : Bool = FileManager.default.fileExists(atPath: object.path)
+            
+            XCTAssertTrue(boolResult, "Downloaded file isn't copied to Fridge cache after it is instructed to download item to non-existing custom folder")
             expect.fulfill()
         }
         sharedFridge.download(item: fi)
