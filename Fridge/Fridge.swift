@@ -122,7 +122,6 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         var downloadItem : FridgeItem?
         
         //get FridgeItem from synchronizer
-        ///*
         synchronizer.sync {
             downloadItem = taskIDs[downloadTask.taskIdentifier]
         }
@@ -131,16 +130,15 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         
         let taskID = downloadTask.taskIdentifier
         print("⏺ Task #\(taskID): Download completed, temporary file path : \(location.absoluteString)")
-        print("⏺ Task #\(taskID): Kicking off file manager duties (SYNC) ~~")
-        //*/
+        print("⏺ Task #\(taskID): Kicking off file manager duties ~~SYNC~~")
         
         synchronizer.sync {
-            //initialize itemFileManager with this FridgeItem
+            //initialize ItemFileManager with this FridgeItem
             let manager = ItemFileManger(file: downloadItem!, source: location)
             
             do {
                 
-                let permaLocation = try manager.itemPermaCopy()
+                let permaLocation = try manager.storePermanently()
                 
                 //perform FridgeItem closure if exists
                 DispatchQueue.main.async {
@@ -168,6 +166,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
         }
     }
     
+    /*
     //protected addition of DownloadTask
     private func add(task: URLSessionDownloadTask) {
         
@@ -177,6 +176,7 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     private func remove(task : URLSessionDownloadTask) {
         
     }
+    */
 }
 
 

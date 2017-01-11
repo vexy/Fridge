@@ -42,17 +42,17 @@ class ItemFileManger {
             //create this folder
             do {
                 try fileManager.createDirectory(at: URL(fileURLWithPath: cachePath), withIntermediateDirectories: false, attributes: nil)
-                print("<📁> Fridge cache folder exists !!")
+                print("<📁> Fridge cache folder created !!")
             } catch {
-                print("<📁> UNABLE TO CREATE CACHE DIRECTORY !! !!")
+                print("<📁> ERROR : UNABLE TO CREATE CACHE DIRECTORY !! !!")
             }
         } else {
-            print("<📁> Fridge cache folder exists !!")
+            print("<📁> Fridge cache folder already exists !!")
         }
     }
     
-    /// Returns system provided Cache folder
-    public var systemCacheFolder : String {
+    /// Returns custom Cache folder
+    public var fridgeCacheFolder : String {
         get {
             return cachePath
         }
@@ -60,43 +60,38 @@ class ItemFileManger {
     
     /**
         Utility function that tries to copy downloaded `FridgeItem` to *appropriate* destination
-        
-        - parameters:
-          - destination: `URL` object where to place this item
+     
      
         - note:
-        This class will try to copy given `FridgeItem` to `FridgeItem.downloadDestination` (if exists) otherwise it will try to copy the given item to system provided **Cache folder** .
-        Cache folder path is computed in `systemCacheFolder` property
+        This class will try to copy given `FridgeItem` to `FridgeItem.downloadDestination` (if exists) otherwise it will try to copy the given item to custom **Fridge cache folder** .
+        Cache folder path is computed in `fridgeCacheFolder` property
      
         - throws:
-        `FridgeError.fileManagementError` if any file related action won't complete
+        `FridgeError.fileManagementError` if any file/folder related actions are unable to complete
     */
-    func itemPermaCopy() throws -> URL {
+    func storePermanently() throws -> URL {
         var fileName : String = ""
         var finalFilePath : URL
         
+        //setup needed parts
         fileName = constructFileName()
-        if let _ = fridgeFile.downloadDestination {
-            finalFilePath = fridgeFile.downloadDestination!.appendingPathComponent(fileName)
-        } else {
-            finalFilePath = URL(fileURLWithPath: systemCacheFolder).appendingPathComponent(fileName)
-        }
+        finalFilePath = handleDownloadPath(withFileName: fileName)
         
-        print("<📁> Checking file existance at : \(finalFilePath.path)")
+        print("<📁> Checking final file existance at : \(finalFilePath.path)")
         do {
             if exists(path: finalFilePath.path) {
                 //delete this file :
                 try delete(path: finalFilePath.path)
             } else {
-                print("<📂> Filename doesn't exist at path ✅")
+                print("<📂> ✅ Final file doesn't exist at path")
             }
 
             //finally try to copy this item to desired destination
             print("<📂> Copying :\n\tFROM: \(sourceFile.description)\n\tTO : \(finalFilePath.description)...")
-            try fileManager.copyItem(at: sourceFile, to: finalFilePath)
-//            try fileManager.moveItem(at: sourceFile, to: finalFilePath)
-        } catch {
-            print("<📂> ERROR : Unable to copy file to final destination ! Reason : \(error.localizedDescription)")
+//            try fileManager.copyItem(at: sourceFile, to: finalFilePath)
+            try fileManager.moveItem(at: sourceFile, to: finalFilePath)
+        } catch let err as NSError {
+            print("<📂> ERROR : Unable to MOVE file to final destination ! Reason : \(err.localizedDescription)")
             throw FridgeError.fileManagementError
         }
         
@@ -116,6 +111,38 @@ class ItemFileManger {
         }
         
         return validFileName
+    }
+    
+    private func handleDownloadPath(withFileName : String) -> URL {
+        var downloadPath : URL
+        
+        if let customPath = fridgeFile.downloadDestination {
+            //we have some custom destination, first make sure it exists
+            if exists(path: fridgeFile.downloadDestination!.path) {
+                downloadPath = customPath.appendingPathComponent(withFileName)
+                print("<📁> ✅ Custom download destination exists")
+            } else {
+                do {
+                    try fileManager.createDirectory(at: customPath, withIntermediateDirectories: true, attributes: nil)
+                    
+                    downloadPath = customPath.appendingPathComponent(withFileName)
+                    print("<📁> ✅ Custom download destination created")
+                } catch {
+                    print("<📁> Custom download destination cannot be created, defaulting to fridgeCacheFolder !")
+                    downloadPath = URL(fileURLWithPath: cachePath).appendingPathComponent(withFileName)
+                }
+                
+                /*
+                print("<📁> Custom download destination doesn't exists, defaulting to fridgeCacheFolder !")
+                downloadPath = URL(fileURLWithPath: cachePath).appendingPathComponent(withFileName)
+                */
+            }
+        } else {
+            //there is no custom destination, use Fridge cache instead
+            downloadPath = URL(fileURLWithPath: cachePath).appendingPathComponent(withFileName)
+        }
+        
+        return downloadPath
     }
     
     private func exists(path : String) -> Bool {
