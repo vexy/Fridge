@@ -104,7 +104,7 @@ THANK YOU FOR READING THIS FAR
 
 ---   
 (**FRIDGE IS STILL UNDER HEAVY DEVELOPMENT**)  
-Latest stable release : *v0.64 ( UTC2016-12-27 )*
+Latest stable release : *v0.7 ( UTC2017-01-11 )*
 
 Developed under MIT license   
 Copyright © 2016 Veljko Tekelerović
