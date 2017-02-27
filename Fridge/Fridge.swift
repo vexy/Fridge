@@ -29,9 +29,6 @@
 
 */
 
-
-
-
 //
 //  - CLASS MAIN RESPONSIBILITY -
 //
@@ -46,12 +43,14 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     //serial queue used for storing/retreiving taskIDs
     private let synchronizer = DispatchQueue(label: "com.vexscited.fridge.synchronizer", qos: DispatchQoS.userInitiated)
     
+    /*
     //concurent queue used for starting network tasks
     private let dispatcher = DispatchQueue(label: "com.vexscited.fridge.network_dispatcher", qos: DispatchQoS.utility, attributes: DispatchQueue.Attributes.concurrent)
     private let opQueue = OperationQueue()
     //
     private var background : URLSessionConfiguration?
     private var downloadSession : URLSession?
+    */
     
     //dictionary of DownloadTask(s) and appropriate DownloadItem(s)
     private var taskIDs : Dictionary<Int, FridgeItem> = Dictionary<Int,FridgeItem>()
@@ -64,11 +63,14 @@ class Fridge : NSObject, URLSessionDownloadDelegate {
     private override init() {
         super.init()
         
+        /*
         opQueue.qualityOfService = .background
         opQueue.maxConcurrentOperationCount = 4
         
         background = URLSessionConfiguration.background(withIdentifier: "com.vexscited.fridge.downloader.background")
         downloadSession = URLSession(configuration: background!, delegate: self, delegateQueue: opQueue)
+        */
+        
         
         taskIDs.removeAll()
     }

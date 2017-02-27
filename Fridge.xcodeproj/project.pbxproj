@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C510011E1E64B82900BA4E56 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510011D1E64B82900BA4E56 /* Downloader.swift */; };
 		C529D4711E129CF70047CC7B /* ItemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C529D4701E129CF70047CC7B /* ItemFileManager.swift */; };
 		C52AD4011E13F88700A20622 /* ItemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C529D4701E129CF70047CC7B /* ItemFileManager.swift */; };
 		C52AD4041E14326500A20622 /* ItemFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		C505E0611DEFAFE600442DDE /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; fileEncoding = 4; path = README.md; sourceTree = SOURCE_ROOT; };
+		C510011D1E64B82900BA4E56 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		C529D4701E129CF70047CC7B /* ItemFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFileManager.swift; sourceTree = "<group>"; };
 		C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemFileManagerTests.swift; path = FridgeTests/ItemFileManagerTests.swift; sourceTree = "<group>"; };
 		C553FBE11DEDC58A000798D8 /* Fridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fridge; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,14 @@
 			path = Fridge;
 			sourceTree = "<group>";
 		};
+		C510011C1E64B7A200BA4E56 /* ItemFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */,
+			);
+			name = ItemFileManager;
+			sourceTree = "<group>";
+		};
 		C553FBD61DEDC540000798D8 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 				C56923661DF077CA0023DF0E /* FridgeErrors.swift */,
 				C553FBE91DEDC9FA000798D8 /* Fridge.swift */,
 				C529D4701E129CF70047CC7B /* ItemFileManager.swift */,
+				C510011D1E64B82900BA4E56 /* Downloader.swift */,
 			);
 			path = Fridge;
 			sourceTree = "<group>";
@@ -132,10 +143,10 @@
 		C591C64F1E0AB5AC00A92A8C /* TestSuites */ = {
 			isa = PBXGroup;
 			children = (
-				C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */,
 				C591C6481E0AA9C100A92A8C /* Info.plist */,
 				C5CC276D1E1285D6003CA17F /* Fridge */,
 				C591C6451E0AA9C100A92A8C /* FridgeItem */,
+				C510011C1E64B7A200BA4E56 /* ItemFileManager */,
 			);
 			name = TestSuites;
 			sourceTree = "<group>";
@@ -240,6 +251,7 @@
 			files = (
 				C553FBEA1DEDC9FA000798D8 /* Fridge.swift in Sources */,
 				C553FBE51DEDC58A000798D8 /* main.swift in Sources */,
+				C510011E1E64B82900BA4E56 /* Downloader.swift in Sources */,
 				C56923651DF076AD0023DF0E /* FridgeItem.swift in Sources */,
 				C529D4711E129CF70047CC7B /* ItemFileManager.swift in Sources */,
 				C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */,
