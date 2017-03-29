@@ -20,6 +20,8 @@
 		C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
 		C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Fridge.swift */; };
 		C5CC276F1E128A52003CA17F /* FridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CC276E1E128A52003CA17F /* FridgeTests.swift */; };
+		C5E717FF1E8C4C55000E84C6 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510011D1E64B82900BA4E56 /* Downloader.swift */; };
+		C5E718011E8C56AC000E84C6 /* ExampleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E718001E8C56AC000E84C6 /* ExampleFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,7 @@
 		C591C6481E0AA9C100A92A8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = FridgeTests/Info.plist; sourceTree = "<group>"; };
 		C5CC276E1E128A52003CA17F /* FridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FridgeTests.swift; path = FridgeTests/FridgeTests.swift; sourceTree = "<group>"; };
 		C5D0E6B91DF449A400BA1716 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
+		C5E718001E8C56AC000E84C6 /* ExampleFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				C553FBE41DEDC58A000798D8 /* main.swift */,
+				C5E718001E8C56AC000E84C6 /* ExampleFactory.swift */,
 				C56923641DF076AD0023DF0E /* FridgeItem.swift */,
 				C56923661DF077CA0023DF0E /* FridgeErrors.swift */,
 				C553FBE91DEDC9FA000798D8 /* Fridge.swift */,
@@ -250,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C553FBEA1DEDC9FA000798D8 /* Fridge.swift in Sources */,
+				C5E718011E8C56AC000E84C6 /* ExampleFactory.swift in Sources */,
 				C553FBE51DEDC58A000798D8 /* main.swift in Sources */,
 				C510011E1E64B82900BA4E56 /* Downloader.swift in Sources */,
 				C56923651DF076AD0023DF0E /* FridgeItem.swift in Sources */,
@@ -264,6 +269,7 @@
 			files = (
 				C52AD4041E14326500A20622 /* ItemFileManagerTests.swift in Sources */,
 				C5CC276F1E128A52003CA17F /* FridgeTests.swift in Sources */,
+				C5E717FF1E8C4C55000E84C6 /* Downloader.swift in Sources */,
 				C591C6471E0AA9C100A92A8C /* FridgeItemTests.swift in Sources */,
 				C591C64C1E0AB1BC00A92A8C /* FridgeItem.swift in Sources */,
 				C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */,

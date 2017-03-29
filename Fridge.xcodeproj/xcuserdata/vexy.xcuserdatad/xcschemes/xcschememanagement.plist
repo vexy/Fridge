@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>FridgeLib.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>C5D00D9E1DF488A500AD8973</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C5E717FB1E8C3D5E000E84C6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
