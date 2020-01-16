@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+options: "4f41fc67525c2bc91336be300f196006"
+build_time: [1579207295, 743017000]
+inputs:
+  "/Users/vexy/iOS Dev/My Stuff/Fridge/Tests/FridgeTests/FridgeTests.swift": [1579206420, 626181537]
+  "/Users/vexy/iOS Dev/My Stuff/Fridge/Tests/FridgeTests/XCTestManifests.swift": [1579206420, 626458292]

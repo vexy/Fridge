@@ -1,5 +1,6 @@
-# Xcode created files
+# Xcode build created files
 build/
+.build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -25,4 +26,3 @@ DerivedData
 *.jpg
 *.jpeg
 *.html
-

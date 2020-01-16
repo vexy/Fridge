@@ -6,169 +6,150 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		"Fridge::FridgePackageTests::ProductTarget" /* FridgePackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_33 /* Build configuration list for PBXAggregateTarget "FridgePackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_36 /* PBXTargetDependency */,
+			);
+			name = FridgePackageTests;
+			productName = FridgePackageTests;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		C510011E1E64B82900BA4E56 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510011D1E64B82900BA4E56 /* Downloader.swift */; };
-		C529D4711E129CF70047CC7B /* ItemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C529D4701E129CF70047CC7B /* ItemFileManager.swift */; };
-		C52AD4011E13F88700A20622 /* ItemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C529D4701E129CF70047CC7B /* ItemFileManager.swift */; };
-		C52AD4041E14326500A20622 /* ItemFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */; };
-		C553FBE51DEDC58A000798D8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE41DEDC58A000798D8 /* main.swift */; };
-		C553FBEA1DEDC9FA000798D8 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Fridge.swift */; };
-		C56923651DF076AD0023DF0E /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* FridgeItem.swift */; };
-		C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
-		C591C6471E0AA9C100A92A8C /* FridgeItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C591C6461E0AA9C100A92A8C /* FridgeItemTests.swift */; };
-		C591C64C1E0AB1BC00A92A8C /* FridgeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923641DF076AD0023DF0E /* FridgeItem.swift */; };
-		C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56923661DF077CA0023DF0E /* FridgeErrors.swift */; };
-		C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C553FBE91DEDC9FA000798D8 /* Fridge.swift */; };
-		C5CC276F1E128A52003CA17F /* FridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CC276E1E128A52003CA17F /* FridgeTests.swift */; };
+		OBJ_24 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Fridge.swift */; };
+		OBJ_31 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_42 /* FridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FridgeTests.swift */; };
+		OBJ_43 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* XCTestManifests.swift */; };
+		OBJ_45 /* Fridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Fridge::Fridge::Product" /* Fridge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C591C6501E0ABEDF00A92A8C /* PBXContainerItemProxy */ = {
+		C53D536D23D100C800EE51CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C553FBD71DEDC540000798D8 /* Project object */;
+			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C553FBE01DEDC58A000798D8;
+			remoteGlobalIDString = "Fridge::Fridge";
 			remoteInfo = Fridge;
+		};
+		C53D536E23D100C900EE51CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Fridge::FridgeTests";
+			remoteInfo = FridgeTests;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		C553FBDF1DEDC58A000798D8 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		C505E0611DEFAFE600442DDE /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; fileEncoding = 4; path = README.md; sourceTree = SOURCE_ROOT; };
-		C510011D1E64B82900BA4E56 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
-		C529D4701E129CF70047CC7B /* ItemFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFileManager.swift; sourceTree = "<group>"; };
-		C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemFileManagerTests.swift; path = FridgeTests/ItemFileManagerTests.swift; sourceTree = "<group>"; };
-		C553FBE11DEDC58A000798D8 /* Fridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fridge; sourceTree = BUILT_PRODUCTS_DIR; };
-		C553FBE41DEDC58A000798D8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C553FBE91DEDC9FA000798D8 /* Fridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
-		C5576B2E1DF5EF08002F5D9F /* License.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = License.md; sourceTree = SOURCE_ROOT; };
-		C56923641DF076AD0023DF0E /* FridgeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeItem.swift; sourceTree = "<group>"; };
-		C56923661DF077CA0023DF0E /* FridgeErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeErrors.swift; sourceTree = "<group>"; };
-		C591C6441E0AA9C100A92A8C /* FridgeTestsCollection.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FridgeTestsCollection.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C591C6461E0AA9C100A92A8C /* FridgeItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeItemTests.swift; sourceTree = "<group>"; };
-		C591C6481E0AA9C100A92A8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = FridgeTests/Info.plist; sourceTree = "<group>"; };
-		C5CC276E1E128A52003CA17F /* FridgeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FridgeTests.swift; path = FridgeTests/FridgeTests.swift; sourceTree = "<group>"; };
-		C5D0E6B91DF449A400BA1716 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
+		C53D537023D103AA00EE51CF /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = SOURCE_ROOT; };
+		"Fridge::Fridge::Product" /* Fridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Fridge::FridgeTests::Product" /* FridgeTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = FridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_12 /* FridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeTests.swift; sourceTree = "<group>"; };
+		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		OBJ_17 /* License.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = License.md; sourceTree = "<group>"; };
+		OBJ_18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_9 /* Fridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C553FBDE1DEDC58A000798D8 /* Frameworks */ = {
+		OBJ_25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C591C6411E0AA9C100A92A8C /* Frameworks */ = {
+		OBJ_44 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
+				OBJ_45 /* Fridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C505E0601DEFAFC700442DDE /* Helper files */ = {
+		C53D536F23D1033400EE51CF /* Additional Files */ = {
 			isa = PBXGroup;
 			children = (
-				C5576B2E1DF5EF08002F5D9F /* License.md */,
-				C5D0E6B91DF449A400BA1716 /* .travis.yml */,
-				C505E0611DEFAFE600442DDE /* README.md */,
+				C53D537023D103AA00EE51CF /* .travis.yml */,
+				OBJ_17 /* License.md */,
 			);
-			name = "Helper files";
-			path = Fridge;
+			path = "Additional Files";
 			sourceTree = "<group>";
 		};
-		C510011C1E64B7A200BA4E56 /* ItemFileManager */ = {
+		OBJ_10 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C52AD4021E14326500A20622 /* ItemFileManagerTests.swift */,
+				OBJ_11 /* FridgeTests */,
 			);
-			name = ItemFileManager;
-			sourceTree = "<group>";
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
 		};
-		C553FBD61DEDC540000798D8 = {
+		OBJ_11 /* FridgeTests */ = {
 			isa = PBXGroup;
 			children = (
-				C553FBE31DEDC58A000798D8 /* Fridge */,
-				C591C64F1E0AB5AC00A92A8C /* TestSuites */,
-				C505E0601DEFAFC700442DDE /* Helper files */,
-				C553FBE21DEDC58A000798D8 /* Products */,
+				OBJ_12 /* FridgeTests.swift */,
+				OBJ_13 /* XCTestManifests.swift */,
 			);
-			sourceTree = "<group>";
+			name = FridgeTests;
+			path = Tests/FridgeTests;
+			sourceTree = SOURCE_ROOT;
 		};
-		C553FBE21DEDC58A000798D8 /* Products */ = {
+		OBJ_14 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C553FBE11DEDC58A000798D8 /* Fridge */,
-				C591C6441E0AA9C100A92A8C /* FridgeTestsCollection.xctest */,
+				"Fridge::Fridge::Product" /* Fridge.framework */,
+				"Fridge::FridgeTests::Product" /* FridgeTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C553FBE31DEDC58A000798D8 /* Fridge */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
-				C553FBE41DEDC58A000798D8 /* main.swift */,
-				C56923641DF076AD0023DF0E /* FridgeItem.swift */,
-				C56923661DF077CA0023DF0E /* FridgeErrors.swift */,
-				C553FBE91DEDC9FA000798D8 /* Fridge.swift */,
-				C529D4701E129CF70047CC7B /* ItemFileManager.swift */,
-				C510011D1E64B82900BA4E56 /* Downloader.swift */,
+				OBJ_18 /* README.md */,
+				C53D536F23D1033400EE51CF /* Additional Files */,
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_10 /* Tests */,
+				OBJ_14 /* Products */,
 			);
-			path = Fridge;
 			sourceTree = "<group>";
 		};
-		C591C6451E0AA9C100A92A8C /* FridgeItem */ = {
+		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C591C6461E0AA9C100A92A8C /* FridgeItemTests.swift */,
+				OBJ_8 /* Fridge */,
 			);
-			name = FridgeItem;
-			path = FridgeTests;
-			sourceTree = "<group>";
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
 		};
-		C591C64F1E0AB5AC00A92A8C /* TestSuites */ = {
+		OBJ_8 /* Fridge */ = {
 			isa = PBXGroup;
 			children = (
-				C591C6481E0AA9C100A92A8C /* Info.plist */,
-				C5CC276D1E1285D6003CA17F /* Fridge */,
-				C591C6451E0AA9C100A92A8C /* FridgeItem */,
-				C510011C1E64B7A200BA4E56 /* ItemFileManager */,
-			);
-			name = TestSuites;
-			sourceTree = "<group>";
-		};
-		C5CC276D1E1285D6003CA17F /* Fridge */ = {
-			isa = PBXGroup;
-			children = (
-				C5CC276E1E128A52003CA17F /* FridgeTests.swift */,
+				OBJ_9 /* Fridge.swift */,
 			);
 			name = Fridge;
-			sourceTree = "<group>";
+			path = Sources/Fridge;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C553FBE01DEDC58A000798D8 /* Fridge */ = {
+		"Fridge::Fridge" /* Fridge */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C553FBE61DEDC58A000798D8 /* Build configuration list for PBXNativeTarget "Fridge" */;
+			buildConfigurationList = OBJ_20 /* Build configuration list for PBXNativeTarget "Fridge" */;
 			buildPhases = (
-				C553FBDD1DEDC58A000798D8 /* Sources */,
-				C553FBDE1DEDC58A000798D8 /* Frameworks */,
-				C553FBDF1DEDC58A000798D8 /* CopyFiles */,
+				OBJ_23 /* Sources */,
+				OBJ_25 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -176,391 +157,353 @@
 			);
 			name = Fridge;
 			productName = Fridge;
-			productReference = C553FBE11DEDC58A000798D8 /* Fridge */;
-			productType = "com.apple.product-type.tool";
+			productReference = "Fridge::Fridge::Product" /* Fridge.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		C591C6431E0AA9C100A92A8C /* FridgeTestsCollection */ = {
+		"Fridge::FridgeTests" /* FridgeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C591C64B1E0AA9C100A92A8C /* Build configuration list for PBXNativeTarget "FridgeTestsCollection" */;
+			buildConfigurationList = OBJ_38 /* Build configuration list for PBXNativeTarget "FridgeTests" */;
 			buildPhases = (
-				C591C6401E0AA9C100A92A8C /* Sources */,
-				C591C6411E0AA9C100A92A8C /* Frameworks */,
-				C591C6421E0AA9C100A92A8C /* Resources */,
+				OBJ_41 /* Sources */,
+				OBJ_44 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C591C6511E0ABEDF00A92A8C /* PBXTargetDependency */,
+				OBJ_46 /* PBXTargetDependency */,
 			);
-			name = FridgeTestsCollection;
+			name = FridgeTests;
 			productName = FridgeTests;
-			productReference = C591C6441E0AA9C100A92A8C /* FridgeTestsCollection.xctest */;
+			productReference = "Fridge::FridgeTests::Product" /* FridgeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Fridge::SwiftPMPackageDescription" /* FridgePackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_27 /* Build configuration list for PBXNativeTarget "FridgePackageDescription" */;
+			buildPhases = (
+				OBJ_30 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FridgePackageDescription;
+			productName = FridgePackageDescription;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C553FBD71DEDC540000798D8 /* Project object */ = {
+		OBJ_1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0820;
-				TargetAttributes = {
-					C553FBE01DEDC58A000798D8 = {
-						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
-					};
-					C591C6431E0AA9C100A92A8C = {
-						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
-					};
-				};
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
 			};
-			buildConfigurationList = C553FBDA1DEDC540000798D8 /* Build configuration list for PBXProject "Fridge" */;
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Fridge" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = C553FBD61DEDC540000798D8;
-			productRefGroup = C553FBE21DEDC58A000798D8 /* Products */;
+			mainGroup = OBJ_5;
+			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C553FBE01DEDC58A000798D8 /* Fridge */,
-				C591C6431E0AA9C100A92A8C /* FridgeTestsCollection */,
+				"Fridge::Fridge" /* Fridge */,
+				"Fridge::SwiftPMPackageDescription" /* FridgePackageDescription */,
+				"Fridge::FridgePackageTests::ProductTarget" /* FridgePackageTests */,
+				"Fridge::FridgeTests" /* FridgeTests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		C591C6421E0AA9C100A92A8C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		C553FBDD1DEDC58A000798D8 /* Sources */ = {
+		OBJ_23 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				C553FBEA1DEDC9FA000798D8 /* Fridge.swift in Sources */,
-				C553FBE51DEDC58A000798D8 /* main.swift in Sources */,
-				C510011E1E64B82900BA4E56 /* Downloader.swift in Sources */,
-				C56923651DF076AD0023DF0E /* FridgeItem.swift in Sources */,
-				C529D4711E129CF70047CC7B /* ItemFileManager.swift in Sources */,
-				C56923671DF077CA0023DF0E /* FridgeErrors.swift in Sources */,
+				OBJ_24 /* Fridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C591C6401E0AA9C100A92A8C /* Sources */ = {
+		OBJ_30 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				C52AD4041E14326500A20622 /* ItemFileManagerTests.swift in Sources */,
-				C5CC276F1E128A52003CA17F /* FridgeTests.swift in Sources */,
-				C591C6471E0AA9C100A92A8C /* FridgeItemTests.swift in Sources */,
-				C591C64C1E0AB1BC00A92A8C /* FridgeItem.swift in Sources */,
-				C591C64D1E0AB1BC00A92A8C /* FridgeErrors.swift in Sources */,
-				C52AD4011E13F88700A20622 /* ItemFileManager.swift in Sources */,
-				C591C64E1E0AB1BC00A92A8C /* Fridge.swift in Sources */,
+				OBJ_31 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_42 /* FridgeTests.swift in Sources */,
+				OBJ_43 /* XCTestManifests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C591C6511E0ABEDF00A92A8C /* PBXTargetDependency */ = {
+		OBJ_36 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C553FBE01DEDC58A000798D8 /* Fridge */;
-			targetProxy = C591C6501E0ABEDF00A92A8C /* PBXContainerItemProxy */;
+			target = "Fridge::FridgeTests" /* FridgeTests */;
+			targetProxy = C53D536E23D100C900EE51CF /* PBXContainerItemProxy */;
+		};
+		OBJ_46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Fridge::Fridge" /* Fridge */;
+			targetProxy = C53D536D23D100C800EE51CF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		C553FBDB1DEDC540000798D8 /* Debug */ = {
+		OBJ_21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Fridge.xcodeproj/Fridge_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MARKETING_VERSION = 0.7;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Fridge;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Fridge;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		C553FBDC1DEDC540000798D8 /* Release */ = {
+		OBJ_22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				CURRENT_PROJECT_VERSION = 0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Fridge.xcodeproj/Fridge_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MARKETING_VERSION = 0.7;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Fridge;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Fridge;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		C553FBE71DEDC58A000798D8 /* Debug */ = {
+		OBJ_28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACH_O_TYPE = mh_execute;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				LD = /usr/bin/true;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		C553FBE81DEDC58A000798D8 /* Release */ = {
+		OBJ_29 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACH_O_TYPE = mh_execute;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				LD = /usr/bin/true;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		C591C6491E0AA9C100A92A8C /* Debug */ = {
+		OBJ_3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FridgeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACH_O_TYPE = mh_bundle;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vexscited.FridgeTests;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				USE_HEADERMAP = NO;
 			};
 			name = Debug;
 		};
-		C591C64A1E0AA9C100A92A8C /* Release */ = {
+		OBJ_34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+			};
+			name = Debug;
+		};
+		OBJ_35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Fridge.xcodeproj/FridgeTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = FridgeTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = NO;
-				COPY_PHASE_STRIP = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FridgeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACH_O_TYPE = mh_bundle;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vexscited.FridgeTests;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Fridge.xcodeproj/FridgeTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = FridgeTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C553FBDA1DEDC540000798D8 /* Build configuration list for PBXProject "Fridge" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "Fridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C553FBDB1DEDC540000798D8 /* Debug */,
-				C553FBDC1DEDC540000798D8 /* Release */,
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C553FBE61DEDC58A000798D8 /* Build configuration list for PBXNativeTarget "Fridge" */ = {
+		OBJ_20 /* Build configuration list for PBXNativeTarget "Fridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C553FBE71DEDC58A000798D8 /* Debug */,
-				C553FBE81DEDC58A000798D8 /* Release */,
+				OBJ_21 /* Debug */,
+				OBJ_22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C591C64B1E0AA9C100A92A8C /* Build configuration list for PBXNativeTarget "FridgeTestsCollection" */ = {
+		OBJ_27 /* Build configuration list for PBXNativeTarget "FridgePackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C591C6491E0AA9C100A92A8C /* Debug */,
-				C591C64A1E0AA9C100A92A8C /* Release */,
+				OBJ_28 /* Debug */,
+				OBJ_29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_33 /* Build configuration list for PBXAggregateTarget "FridgePackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_34 /* Debug */,
+				OBJ_35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_38 /* Build configuration list for PBXNativeTarget "FridgeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_39 /* Debug */,
+				OBJ_40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C553FBD71DEDC540000798D8 /* Project object */;
+	rootObject = OBJ_1 /* Project object */;
 }

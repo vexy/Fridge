@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/vexy/iOS Dev/My Stuff/Fridge/.build/x86_64-apple-macosx/debug/Fridge.build/master.swiftdeps"
+  },
+  "/Users/vexy/iOS Dev/My Stuff/Fridge/Sources/Fridge/Fridge.swift": {
+    "dependencies": "/Users/vexy/iOS Dev/My Stuff/Fridge/.build/x86_64-apple-macosx/debug/Fridge.build/Fridge.d",
+    "object": "/Users/vexy/iOS Dev/My Stuff/Fridge/.build/x86_64-apple-macosx/debug/Fridge.build/Fridge.swift.o",
+    "swiftmodule": "/Users/vexy/iOS Dev/My Stuff/Fridge/.build/x86_64-apple-macosx/debug/Fridge.build/Fridge~partial.swiftmodule",
+    "swift-dependencies": "/Users/vexy/iOS Dev/My Stuff/Fridge/.build/x86_64-apple-macosx/debug/Fridge.build/Fridge.swiftdeps"
+  }
+}
