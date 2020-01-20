@@ -115,8 +115,8 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
-				OBJ_18 /* README.md */,
 				C53D536F23D1033400EE51CF /* Additional Files */,
+				OBJ_18 /* README.md */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_10 /* Tests */,

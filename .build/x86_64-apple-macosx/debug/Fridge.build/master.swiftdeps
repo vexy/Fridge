@@ -1,5 +1,5 @@
 version: "Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
-options: "d0a75f5b9de4f3dd4ec315ceba00e124"
-build_time: [1579207286, 907223000]
+options: "e2b09f2bd0e92083954911f9bf8bde2a"
+build_time: [1579564013, 659479000]
 inputs:
-  "/Users/vexy/iOS Dev/My Stuff/Fridge/Sources/Fridge/Fridge.swift": [1579207015, 142802268]
+  "/Users/vexy/iOS Dev/My Stuff/Fridge/Sources/Fridge/Fridge.swift": [1579562612, 268309740]

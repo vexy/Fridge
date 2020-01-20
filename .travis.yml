@@ -4,14 +4,14 @@ xcode_project: Fridge.xcodeproj
 
 # put back to only: - master later
 branches:
-##  only:
+  - master
   - development
-  - swift5
 
 script:
 - set -o pipefail
 - swift build
 
-after_success:
+# Add back later
+# after_success:
 ##upload coverage data to codecov
-- bash <(curl -s https://codecov.io/bash)
+# - bash <(curl -s https://codecov.io/bash)
