@@ -28,6 +28,6 @@
 
 import Foundation
 
-struct Fridge {
+public struct Fridge {
     static func greetFolks() { print("Freezyall !") }
 }
