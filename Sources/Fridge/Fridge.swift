@@ -29,5 +29,15 @@
 import Foundation
 
 public struct Fridge {
-    public static func greetFolks() { print("Freezyall !") }
+    public static func greetFellowProgrammers() {
+        let theText =
+        """
+                            Freezyall !
+          Be greeted by Fridge creator (wherever he is the world now) !
+          Your hard work will pay off, just keep pushing !
+
+          Yours truly,
+          Fridge
+        """
+    }
 }
