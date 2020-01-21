@@ -29,5 +29,5 @@
 import Foundation
 
 public struct Fridge {
-    static func greetFolks() { print("Freezyall !") }
+    public static func greetFolks() { print("Freezyall !") }
 }
