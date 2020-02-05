@@ -21,7 +21,7 @@ Main features  you can apply to your pure `Swift struct` :
 Using `Swift Package Manager`, just add blah blah blah.
 
 ---   
-(**FRIDGE IS STILL UNDER HEAVY DEVELOPMENT**)  
+(**FRIDGE IS STILL UNDER HEAVY DEVELOPMENT**)
 Package **BETA** release : *v0.7 ( UTC2020-01-20 )*
 
 Developed under MIT license   
