@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)"
-options: "d032cfdf857f93d85dc7f4d8235b588b"
-build_time: [1622149644, 825631000]
-inputs:
-  "/Users/vexy/WORK/ios/My Stuff/Fridge/Sources/Fridge/Freezer.swift": [1580331786, 280924401]
-  "/Users/vexy/WORK/ios/My Stuff/Fridge/Sources/Fridge/Fridge.swift": [1622149338, 804278649]
