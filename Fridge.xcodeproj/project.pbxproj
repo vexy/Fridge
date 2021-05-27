@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C535D13823D7827C00AF169D /* Freezer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C535D13723D7827C00AF169D /* Freezer.swift */; };
+		C535D13B23D78AF800AF169D /* FreezerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C535D13A23D78AF800AF169D /* FreezerTests.swift */; };
 		OBJ_24 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Fridge.swift */; };
 		OBJ_31 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_42 /* FridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FridgeTests.swift */; };
@@ -46,15 +48,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C53D537023D103AA00EE51CF /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = SOURCE_ROOT; };
+		C52EB61F2660433F00FBF816 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		C535D13723D7827C00AF169D /* Freezer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Freezer.swift; sourceTree = "<group>"; };
+		C535D13A23D78AF800AF169D /* FreezerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerTests.swift; sourceTree = "<group>"; };
 		"Fridge::Fridge::Product" /* Fridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Fridge::FridgeTests::Product" /* FridgeTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = FridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Fridge::FridgeTests::Product" /* FridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = FridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_12 /* FridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
-		OBJ_17 /* License.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = License.md; sourceTree = "<group>"; };
 		OBJ_18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_9 /* Fridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
+		OBJ_9 /* Fridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,15 +79,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C53D536F23D1033400EE51CF /* Additional Files */ = {
-			isa = PBXGroup;
-			children = (
-				C53D537023D103AA00EE51CF /* .travis.yml */,
-				OBJ_17 /* License.md */,
-			);
-			path = "Additional Files";
-			sourceTree = "<group>";
-		};
 		OBJ_10 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_12 /* FridgeTests.swift */,
+				C535D13A23D78AF800AF169D /* FreezerTests.swift */,
 				OBJ_13 /* XCTestManifests.swift */,
 			);
 			name = FridgeTests;
@@ -115,7 +110,7 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
-				C53D536F23D1033400EE51CF /* Additional Files */,
+				C52EB61F2660433F00FBF816 /* LICENSE */,
 				OBJ_18 /* README.md */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
@@ -136,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* Fridge.swift */,
+				C535D13723D7827C00AF169D /* Freezer.swift */,
 			);
 			name = Fridge;
 			path = Sources/Fridge;
@@ -226,6 +222,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_24 /* Fridge.swift in Sources */,
+				C535D13823D7827C00AF169D /* Freezer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +240,7 @@
 			files = (
 				OBJ_42 /* FridgeTests.swift in Sources */,
 				OBJ_43 /* XCTestManifests.swift in Sources */,
+				C535D13B23D78AF800AF169D /* FreezerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +263,7 @@
 		OBJ_21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 5;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -273,10 +271,10 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Fridge.xcodeproj/Fridge_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 0.7;
+				MARKETING_VERSION = 0.7.1;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -284,6 +282,7 @@
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = Fridge;
@@ -295,7 +294,7 @@
 		OBJ_22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 5;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -303,10 +302,10 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Fridge.xcodeproj/Fridge_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 0.7;
+				MARKETING_VERSION = 0.7.1;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -314,6 +313,7 @@
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = Fridge;
@@ -398,6 +398,8 @@
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				STRIP_STYLE = "non-global";
+				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = FridgeTests;
@@ -439,6 +441,7 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Fridge.xcodeproj/FridgeTests_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -447,6 +450,8 @@
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				STRIP_STYLE = "non-global";
+				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = FridgeTests;

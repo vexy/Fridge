@@ -29,15 +29,48 @@
 import Foundation
 
 public struct Fridge {
+    /// Tries to freeze an object into persistant storage (if possible).
+    public static func freeze🧊<T: Codable>(_ object: T) throws {
+        let freezer = Freezer()
+        do {
+            try freezer.freeze(object: object)
+        } catch {
+            throw Freezer.FreezingErrors.dataStoringError
+        }
+    }
+    
+    /// Tries to grab an object from a given `URL`
+    public static func grab🔮(from url: URL) throws -> Int {
+        return 0
+    }
+    
+    /// Tries to grab an object using given `URLRequest`
+    public static func grab🔮(using urlRequest: URLRequest) throws -> Int {
+        return 0
+    }
+}
+
+//MARK: - Extra goodies
+extension Fridge {
+    /// This method is methodically designed to raise your moral my dear friend. Use it ONLY in emergency
     public static func greetFellowProgrammers() {
         let theText =
         """
-                            Freezyall !
-          Be greeted by Fridge creator (wherever he is the world now) !
-          Your hard work will pay off, just keep pushing !
+                            ❄️ Freezyall !
+          Be greeted by Fridge creator, wherever he is in the 🌍 now !
+          Remember 🧠
+          Your hard work will pay off, just keep (git) pushing !
 
           Yours truly,
-          Fridge
+          Vex - The Fridge grandpa
+          🙏
         """
+        print(theText)
+    }
+    
+    /// Computes unix timestamp of a Fridge update. Method may throw occasionally.
+    public static func willFrigeBeUpdatedSoon() throws -> Bool {
+        enum whoKnows: Error { case unknownAnswer }
+        throw whoKnows.unknownAnswer
     }
 }
