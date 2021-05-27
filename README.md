@@ -1,7 +1,10 @@
 | Builds | Test coverage and code quality |
 | ---- |
 | [![Build Status](https://travis-ci.org/vexy/Fridge.svg?branch=swift5)](https://travis-ci.org/vexy/Fridge) | [![codecov](https://codecov.io/gh/vexy/Fridge/branch/swift5/graph/badge.svg)](https://codecov.io/gh/vexy/Fridge) |
-| [![Build Status](https://app.bitrise.io/app/0a6d6b6f5e679665/status.svg?token=2lSrCvvachugWUQaYZ44Og)](https://app.bitrise.io/app/0a6d6b6f5e679665) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/24b9cd48be1d4d5487c68e0acf796f50)](https://www.codacy.com/app/veljko-tekelerovic/Fridge?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vexy/Fridge&amp;utm_campaign=Badge_Grade) |
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/24b9cd48be1d4d5487c68e0acf796f50)](https://www.codacy.com/app/veljko-tekelerovic/Fridge?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vexy/Fridge&amp;utm_campaign=Badge_Grade) |
+
+GITHUB ACTIONS STATUS:
+[![Swift](https://github.com/vexy/Fridge/actions/workflows/swift.yml/badge.svg?branch=development&event=push)](https://github.com/vexy/Fridge/actions/workflows/swift.yml)
 
 
 ![package_manager](https://img.shields.io/badge/SPM-comming%20soon-orange)
