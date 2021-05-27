@@ -1,20 +1,12 @@
-| Builds | Test coverage and code quality |
-| ---- |
-| [![Build Status](https://travis-ci.org/vexy/Fridge.svg?branch=swift5)](https://travis-ci.org/vexy/Fridge) | [![codecov](https://codecov.io/gh/vexy/Fridge/branch/swift5/graph/badge.svg)](https://codecov.io/gh/vexy/Fridge) |
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/24b9cd48be1d4d5487c68e0acf796f50)](https://www.codacy.com/app/veljko-tekelerovic/Fridge?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vexy/Fridge&amp;utm_campaign=Badge_Grade) |
-
-GITHUB ACTIONS STATUS:
-[![Swift](https://github.com/vexy/Fridge/actions/workflows/swift.yml/badge.svg?branch=development&event=push)](https://github.com/vexy/Fridge/actions/workflows/swift.yml)
-
-
-![package_manager](https://img.shields.io/badge/SPM-comming%20soon-orange)
-[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 # Fridge ❄️0.7.1
 **Fridge** is the silliest refrigerator you'll ever use on a dialy basis.  
 With Fridge, your fancy `struct`(s) will raise and shine, allowing you to focus on your plan to conquer Earth...finally !
 
-#### Waaaait... a refrigerator 🤔 There has to be a trick !
+Build: [![Swift](https://github.com/vexy/Fridge/actions/workflows/swift.yml/badge.svg?branch=development&event=push)](https://github.com/vexy/Fridge/actions/workflows/swift.yml)
+
+```Waaaait... a refrigerator 🤔 There has to be a trick !
+```
 That's right! `Fridge` is actually one super fancy computer program, and if you talk with it gently, it can do magic for you !
 
 Say, you want to store your data into persistant storage. Easy !  
