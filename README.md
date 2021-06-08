@@ -6,6 +6,9 @@ With Fridge, your fancy `struct`(s) will raise and shine, allowing you to focus 
 ```
 print("Say whaat ?! 🤔 There has to be a trick !")
 ```
+|Branch|Build status|
+|-|-|
+|master|[![Swift](https://github.com/vexy/Fridge/actions/workflows/swift.yml/badge.svg)](https://github.com/vexy/Fridge/actions/workflows/swift.yml)|
 
 ## So, here's the story
 `Fridge` is one super fancy `Swift5.5 async/await` library, and if you talk with it gently, you can expect magic !  
