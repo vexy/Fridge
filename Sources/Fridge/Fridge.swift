@@ -28,6 +28,10 @@
 
 import Foundation
 
+enum FridgeErrors: Error {
+    case grabFailed
+}
+
 public struct Fridge {
     /// Tries to freeze an object into persistant storage (if possible).
     public static func freeze🧊<T: Codable>(_ object: T) throws {
@@ -40,8 +44,11 @@ public struct Fridge {
     }
     
     /// Tries to grab an object from a given `URL`
-    public static func grab🔮(from url: URL) throws -> Int {
-        return 0
+    @available(iOS 9999, *)
+    public static func grab🔮<D: Decodable> (from url: URL) async throws -> D {
+        let grabster = Grabber()
+        let grabbedObject: D = try await grabster.grab(from: url)
+        return grabbedObject
     }
     
     /// Tries to grab an object using given `URLRequest`

@@ -1,68 +1,59 @@
 
-# Fridge ❄️0.7.1
-**Fridge** is the silliest refrigerator you'll ever use on a dialy basis.  
-With Fridge, your fancy `struct`(s) will raise and shine, allowing you to focus on your plan to conquer Earth...finally !
+# Fridge ❄️0.8
+**Fridge** is the perhaps the silliest refrigerator implementation you'll ever see.  
+With Fridge, your fancy `struct`(s) will raise and shine, allowing you to focus on your plan to conquer the Earth...finally !
 
-Build: [![Swift](https://github.com/vexy/Fridge/actions/workflows/swift.yml/badge.svg?branch=development&event=push)](https://github.com/vexy/Fridge/actions/workflows/swift.yml)
-
-```Waaaait... a refrigerator 🤔 There has to be a trick !
 ```
-That's right! `Fridge` is actually one super fancy computer program, and if you talk with it gently, it can do magic for you !
+print("Say whaat ?! 🤔 There has to be a trick !")
+```
 
-Say, you want to store your data into persistant storage. Easy !  
-Just conform your fancy `struct` into `Codable` first:
+## So, here's the story
+`Fridge` is one super fancy `Swift5.5 async/await` library, and if you talk with it gently, you can expect magic !  
+
+So say you *just wanna grab that model from the API* and do your stuff. **Your** stuff...   Well, if you conform your fancy `struct` into `Decodable` first:
 ```Swift
-struct My🧞truct: Codable {
+struct My🧞truct: Decodable {
     var something: String
     var elixirOfL❤️fe: URL
+    var piTimesE: Float
 
     //fatalError if elixir cannot be initialized (!)
-    init() { ... }  
+    init(private🔑: Chachapoly20) { ... }
 }
-
-let crucialObject = My🧞‍truct(private🔑: 0xb375af2.hash())
-//..okay, I'm ready. Now what? 🤨
 ```
-Then, as you would do with let's say pizza, just:
+
+Then, you can go ahead and *just grab* it from that fancy `URL` of yours..
 
 ```Swift
-//freeze it into refrigerator
-Fridge.freeze🧊(crucialObject)
+/* just grab it 😮  Really... like this ?? */
+
+let grabbedObject: My🧞‍truct = try await Fridge.grab🔮(from: fancyURL_of_mine)
 ```
 
-And you're done !
+Yup, and you're all **set**. `Fridge` will perform the network fetch and decode the network data and return your `struct`.  
+Easy peasy right ?
 
-### 😮 really? What else can Fridge do
-Inside `Fridge` there are handy of prepacked stuff:
-  - `freeze` method to persistantly store your `struct`s to disk
-  - `unfreeze` method to directly load your `struct` back from the storage
-  - `grab(from:)` or `grab(using:)` method to get your `struct` directly from the network
-  - then you can...
+## For real ??
+`Fridge` is here to reduce the pain of fetching your stuff from the network, parsing, doing endless error checking and yeah... good old closures. You can even say goodbay to closures if you want.
+It's build using `async/await` philosophy and requires `Swift 5.5` to run.
 
-### Stop. Have you said network calls ?!!? 😲
-Well yeah. Prepare your `URL` or `URLRequest` object first:
-```Swift
-let thisURL = URL(string: "https://my.secret.plan/api/v433x/users")
-//or if you need better control over URL request then:
-let customRequest = URLRequest(..someMagic...)
-```
-Then, call `grab(from:)` or `grab(using:)` to get it from the network like so:
-```Swift
-let networkObject = Fridge.grab(from: thisURL)
-//or this one, depending on your needs
-let anotherOne = Fridge.grab(using: customRequest)
-```
-*... MORE TO COME ...*
---
+*NOTE*  
+As of 6-8-2021 Fridge requires `Swift5.5` and prebuilt Swift [snapshots](https://swift.org/download/#snapshots). You may also need to set `-Xfrontend -enable-experimental-concurrency` flag in other linker flags section. Checkout official [Swift.org](https://swift.org/) website for more info.
 
-## Okay. How can I install Fridge
+### Library reference
+`Fridge` has very simple interface to work with:
+  - `Fridge.grab🔮(from: URL)` method to get your `struct` directly from the network
+  - `Fridge.freeze🧊()` to store your `struct` on the disk
+
+## How can I install Fridge ?
 Using `Swift Package Manager` is by far the sexiest way to install silly `Fridge`.  
-Just add following line to your `Package.swift`:  
-`dependency: ["this_repo_i_guess_"]`
-
+Just add following line to your `Package.swift`:
+```
+Package: "Fridge",  
+URL: https://github.com/vexy/Fridge.git
+```
 ---   
 (**FRIDGE IS STILL UNDER HEAVY DEVELOPMENT**)  
-Package **BETA** release : *v0.7.1 ( UTC2020-01-29 )*
+Package **BETA** release : *v0.8.1 ( UTC2021-06-08 )*
 
-Developed under MIT license   
-Copyright © 2020 Veljko Tekelerović
+Copyright © 2020 Veljko Tekelerović, MIT license

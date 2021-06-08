@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		C535D13823D7827C00AF169D /* Freezer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C535D13723D7827C00AF169D /* Freezer.swift */; };
 		C535D13B23D78AF800AF169D /* FreezerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C535D13A23D78AF800AF169D /* FreezerTests.swift */; };
+		C5915C522667E9B700A1557C /* Grabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5915C512667E9B700A1557C /* Grabber.swift */; };
 		OBJ_24 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Fridge.swift */; };
 		OBJ_31 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_42 /* FridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FridgeTests.swift */; };
@@ -51,6 +52,7 @@
 		C52EB61F2660433F00FBF816 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C535D13723D7827C00AF169D /* Freezer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Freezer.swift; sourceTree = "<group>"; };
 		C535D13A23D78AF800AF169D /* FreezerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerTests.swift; sourceTree = "<group>"; };
+		C5915C512667E9B700A1557C /* Grabber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grabber.swift; sourceTree = "<group>"; };
 		"Fridge::Fridge::Product" /* Fridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Fridge::FridgeTests::Product" /* FridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = FridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_12 /* FridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeTests.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				OBJ_9 /* Fridge.swift */,
 				C535D13723D7827C00AF169D /* Freezer.swift */,
+				C5915C512667E9B700A1557C /* Grabber.swift */,
 			);
 			name = Fridge;
 			path = Sources/Fridge;
@@ -223,6 +226,7 @@
 			files = (
 				OBJ_24 /* Fridge.swift in Sources */,
 				C535D13823D7827C00AF169D /* Freezer.swift in Sources */,
+				C5915C522667E9B700A1557C /* Grabber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +267,7 @@
 		OBJ_21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -274,10 +278,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 0.7.1;
+				MARKETING_VERSION = 0.8;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -enable-experimental-concurrency $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Fridge;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -294,7 +298,7 @@
 		OBJ_22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,10 +309,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 0.7.1;
+				MARKETING_VERSION = 0.8;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -enable-experimental-concurrency $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = Fridge;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -359,9 +363,13 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-Xfrontend",
+					"-enable-experimental-concurrency",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -422,9 +430,13 @@
 					"SWIFT_PACKAGE=1",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = (
+					"-Xfrontend",
+					"-enable-experimental-concurrency",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
