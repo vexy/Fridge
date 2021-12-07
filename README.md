@@ -1,39 +1,41 @@
 
 # Fridge ❄️0.8
-**Fridge** is the perhaps the silliest refrigerator implementation you'll ever see.  
+**Fridge** is the perhaps the silliest `Swift5 async/await` network implementation you'll ever see.  
 With Fridge, your fancy `struct`(s) will raise and shine, allowing you to focus on your plan to conquer the Earth...finally !
 
-```
-print("Say whaat ?! 🤔 There has to be a trick !")
-```
+|Branch|Build status|
+|-|-|
+|master|[![Swift](https://github.com/vexy/Fridge/actions/workflows/swift.yml/badge.svg)](https://github.com/vexy/Fridge/actions/workflows/swift.yml)|
 
-## So, here's the story
-`Fridge` is one super fancy `Swift5.5 async/await` library, and if you talk with it gently, you can expect magic !  
+## Usage
+So say you *just wanna grab that model from the API* and do your stuff. **Your** stuff...  
 
-So say you *just wanna grab that model from the API* and do your stuff. **Your** stuff...   Well, if you conform your fancy `struct` into `Decodable` first:
+Well, if you conform your fancy `struct` into `Decodable` first:
 ```Swift
-struct My🧞truct: Decodable {
+struct MyStuff: Decodable {
     var something: String
     var elixirOfL❤️fe: URL
     var piTimesE: Float
 
-    //fatalError if elixir cannot be initialized (!)
-    init(private🔑: Chachapoly20) { ... }
+    init(private🔑: Chachapoly20) { ... } //do fatalError if elixir cannot be initialized (!)
 }
 ```
 
 Then, you can go ahead and *just grab* it from that fancy `URL` of yours..
 
 ```Swift
-/* just grab it 😮  Really... like this ?? */
-
-let grabbedObject: My🧞‍truct = try await Fridge.grab🔮(from: fancyURL_of_mine)
+let _stuff: MyStuff = try await Fridge.grab🔮(from: fancyURL_of_mine)
+print("Elixir of live is: \(_stuff.elixirOfL❤️fe)")
 ```
 
 Yup, and you're all **set**. `Fridge` will perform the network fetch and decode the network data and return your `struct`.  
 Easy peasy right ?
 
-## For real ??
+### Minimum iOS versions
+Fridge requires following configuration:
+  - Swift 5.0
+  - iOS 15.0
+  
 `Fridge` is here to reduce the pain of fetching your stuff from the network, parsing, doing endless error checking and yeah... good old closures. You can even say goodbay to closures if you want.
 It's build using `async/await` philosophy and requires `Swift 5.5` to run.
 
@@ -54,6 +56,6 @@ URL: https://github.com/vexy/Fridge.git
 ```
 ---   
 (**FRIDGE IS STILL UNDER HEAVY DEVELOPMENT**)  
-Package **BETA** release : *v0.8.1 ( UTC2021-06-08 )*
+Package **BETA** release : *v0.8.4 ( UTC2021-12-07 )*
 
 Copyright © 2020 Veljko Tekelerović, MIT license

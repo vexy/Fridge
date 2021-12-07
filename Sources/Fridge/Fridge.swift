@@ -1,11 +1,10 @@
+// Copyright (c) 2016 Veljko Tekelerović
 /*
  RECREATED BY VEXY @ Januarry 16, 2020 9:50pm
  
                 *   FRIDGE  *
 
  MIT License
-
- Copyright (c) 2016 Veljko Tekelerović
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +43,6 @@ public struct Fridge {
     }
     
     /// Tries to grab an object from a given `URL`
-    @available(iOS 9999, *)
     public static func grab🔮<D: Decodable> (from url: URL) async throws -> D {
         let grabster = Grabber()
         let grabbedObject: D = try await grabster.grab(from: url)
@@ -52,8 +50,10 @@ public struct Fridge {
     }
     
     /// Tries to grab an object using given `URLRequest`
-    public static func grab🔮(using urlRequest: URLRequest) throws -> Int {
-        return 0
+    public static func grab🔮<D: Decodable>(using urlRequest: URLRequest) async throws -> D {
+        let grb = Grabber()
+        let theObject: D = try await grb.grab(using: urlRequest)
+        return theObject
     }
 }
 

@@ -1,32 +1,62 @@
 //
 //  Grabber.swift
 //  Fridge
-//
-//  Created by Veljko Tekelerovic on 2.6.21.
-//
+//  Copyright (c) 2016-2022 Veljko Tekelerović
+
+/*
+    MIT License
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+*/
 
 import Foundation
 
-@available(iOS 9999, *)
 final class Grabber {
     func grab<D: Decodable>(from url: URL) async throws -> D {
-        return try await withUnsafeThrowingContinuation { continuation in
-            URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
-                // basic fail check (add more)
-                guard let rawData = data else {
-                    continuation.resume(throwing: FridgeErrors.grabFailed)
-                    return
-                }
-                
-                // try to convert raw data to D
-                guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
-                    continuation.resume(throwing: FridgeErrors.grabFailed)
-                    return
-                }
-                
-                // return final object
-                continuation.resume(returning: decodedObject)
-            }.resume()
-      }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            
+            // try to serialize the data
+            guard let decodedObject = try? JSONDecoder().decode(D.self, from: data) else {
+                throw FridgeErrors.grabFailed
+            }
+            
+            // return grabbed object
+            return decodedObject
+        } catch {
+            throw FridgeErrors.grabFailed
+        }
+    }
+    
+    func grab<D: Decodable>(using urlRequest: URLRequest) async throws -> D {
+        do {
+            let (data, _) = try await URLSession.shared.data(for: urlRequest)
+            
+            // serialize returned data
+            guard let decodedObject = try? JSONDecoder().decode(D.self, from: data) else {
+                throw FridgeErrors.grabFailed
+            }
+            
+            // finally returned real object
+            return decodedObject
+        } catch {
+            throw FridgeErrors.grabFailed
+        }
     }
 }
