@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.5
 /*
  * RECREATED BY VEXY @ Januarry 16, 2020 9:50pm
  * Package.swift
@@ -12,13 +12,15 @@ import PackageDescription
 let package = Package(
     name: "Fridge",
     platforms: [
-        .macOS(.v10_10), .iOS(.v11), .tvOS(.v11),
+        .iOS(.v11),
+        .macOS(.v12),
+        .tvOS(.v11)
     ],
     products: [
         .library( name: "Fridge", targets: ["Fridge"]),
     ],
     targets: [
         .target( name: "Fridge", dependencies: []),
-        .testTarget( name: "FridgeTests", dependencies: ["Fridge"]),
+        .testTarget( name: "FridgeTests", dependencies: ["Fridge"])
     ]
 )
