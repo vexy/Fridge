@@ -1,0 +1,19 @@
+name: Fridge build process
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master, development ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Package build process
+      run: swift build -v
+    - name: Package tests
+      run: swift test --parallel -l -v
