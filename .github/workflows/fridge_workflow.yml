@@ -18,7 +18,7 @@ jobs:
     - name: xcodebuild build
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
     - name: xcodebuild iOS testing
-      run: xcodebuild test-without-build -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
+      run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
 #    - name: xcodebuild tvOS testing
 #      run: xcodebuild test-without-building -scheme Fridge -destination "platform=tvOS Simulator,name=Apple TV 4K (at 1080p) (2nd generation)
 #    - name: xcodebuild watchOS
