@@ -1,9 +1,7 @@
-// Copyright (c) 2016 Veljko Tekelerović
 /*
+ Copyright (c) 2016 Veljko Tekelerović
  RECREATED BY VEXY @ Januarry 16, 2020 9:50pm
  
-                *   FRIDGE  *
-
  MIT License
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,27 +21,21 @@
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
+ 
+ 
 */
 
 import Foundation
 
-enum FridgeErrors: Error {
-    case grabFailed
+/*      PUBLIC  *   FRIDGE  *   INTERFACE        */
+public struct Fridge {
+    // ADD OTHER STUFF HERE
 }
 
-public struct Fridge {
-    /// Tries to freeze an object into persistant storage (if possible).
-    public static func freeze🧊<T: Codable>(_ object: T) throws {
-        let freezer = Freezer()
-        do {
-            try freezer.freeze(object: object)
-        } catch {
-            throw Freezer.FreezingErrors.dataStoringError
-        }
-    }
-    
+//MARK: - Network object fetching
+extension Fridge {
     /// Tries to grab an object from a given `URL`
-    public static func grab🔮<D: Decodable> (from url: URL) async throws -> D {
+    public static func grab🔮<D: Decodable>(from url: URL) async throws -> D {
         let grabster = Grabber()
         let grabbedObject: D = try await grabster.grab(from: url)
         return grabbedObject
@@ -54,6 +46,30 @@ public struct Fridge {
         let grb = Grabber()
         let theObject: D = try await grb.grab(using: urlRequest)
         return theObject
+    }
+}
+
+//MARK: - Object persistent storage
+extension Fridge {
+    /// Tries to freeze an object into persistant storage (if possible).
+    public static func freeze🧊<E: Encodable>(_ object: E, id: String) throws {
+        let freezer = Freezer()
+        do {
+            try freezer.freeze(object: object, identifier: id)
+        } catch {
+            throw FreezingErrors.dataStoringError
+        }
+    }
+    
+    /// Tries to unfreeze an object from persistant storage.
+    public static func unfreeze<D: Decodable>(_ key: String) throws -> D {
+        let unfreezer = Freezer()
+        do {
+            let unfrozenObject: D = try unfreezer.unfreeze(identifier: key)
+            return unfrozenObject
+        } catch {
+            throw FreezingErrors.dataStoringError
+        }
     }
 }
 

@@ -1,9 +1,13 @@
-# Xcode build created files
-build/
+# Xcode (or swift) build created files
+/build/
 .build/
 .build
+.swiftpm
 
-# Xcode project filesx
+# Swift Package Manager resolution files
+*.resolved
+
+# Xcode project files
 xcuserdata
 *.xccheckout
 *.moved-aside

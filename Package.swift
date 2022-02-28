@@ -11,16 +11,34 @@ import PackageDescription
 
 let package = Package(
     name: "Fridge",
+    
+    // Supported platforms
     platforms: [
-        .iOS(.v11),
+        .iOS(.v15),
         .macOS(.v12),
         .tvOS(.v11)
     ],
+    
+    // Product definitions
     products: [
-        .library( name: "Fridge", targets: ["Fridge"]),
+        .library(name: "Fridge", targets: ["Fridge"]),
     ],
+    dependencies: [
+        .package(name: "BSONCoder", url: "https://github.com/vexy/bsoncoder", branch: "main")
+    ],
+    
+    // Output target
     targets: [
-        .target( name: "Fridge", dependencies: []),
-        .testTarget( name: "FridgeTests", dependencies: ["Fridge"])
+        .target(
+            name: "Fridge",
+            dependencies: [
+                .product(name: "bsoncoder", package: "BSONCoder")
+            ],
+            exclude: [
+                "../../Guides/",
+                "../../README.md"
+            ]
+        ),
+        .testTarget(name: "FridgeTests", dependencies: ["Fridge"]),
     ]
 )

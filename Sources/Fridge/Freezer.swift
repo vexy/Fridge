@@ -29,57 +29,63 @@
 
 import Foundation
 
-final class Freezer {
-//-------
-    internal enum FreezingErrors: Error {
-        case dataStoringError
-        case dataReadingError
-        case unexpected
+// Reference to FileManager
+fileprivate let _fileManager = FileManager.default
+
+/// Trivial Storage implementation (/// /// Representation of an `URL` storage concept)
+struct FridgeCompartment {
+    // Internal BLOB file extension
+    private let BLOB_EXTENSION: String = ".fridgeStore"
+    
+    // key used to identify raw content
+    private let key: String// = "FridgeCompartment"
+    
+    init(key: String) {
+        self.key = key
     }
-//-------
     
-    private let fileManager = FileManager.default
-    
-    /// Representation of an `URL` storage concept
-    private var Storage : URL {
+    var filePath: URL {
         //get documents directory
-        guard let documentDirectoryURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("<Fridge> Unable to compute DocumentsDirectory path")
+        guard let documentDirectoryURL = _fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            fatalError("<Fridge.Storage> Unable to compute DocumentsDirectory path")
         }
         
-        //append storage file name
-        let fridgeStoragePath: String = ".fridgeStorage"
-        let finalURL = documentDirectoryURL.appendingPathComponent(fridgeStoragePath)
+        let finalName = "\(key)\(BLOB_EXTENSION)"
+        let finalURL = documentDirectoryURL.appendingPathComponent(finalName)
         return finalURL
     }
+}
+
 // MARK: -
-    
-//    init() {}
-    
+final class Freezer {
     /// Freezes an object into Fridge persistant storage. Any new object will overwrite previously stored object
-    func freeze<T: Encodable>(object: T) throws {
+    func freeze<T: Encodable>(object: T, identifier: String) throws { //async ?
         do {
-            try resetStorage()
+            // 1. initialize fridge compartment for given key
+            let comp = FridgeCompartment(key: identifier)
             
-            let encodedData = encode(object: object)
-            saveData(encodedData)
+            // 2. initialize Streamer with produced compartment
+            let writer = BSONConverter(compartment: comp)
+            
+            // 3. perform stream write of given object
+            try writer.write(object: object)
         } catch {
             throw FreezingErrors.dataStoringError
         }
     }
     
     /// Unfreezes an object from Fridge persistant storage.
-    func unfreeze<T: Decodable>() throws -> T {
+    func unfreeze<T: Decodable>(identifier: String) throws -> T {
         do {
-            //get binary data
-            let binaryData = getSavedData()
-            print("Binary data is : \(binaryData)")
+            // 1. setup compartment
+            let comp = FridgeCompartment(key: identifier)
             
-            //encode
-            let encoder = JSONDecoder()
-            let unfrozenObject = try encoder.decode(T.self, from: binaryData)
-            print("** RETURNED: \(unfrozenObject)")
-            return unfrozenObject
+            // 2. initialize Streamer with created compartment
+            let reader = BSONConverter(compartment: comp)
+            
+            // 3. perform stream read
+            let storedObject: T = try reader.read()
+            return storedObject
         } catch {
             print("THROW HAPPENED")
             throw FreezingErrors.dataReadingError
@@ -87,51 +93,8 @@ final class Freezer {
     }
     
     /// Returns `true` if a given object has been frozen previously.
-    func isAlreadyFrozen(object: Any) -> Bool {
-        #warning("Not implemented")
-        return false
-    }
-}
-
-// MARK: - Utilities
-extension Freezer {
-    /// Returns JSONEncoded`Data` of a given `Encodable`
-    fileprivate func encode<T: Encodable>(object: T) -> Data {
-        let coder = JSONEncoder()
-        guard let codedData = try? coder.encode(object) else {
-            print("Problem encoding [\(object)]")
-            fatalError("<Fridge> Unable to encode given data.")
-        }
-        return codedData
-    }
-    
-    /// Returns saved `Data` from the Storage
-    fileprivate func getSavedData() -> Data {
-        guard let storageData = try? Data(contentsOf: Storage) else {
-            fatalError("<Fridge> Unable to read storage file")
-        }
-        print("STORAGE DATA: \(storageData)")
-        return storageData
-    }
-    
-    /// Saves `Data` into the Storage
-    fileprivate func saveData(_ theData: Data) {
-        let success = fileManager.createFile(atPath: Storage.path, contents: theData, attributes: nil)
-        print("File created - [\(success)], \(theData.count) bytes written")
-    }
-    
-    fileprivate func resetStorage() throws {
-        if fileManager.fileExists(atPath: Storage.path) {
-            try fileManager.removeItem(at: Storage)
-            print("Previous Freezer file noticed and deleted.")
-        }
-    }
-}
-
-extension Freezer: CustomDebugStringConvertible {
-    var debugDescription: String {
-        let o = "Freezer [\(Storage.path)]"
-        let c = getSavedData().count.description
-        return o + "\nSize: " + c
+    func isAlreadyFrozen(identifier: String) -> Bool {
+        let filePath = FridgeCompartment(key: identifier).filePath.path
+        return _fileManager.fileExists(atPath: filePath)
     }
 }

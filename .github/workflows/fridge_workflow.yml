@@ -8,12 +8,18 @@ on:
 
 jobs:
   build:
-
+    name: Swift and xcodebuild variations for building Fridge
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Package build process
+    - name: Swift build
       run: swift build -v
-    - name: Package tests
-      run: swift test --parallel -l -v
+    - name: xcodebuild build
+      run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
+    - name: xcodebuild iOS testing
+      run: xcodebuild test-without-build -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
+#    - name: xcodebuild tvOS testing
+#      run: xcodebuild test-without-building -scheme Fridge -destination "platform=tvOS Simulator,name=Apple TV 4K (at 1080p) (2nd generation)
+#    - name: xcodebuild watchOS
+#      run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"

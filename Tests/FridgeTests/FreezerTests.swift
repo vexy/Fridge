@@ -28,12 +28,13 @@
  SOFTWARE.
 */
 
-
-import XCTest
 import Foundation
+import XCTest
+
 @testable import Fridge
 
 final class FreezerTests: XCTestCase {
+    let testObjectIdentifier = "Test.OBJECT"
     struct TestingStructure: Codable, Equatable {
         var field1: Int = 1
         var field2: Int = 2
@@ -49,23 +50,24 @@ final class FreezerTests: XCTestCase {
     func testFreezingCapability(){
         let testData1 = TestingStructure()
         //try to save data without throwing
-        XCTAssertNoThrow(try freezer.freeze(object: testData1))
+        XCTAssertNoThrow(try freezer.freeze(object: testData1, identifier: testObjectIdentifier))
     }
     
-    func testFreezingAnArray() throws {
-        let testArray = [TestingStructure]()
-        try freezer.freeze(object: testArray)
-    }
+    // Make sure the to test freezing of arrays
+//    func testFreezingAnArray() throws {
+//        let testArray = [TestingStructure]()
+//        try freezer.freeze(object: testArray, identifier: testObjectIdentifier)
+//    }
     
     func testUnfreezingCapability() {
         //freeze an object first
         var frozenObject = TestingStructure()
         frozenObject.field1 = 10
-        XCTAssertNoThrow(try freezer.freeze(object: frozenObject))
+        XCTAssertNoThrow(try freezer.freeze(object: frozenObject, identifier: testObjectIdentifier))
         
         do {
             //unfreeze it now
-            let unFrozenObject: TestingStructure = try freezer.unfreeze()
+            let unFrozenObject: TestingStructure = try freezer.unfreeze(identifier: testObjectIdentifier)
             
             //make sure they are equal
             XCTAssert(frozenObject == unFrozenObject)
@@ -74,35 +76,45 @@ final class FreezerTests: XCTestCase {
         }
     }
     
-    func testSuccessiveFreeze() throws {
-        var data1 = TestingStructure(); data1.field1 = -100
-        var data2 = TestingStructure(); data2.field2 =  100
+    func testMultipleFreeze() throws {
+        var test_structure1 = TestingStructure(); test_structure1.field1 = -100
+        var test_structure2 = TestingStructure(); test_structure2.field2 =  100
         
         //freeze both objects (in specific order)
-        try freezer.freeze(object: data1)
-        try freezer.freeze(object: data2)
+        try freezer.freeze(object: test_structure1, identifier: "data1")
+        try freezer.freeze(object: test_structure2, identifier: "data2")
         
         //now try to pull put data1 first
-        let pulledData: TestingStructure = try freezer.unfreeze()
+        let pulledData1: TestingStructure = try freezer.unfreeze(identifier: "data1")
         // test consistency
-        XCTAssert(pulledData != data1)
+        XCTAssert(pulledData1 == test_structure1)
+        XCTAssert(pulledData1.field1 == -100)
+        
+        //now try to pull put data2
+        let pulledData2: TestingStructure = try freezer.unfreeze(identifier: "data2")
+        // test consistency
+        XCTAssert(pulledData2 == test_structure2)
+        XCTAssert(pulledData2.field2 == 100)
     }
     
     func testFreezingPersistance() throws {
-        #warning("Incomplete test")
         let testData1 = TestingStructure()
         
         //freeze first
-        try freezer.freeze(object: testData1)
+        try freezer.freeze(object: testData1, identifier: testObjectIdentifier)
         
         //check if it's present
-        XCTAssertFalse(freezer.isAlreadyFrozen(object: testData1))
+        XCTAssert(freezer.isAlreadyFrozen(identifier: testObjectIdentifier))
     }
     
-    static var allTests = [
-        ("testFreezingCapability", testFreezingCapability),
-        ("testUnfreezingCapability", testUnfreezingCapability),
-        ("testSuccessiveFreeze", testSuccessiveFreeze),
-        ("testFreezingPersistance", testFreezingPersistance)
-    ]
+    func testNonExistantFreezePersistance() {
+        XCTAssertFalse(freezer.isAlreadyFrozen(identifier: "non_existant_object"))
+    }
+    
+//    static var allTests = [
+//        ("testFreezingCapability", testFreezingCapability),
+//        ("testUnfreezingCapability", testUnfreezingCapability),
+//        ("testMultipleFreeze", testMultipleFreeze),
+//        ("testFreezingPersistance", testFreezingPersistance)
+//    ]
 }

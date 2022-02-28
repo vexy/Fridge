@@ -26,6 +26,7 @@
 
 import XCTest
 import Foundation
+
 @testable import Fridge
 
 final class FridgeTests: XCTestCase {
@@ -42,7 +43,7 @@ final class FridgeTests: XCTestCase {
         
         //try to save a struct
         let testObject = SomeCodableStruct()
-        try Fridge.freeze🧊(testObject)
+        try Fridge.freeze🧊(testObject, id: "test.id")
         
         //if it throws, test will fail on it's own
     }
@@ -74,8 +75,8 @@ final class FridgeTests: XCTestCase {
         */
     }
 
-    static var allTests = [
-        ("Sanity check", testAmIInsane🤔),
-        ("Freezing capabilities", testCanFreezeObject)
-    ]
+//    static var allTests = [
+//        ("Sanity check", testAmIInsane🤔),
+//        ("Freezing capabilities", testCanFreezeObject)
+//    ]
 }
