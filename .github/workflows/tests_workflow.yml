@@ -2,22 +2,22 @@ name: Fridge tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master, development ]
+    branches: [ main, development ]
 
 jobs:
   build:
-    name: Xcodebuild variations for testing Fridge library
     runs-on: macos-latest
+    name: Fridge library testing suite
 
     steps:
     - uses: actions/checkout@v2
-    - name: xcodebuild build
+    - name: pure swift build
       run: swift build -v
-    - name: xcodebuild - iOS Simulator 8
+    - name: Test - iOS Simulator 8
       run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
-    - name: xcodebuild - iOS Simulator 11
+    - name: Test - iOS Simulator 11
       run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11"
-    - name: xcodebuild - iOS Simulator 12
+    - name: Test - iOS Simulator 12
       run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12"

@@ -2,26 +2,26 @@ name: Fridge release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master, development ]
+    branches: [ main, development ]
 
 jobs:
   build:
-    name: Swift and xcodebuild variations for building Fridge library
     runs-on: macos-latest
+    name: Swift and xcodebuild release build
 
     steps:
     - uses: actions/checkout@v2
     - name: Swift build
       run: swift build -v
-    - name: xcodebuild build
+    - name: xcodebuild build - iPhone 8
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
-    - name: xcodebuild build
+    - name: xcodebuild build - iPhone 11
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11"
-    - name: xcodebuild build
+    - name: xcodebuild build - iPhone 12
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12"
-    - name: xcodebuild iOS testing
+    - name: iOS testing - iPhone 8
       run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
 #    - name: xcodebuild tvOS testing
 #      run: xcodebuild test-without-building -scheme Fridge -destination "platform=tvOS Simulator,name=Apple TV 4K (at 1080p) (2nd generation)
