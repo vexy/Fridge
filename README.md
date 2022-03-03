@@ -18,7 +18,11 @@
     <th># HEADERS HIDDEN #</th>
   </tr> -->
   <tr style="outline: thin; vertical-align: middle">
-    <td><img alt="Release build" src="https://github.com/vexy/Fridge/actions/workflows/release_workflow/badge.svg"></td>
+    <td>
+        <a href=https://github.com/vexy/Fridge/actions/workflows/release_workflow.yml">
+            <img alt="Release build" src="https://github.com/vexy/Fridge/actions/workflows/release_workflow.yml/badge.svg">
+        </a>
+    </td>
     <td>
         <a href="https://github.com/vexy/Fridge/releases">
             <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/vexy/Fridge?color=green&display_name=release&label=Latest%20release">
@@ -137,7 +141,7 @@ Although, you can even run `Fridge` with following: 😮
 
 *NOTEs*  
 Be sure to meet minimum configuration parameters as you may encounter difficult-to-recover build errors on earlier configurations.  
-_Sometimes_, altering liker flag `-Xfrontend -enable-experimental-concurrency` helps, but may fail if building with commandline.  
+_Sometimes_, setting liker flag to `-Xfrontend -enable-experimental-concurrency` helps, but may fail if building with commandline.  
 That may be helpfull for `Xcode 12.x`, assuming `Swift 5.x` is installed.  
 
 Checkout official [Swift.org](https://www.swift.org/) website, for supporting earlier than minimums and other info.
@@ -151,11 +155,11 @@ Fridge uses [BSONCoder v0.9](https://github.com/vexy/bsoncoder) - Copyright by [
 Check original library licencing information under licencing section in README file.
 
 # Contribution
-If you like `Fridge`, feel free to fire a [pull request](https://github.com/vexy/pulls).
+If you like `Fridge`, feel free to fire a [pull request](https://github.com/vexy/Fridge/pulls).
 The prefered way is to branch off the `main` branch, complete feature or a fix and then merge to `development`.
 After the pull request has been approved, your change will be merged to `main`.  
 
-Don't be affraid to start any (discussions)[https://github.com/vexy/Fridge/discussions] if you think so.  
+Don't be affraid to start any [discussions](https://github.com/vexy/Fridge/discussions) if you think so.  
 [Issues](https://github.com/vexy/Fridge/issues) section is a good way to start, if you stumble upon the way.  
 
 ---   
