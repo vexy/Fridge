@@ -33,41 +33,65 @@ import XCTest
 
 @testable import Fridge
 
-final class FreezerTests: XCTestCase {
-    let testObjectIdentifier = "Test.OBJECT"
-    struct TestingStructure: Codable, Equatable {
-        var field1: Int = 1
-        var field2: Int = 2
-        
-        static func ==(lhs: TestingStructure, rhs: TestingStructure) -> Bool {
-            return (lhs.field1 == rhs.field1) && (lhs.field2 == rhs.field2)
-        }
-    }
+fileprivate struct FridgeTestObject: Codable {
+    let string_field: String
+    let int_field: Int
+    let dict_field: InnerTestObject
+    let arr_field: [Int]
+    let data_field: Data
+    let url_field: URL
     
-    // TESTING OBJECT
+    static let IDENTIFIER = "Test.OBJECT"
+    
+    
+    init() {
+        string_field = "Some f🧊ncy string"
+        int_field = Int.max
+        dict_field = InnerTestObject()
+        arr_field = [100, 200, 300, Int.random(in: Int.min...Int.max)]
+        data_field = Data(repeating: 0xAE, count: 0xABCDEF)
+        url_field = URL(fileURLWithPath: "someFilePathOfAMockObject")
+    }
+}
+
+fileprivate struct InnerTestObject: Codable {
+    var field1: Float   = 1_234_567.890_001
+    var field2: Double  = Double.pi
+    var field3: Set     = Set([1,2,3])
+    var field4: String? = nil
+}
+
+extension FridgeTestObject: Equatable {
+    static func ==(lhs: FridgeTestObject, rhs: FridgeTestObject) -> Bool {
+        let equality =
+        (lhs.string_field == rhs.string_field) &&
+        (lhs.int_field == rhs.int_field) &&
+        (lhs.arr_field == rhs.arr_field)
+        
+        return equality
+    }
+}
+
+final class FreezerTests: XCTestCase {
+    // SHARED TESTING OBJECT
     let freezer = Freezer()
     
-    func testFreezingCapability(){
-        let testData1 = TestingStructure()
-        //try to save data without throwing
-        XCTAssertNoThrow(try freezer.freeze(object: testData1, identifier: testObjectIdentifier))
+    /// Tests weather an object can be saved without throwing error
+    func testBasicFreezing(){
+        let testData1 = FridgeTestObject()
+        XCTAssertNoThrow(try freezer.freeze(object: testData1, identifier: FridgeTestObject.IDENTIFIER))
     }
-    
-    // Make sure the to test freezing of arrays
-//    func testFreezingAnArray() throws {
-//        let testArray = [TestingStructure]()
-//        try freezer.freeze(object: testArray, identifier: testObjectIdentifier)
-//    }
-    
-    func testUnfreezingCapability() {
+
+    /// Tests weather an object can be loaded without throwing error
+    func testBasicUnfreezing() {
         //freeze an object first
-        var frozenObject = TestingStructure()
-        frozenObject.field1 = 10
-        XCTAssertNoThrow(try freezer.freeze(object: frozenObject, identifier: testObjectIdentifier))
+        let frozenObject = FridgeTestObject()
+        
+        XCTAssertNoThrow(try freezer.freeze(object: frozenObject, identifier: FridgeTestObject.IDENTIFIER))
         
         do {
             //unfreeze it now
-            let unFrozenObject: TestingStructure = try freezer.unfreeze(identifier: testObjectIdentifier)
+            let unFrozenObject: FridgeTestObject = try freezer.unfreeze(identifier: FridgeTestObject.IDENTIFIER)
             
             //make sure they are equal
             XCTAssert(frozenObject == unFrozenObject)
@@ -75,46 +99,22 @@ final class FreezerTests: XCTestCase {
             XCTFail("Unable to unfeeze frozen object")
         }
     }
-    
-    func testMultipleFreeze() throws {
-        var test_structure1 = TestingStructure(); test_structure1.field1 = -100
-        var test_structure2 = TestingStructure(); test_structure2.field2 =  100
-        
-        //freeze both objects (in specific order)
-        try freezer.freeze(object: test_structure1, identifier: "data1")
-        try freezer.freeze(object: test_structure2, identifier: "data2")
-        
-        //now try to pull put data1 first
-        let pulledData1: TestingStructure = try freezer.unfreeze(identifier: "data1")
-        // test consistency
-        XCTAssert(pulledData1 == test_structure1)
-        XCTAssert(pulledData1.field1 == -100)
-        
-        //now try to pull put data2
-        let pulledData2: TestingStructure = try freezer.unfreeze(identifier: "data2")
-        // test consistency
-        XCTAssert(pulledData2 == test_structure2)
-        XCTAssert(pulledData2.field2 == 100)
-    }
-    
-    func testFreezingPersistance() throws {
-        let testData1 = TestingStructure()
-        
-        //freeze first
-        try freezer.freeze(object: testData1, identifier: testObjectIdentifier)
-        
-        //check if it's present
-        XCTAssert(freezer.isAlreadyFrozen(identifier: testObjectIdentifier))
-    }
-    
-    func testNonExistantFreezePersistance() {
+
+    func testPersistancyChecks() {
+        XCTAssert(freezer.isAlreadyFrozen(identifier: FridgeTestObject.IDENTIFIER))
         XCTAssertFalse(freezer.isAlreadyFrozen(identifier: "non_existant_object"))
     }
     
-//    static var allTests = [
-//        ("testFreezingCapability", testFreezingCapability),
-//        ("testUnfreezingCapability", testUnfreezingCapability),
-//        ("testMultipleFreeze", testMultipleFreeze),
-//        ("testFreezingPersistance", testFreezingPersistance)
-//    ]
+    /// Tests if array can be stored
+//    func testFreezingAnArray() throws {
+//        XCTAssertFalse(freezer.isAlreadyFrozen(identifier: "array.test"))
+//
+//        let freezingArray = [1,2,3,4,5,6,7,8]
+//        let objectArray: Array<FridgeTestObject> = [FridgeTestObject(), FridgeTestObject()]
+//        try freezer.freeze(object: freezingArray, identifier: "array.test")
+//        try freezer.freeze(object: objectArray, identifier: "array-object.test")
+//
+//        let unpackedObject: [Int] = try freezer.unfreeze(identifier: "array.test")
+//        XCTAssert(unpackedObject[0] == freezingArray[0])
+//    }
 }

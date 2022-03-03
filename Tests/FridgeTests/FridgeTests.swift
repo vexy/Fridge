@@ -29,33 +29,47 @@ import Foundation
 
 @testable import Fridge
 
+fileprivate struct FridgeTestObject: Codable {
+    let string_field: String
+    let int_field: Int
+    let arr_field: [Int]
+    let data_field: Data
+    let url_field: URL
+    
+    static let IDENTIFIER = "Fridge-TestObject"
+    
+    
+    init() {
+        string_field = "Some f🧊ncy string"
+        int_field = Int.max
+        arr_field = [0xA, 0xB, 0xC, Int.random(in: Int.min...Int.max)]
+        data_field = Data(repeating: 0x00FF, count: 0xAABBCC)
+        url_field = URL(fileURLWithPath: "someFilePathOfAMockObject")
+    }
+}
+
 final class FridgeTests: XCTestCase {
+    /// Tests weather Fridge can save the object from the surface level
     func testCanFreezeObject() throws {
-        struct SomeCodableStruct: Codable {
-            var field1: String
-            var field2: URL
-            
-            init() {
-                field1 = ""
-                field2 = URL(fileURLWithPath: "someFilePathOfAMockObject")
-            }
-        }
-        
-        //try to save a struct
-        let testObject = SomeCodableStruct()
-        try Fridge.freeze🧊(testObject, id: "test.id")
-        
-        //if it throws, test will fail on it's own
+        let testObject = FridgeTestObject()
+        try Fridge.freeze🧊(testObject, id: FridgeTestObject.IDENTIFIER)
     }
     
+    /// Tests weather Fridge can load the object from the surface level
+    func testCanUnfreeeObject() throws {
+        let retrievedObject: FridgeTestObject = try Fridge.unfreeze(FridgeTestObject.IDENTIFIER)
+        XCTAssert(retrievedObject.string_field == "Some f🧊ncy string")
+        XCTAssert(retrievedObject.int_field == Int.max)
+        XCTAssert(retrievedObject.arr_field[0] == 0xA)
+        XCTAssert(retrievedObject.arr_field[1] == 0xB)
+        XCTAssert(retrievedObject.arr_field[2] == 0xC)
+    }
+
+//MARK:-
+    /*
+        Make sure Fridge can greet fellow programmers
+    */
     func testAmIInsane🤔() {
-        //Make sure Fridge can greet fellow programmers
-        //.....
-        //....
-        //..
-        //.
-        //umm... like really ??
-        
         //let's see...
         Fridge.greetFellowProgrammers()
         XCTAssertTrue(true == true)     ///🤯
@@ -64,19 +78,18 @@ final class FridgeTests: XCTestCase {
             Dear reader,
             If you prove that :
          
-            Exactly one commit after
-            [d46bff5c504561ade2a45403b698775a8d55c048]
-            Fridge doesn't have 100% test coverage,
-            please reach back to Fridge author
-            to claim your FREE
-            🍻
+            Exactly one commit after d46bff5c504561ade2a45403b698775a8d55c048
+            "Fridge doesn't have 100% test coverage" -
+            please reach back to Fridge author to claim your FREE
          
             Cheers !
+            🍻🍻🍻
         */
     }
-
-//    static var allTests = [
-//        ("Sanity check", testAmIInsane🤔),
-//        ("Freezing capabilities", testCanFreezeObject)
-//    ]
+    
+    override class func tearDown() {
+        //just dump used storage
+        Fridge.dr🕳p(FridgeTestObject.IDENTIFIER)
+        print("\n** <Fridge.Tests> Test object removed from the file system **\n")
+    }
 }

@@ -14,8 +14,8 @@ let package = Package(
     
     // Supported platforms
     platforms: [
-        .iOS(.v15),
-        .macOS(.v12),
+        .iOS(.v11),
+        .macOS(.v10_14),
         .tvOS(.v11)
     ],
     

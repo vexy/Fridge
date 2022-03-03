@@ -1,4 +1,4 @@
-name: Fridge build process
+name: Fridge release
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Swift and xcodebuild variations for building Fridge
+    name: Swift and xcodebuild variations for building Fridge library
     runs-on: macos-latest
 
     steps:
@@ -17,6 +17,10 @@ jobs:
       run: swift build -v
     - name: xcodebuild build
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
+    - name: xcodebuild build
+      run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11"
+    - name: xcodebuild build
+      run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12"
     - name: xcodebuild iOS testing
       run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
 #    - name: xcodebuild tvOS testing

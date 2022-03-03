@@ -27,6 +27,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 final class Grabber {
     func grab<D: Decodable>(from url: URL) async throws -> D {
         do {

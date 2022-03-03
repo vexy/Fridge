@@ -11,10 +11,10 @@ import BSONCoder
 
 /// Utility class providing write/read BSON functionality
 final class BSONConverter {
-    let _comp: FridgeCompartment
+    let _rawFilePath: URL
 
     init(compartment: FridgeCompartment) {
-        _comp = compartment
+        _rawFilePath = compartment.filePath
     }
     
     /// Writes given object to a compartment storage
@@ -23,13 +23,15 @@ final class BSONConverter {
         let rawBSONData = try BSONEncoder().encode(object).toData() //will throw further
         
         // now flush the data to a file
-        try rawBSONData.write(to: _comp.filePath)
+        print("Writing to: \(_rawFilePath)")
+        try rawBSONData.write(to: _rawFilePath)
     }
     
-    /// Reads a given object from compartment storage
+    /// Reads object from compartment data storage and returns Foundation counterpart
     func read<T: Decodable>() throws -> T { //} -> BSONDoc {
         // prepare input stream
-        let rawBSONData = try Data(contentsOf: _comp.filePath)
+        let rawBSONData = try Data(contentsOf: _rawFilePath)
+        print("Reading from: \(_rawFilePath)")
         
         let realObject = try BSONDecoder().decode(T.self, from: rawBSONData)
         return realObject

@@ -32,7 +32,8 @@ public struct Fridge {
     // ADD OTHER STUFF HERE
 }
 
-//MARK: - Network object fetching
+//MARK: - Network object fetching (iOS 15+ only)
+@available(iOS 15.0, *)
 extension Fridge {
     /// Tries to grab an object from a given `URL`
     public static func grab🔮<D: Decodable>(from url: URL) async throws -> D {
@@ -56,7 +57,8 @@ extension Fridge {
         let freezer = Freezer()
         do {
             try freezer.freeze(object: object, identifier: id)
-        } catch {
+        } catch let err {
+            print("<Fridge.Freezer> Error occured: \(err.localizedDescription)")
             throw FreezingErrors.dataStoringError
         }
     }
@@ -70,6 +72,13 @@ extension Fridge {
         } catch {
             throw FreezingErrors.dataStoringError
         }
+    }
+    
+    /// Drops an object from persistant storage.
+    public static func dr🕳p(_ key: String) {
+//        #warning("Incomplete implementation")
+        //try to drop an item from storage
+        FridgeCompartment(key: key).remove()
     }
 }
 

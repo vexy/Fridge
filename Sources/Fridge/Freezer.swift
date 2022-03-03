@@ -26,35 +26,7 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-
 import Foundation
-
-// Reference to FileManager
-fileprivate let _fileManager = FileManager.default
-
-/// Trivial Storage implementation (/// /// Representation of an `URL` storage concept)
-struct FridgeCompartment {
-    // Internal BLOB file extension
-    private let BLOB_EXTENSION: String = ".fridgeStore"
-    
-    // key used to identify raw content
-    private let key: String// = "FridgeCompartment"
-    
-    init(key: String) {
-        self.key = key
-    }
-    
-    var filePath: URL {
-        //get documents directory
-        guard let documentDirectoryURL = _fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("<Fridge.Storage> Unable to compute DocumentsDirectory path")
-        }
-        
-        let finalName = "\(key)\(BLOB_EXTENSION)"
-        let finalURL = documentDirectoryURL.appendingPathComponent(finalName)
-        return finalURL
-    }
-}
 
 // MARK: -
 final class Freezer {
@@ -94,7 +66,6 @@ final class Freezer {
     
     /// Returns `true` if a given object has been frozen previously.
     func isAlreadyFrozen(identifier: String) -> Bool {
-        let filePath = FridgeCompartment(key: identifier).filePath.path
-        return _fileManager.fileExists(atPath: filePath)
+        FridgeCompartment(key: identifier).alreadyExist
     }
 }

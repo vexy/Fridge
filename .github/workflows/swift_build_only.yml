@@ -1,13 +1,13 @@
-name: Swift
+name: Swift CLI build
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: macOS-latest
+    name: Swift CLI build process
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
+    - name: Swift build
       run: swift build -v

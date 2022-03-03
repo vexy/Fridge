@@ -17,12 +17,16 @@
   <!-- <tr>
     <th># HEADERS HIDDEN #</th>
   </tr> -->
-  <tr style="outline: thin">
-    <td><img alt="" src="https://github.com/vexy/Fridge/actions/workflows/swift.yml/badge.svg"></td>
-    <td><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/vexy/Fridge?color=green&display_name=release&label=Latest%20release"></td>
-    <td><img alt="Github top language" src="https://img.shields.io/github/languages/top/vexy/Fridge"></td>
+  <tr style="outline: thin; vertical-align: middle">
+    <td><img alt="Release build" src="https://github.com/vexy/Fridge/actions/workflows/release_workflow/badge.svg"></td>
+    <td>
+        <a href="https://github.com/vexy/Fridge/releases">
+            <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/vexy/Fridge?color=green&display_name=release&label=Latest%20release">
+        </a>
+    </td>
+    <td><a href="https://github.com/vexy/Fridge/search?l=swift"><img alt="Github top language" src="https://img.shields.io/github/languages/top/vexy/Fridge"></a></td>
     <td><img alt="Platforms" src="https://img.shields.io/badge/Platform-iOS%2C%20macOS%2C%20tvOS%2C%20watchOS-blue"></td>
-    <td><img alt="GitHub" src="https://img.shields.io/github/license/vexy/Fridge"></td>
+    <td><a href="https://github.com/vexy/Fridge/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/vexy/Fridge"></a></td>
   </tr>
 </table>
 </p>
@@ -31,87 +35,132 @@
 
 <br>
 <p align="center">
-  <img src="https://github.com/vexy/Fridge/actions/workflows/fridge_workflow.yml/badge.svg">
-  <img src="https://img.shields.io/github/issues/vexy/fridge">
+  <a href="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml">
+    <img alt="Tets build" src="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml/badge.svg">
+  </a>
+  <a href="https://github.com/vexy/Fridge/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/vexy/fridge">
+  </a>
   <img src="https://img.shields.io/github/languages/code-size/vexy/fridge?color=g">
 </p>
 <br><br>
 
-<!-- [![Tests](https://github.com/vexy/Fridge/actions/workflows/fridge_workflow.yml/badge.svg)](https://github.com/vexy/Fridge/actions/workflows/fridge_workflow.yml)  
-![GitHub issues](https://img.shields.io/github/issues/vexy/fridge)  
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/vexy/fridge?color=g) -->
-
-
 # 💠 Library interface
-`Fridge` is a freezing device. It has to keep things cool enough, exposing this icy interface for us:
-  - `Fridge.grab🔮(from: URL)` - Allows you to easily "grab" your model from the network endpoint
-  - `Fridge.freeze🧊(object, identifier)` - to (persistently) "freeze" your `struct` for future use
-  - `Fridge.unfreeze(identifier)` - to load your `struct` back and take control of it
-  
-`Fridge` is built using `async/await` philosophy and is here to reduce the pain of _fetching your stuff from the network_, parsing, _storing and retreiving stuff_, doing endless _error checking_ and yeah... good old **closures**. You can even say goodbay to closures and CoreData if you want!  
-`Fridge` is built on Foundation principles and uses _BSON_ as internal storage mechanism. 
-It is **lightweight**, with extremely narrow interface, with small - Foundation based - `Error` type system.
+`Fridge` is a freezing device ❄️. It has to keep things cool enough, exposing following icy interface:
+|Method name|TLDR|
+|:-|:-|
+|`Fridge.grab🔮(from: URL)`|Grabs your model from the network endpoint (_iOS 15+ only_)|
+|`Fridge.freeze🧊(object, identifier)`|Safely "freezes" your `struct` to persistant store|
+|`Fridge.unfreeze(identifier)`|"Unfreezes", your previously frozen, `struct` giving you control of it|
 
-### _"Talking is cheap. Show me the code. - Linus Torvalds"_
+### Async/Await networking  
+`Fridge` is supported by `async/await` and is here to reduce the pain of:
+  - _fetching your stuff from the network_,
+  - parsing or decoding (JSON) data,
+  - _storing and retreiving stuff_ to the persistant storage
+  - doing endless _error checking_
+
+And yeah... good old **closures**. You can even say goodbye to closures and CoreData if you want!    
+
+### Persistant storage
+`Fridge` is built on Foundation principles and uses `BSON` as internal storage mechanism.   
+It is **lightweight**, with extremely narrow interface, covered with small - Foundation based - `Error` type system.  
+Checkout internal documentation for more information.  
+
+### _"Talking is cheap. Show me the code."_ - Linus Torvalds
 
 ```Swift
-// there's a catch here !
+// there's a catch here (!)
 struct GHRepo {
     var name: String
     var repositoryURL: URL
 }
 
-let someRepo: GHRepo = try await Fridge.grab🔮(from: URL("https://github.com/vexy/")!)
-print(someRepo)
+let myRepo: GHRepo = try await Fridge.grab🔮(from: URL("https://github.com/vexy/")!)
+// then, just
+print(myRepo)
+print(myRepo.name)
 
-// ..and that's it ! (khm)
+// ..and that's it ! (khm 🧟‍♂️)
 ```  
 
 ### _"RTFM isn't a joke. So..."_ 
 Oh yeah, `Fridge` can ofer way way more, _but it's alllll in the [Docs](Guides/Usage.md)_ 🥴   
-Aside from discovering how to remove that _shocking build error_ from the 👆 code example,in the **Docs** you'll quickly figure out how to:
+Aside from discovering how to remove that _shocking build error_ from the 👆 code example, in the **Docs** you'll quickly figure out how to:
   - *persistently store* your objects,
   - *load them back* into your app,
   - *catch nasty errors* along the way
   -  (**COMMING SOON**) _fine grain_ fetch or store process
   - dirtly little secrets about the Fridge
 
-# How to install ?
+# Installation
 Using `Swift Package Manager` is by far the sexiest way to install silly `Fridge`.  
-Update both `dependencies` and `targets` section in your `Package.swift`, something like this.
+Update both `dependencies` and `targets` section in your `Package.swift`, to look something like this.  
+
 ```Swift
-// swift-tools-version:5.5
+// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
     name: "YOUR-PACKAGE",
     dependencies: [
-        .package(url: "https://github.com/vexy/Fridge.git", .upToNextMajor(from: "0.8.2"))
+        .package(url: "https://github.com/vexy/Fridge.git", .upToNextMajor(from: "0.8.7"))
     ],
     targets: [
         .target(name: "YOUR-TARGET", dependencies: ["Fridge"])
     ]
 )
 ```
+  
+Quick links:
+```
+name: "Fridge"
+url: "https://github.com/vexy/Fridge.git"
+branch: "main"
+```
 
 # Minimum versions required
-`Fridge` requires following Swift & iOS configuration:
+For `Fridge` to work in full capacity, following Swift & iOS configuration is _recommended_:
+  - Xcode `13.1+`
   - Swift `5.5`
-  - iOS `15.0`
+  - iOS `15.0+`
   - macOS `12.0`
+  
+Recommended versions mentioned above area guaranteed to successfully build & test `Fridge` ✅.  
+If nothing else, you can always fire an [issue](https://github.com/vexy/Fridge/issues) if you stumble upon the way.
+  
+Although, you can even run `Fridge` with following: 😮 
+  - iOS `11.0+`
+  - macOS `10.14`
+  
+...but **you won't** be able to `grab🔮` things nor any of the fancy `async/await` things. Sorry 🤷🏻‍♂️
 
-*NOTE*  
-Be sure to meet minimum configuration parameters as you may encounter difficult-to-recover build errors on earlier configurations.   
-_Sometimes_, altering liker flag `-Xfrontend -enable-experimental-concurrency` helps, but may fail if building with commandline  
-Checkout official Swift.org website, for supporting earlier than minimums and other info.
+*NOTEs*  
+Be sure to meet minimum configuration parameters as you may encounter difficult-to-recover build errors on earlier configurations.  
+_Sometimes_, altering liker flag `-Xfrontend -enable-experimental-concurrency` helps, but may fail if building with commandline.  
+That may be helpfull for `Xcode 12.x`, assuming `Swift 5.x` is installed.  
+
+Checkout official [Swift.org](https://www.swift.org/) website, for supporting earlier than minimums and other info.
+
+# Documentation & Examples
+Documentation can be found in [Guides](Guides/) folder.      
+You can find [usage examples](Guides/Usage.md) or standalone sample projects. (TODO: ADD LINK HERE)
 
 # External dependencies
-Fridge uses [BSON](https://github.com/mongodb/swift-bson) external library, licenced under MIT Licence.  
-Check original README for more instructions.
+Fridge uses [BSONCoder v0.9](https://github.com/vexy/bsoncoder) - Copyright by [Vexy](https://github.com/vexy).  
+Check original library licencing information under licencing section in README file.
+
+# Contribution
+If you like `Fridge`, feel free to fire a [pull request](https://github.com/vexy/pulls).
+The prefered way is to branch off the `main` branch, complete feature or a fix and then merge to `development`.
+After the pull request has been approved, your change will be merged to `main`.  
+
+Don't be affraid to start any (discussions)[https://github.com/vexy/Fridge/discussions] if you think so.  
+[Issues](https://github.com/vexy/Fridge/issues) section is a good way to start, if you stumble upon the way.  
 
 ---   
-(**FRIDGE IS STILL UNDER HEAVY DEVELOPMENT**)  
-Fridge **BETA** release : *v0.8.6 ( UTC2022-02-23 )*
+(**FRIDGE IS UNDER ACTIVE DEVELOPMENT ALMOST REACHING v1.0**)  
+Fridge **BETA** release : *v0.8.7 ( UTC2022-03-01 )*
 
 Copyright © 2016 Veljko Tekelerović | MIT license  
 **PGP:** `6302 D860 B74C BD34 6482 DBA2 5187 66D0 8213 DBC0`
