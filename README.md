@@ -5,7 +5,6 @@
 <p align="center">
   <b>Fridge</b> - perhaps the silliest <code>Swift5 async/await</code> fetch-and-store implementation you'll ever see !<br>
   Let your fancy <code>struct</code>(s) raise and shine again, allowing you to focus on 💬 🥊🤖⭐️🗝 <i>stuff</i>.<br><br>
-  <code>Fridge</code> - <b>Lightweight</b>, <b>fast</b> and extreeemely <b>simple to use !</b>
 </p>
 
 <p align="center">
@@ -48,6 +47,10 @@
   <img src="https://img.shields.io/github/languages/code-size/vexy/fridge?color=g">
 </p>
 <br><br>
+<p align="center">
+    <code>Fridge</code> - <b>Lightweight</b>, <b>fast</b> and extreeemely <b>simple to use fetch or store mechanism.</b><br>
+</p>
+<br><br>
 
 # 💠 Library interface
 `Fridge` is a freezing device ❄️. It has to keep things cool enough, exposing following icy interface:
@@ -55,7 +58,8 @@
 |:-|:-|
 |`Fridge.grab🔮(from: URL)`|Grabs your model from the network endpoint (_iOS 15+ only_)|
 |`Fridge.freeze🧊(object, identifier)`|Safely "freezes" your `struct` to persistant store|
-|`Fridge.unfreeze(identifier)`|"Unfreezes", your previously frozen, `struct` giving you control of it|
+|`Fridge.unfreeze🪅🎉(identifier)`|"Unfreezes", your previously frozen, `struct` giving you control of it|
+|`Fridge.isFrozen🔬(identifier)`|Quickly check if your `Fridge` have been loaded|
 
 ### Async/Await networking  
 `Fridge` is supported by `async/await` and is here to reduce the pain of:
@@ -67,8 +71,8 @@
 And yeah... good old **closures**. You can even say goodbye to closures and CoreData if you want!    
 
 ### Persistant storage
-`Fridge` is built on Foundation principles and uses `BSON` as internal storage mechanism.   
-It is **lightweight**, with extremely narrow interface, covered with small - Foundation based - `Error` type system.  
+`Fridge` is built on Foundation principles and uses `BSON` as internal storage mechanism.     
+All you have to do is to conform your struct to `Encodable` and you're ready to go, Fridge will take care of the rest.  
 Checkout internal documentation for more information.  
 
 ### _"Talking is cheap. Show me the code."_ - Linus Torvalds
@@ -88,14 +92,15 @@ print(myRepo.name)
 // ..and that's it ! (khm 🧟‍♂️)
 ```  
 
-### _"RTFM isn't a joke. So..."_ 
-Oh yeah, `Fridge` can ofer way way more, _but it's alllll in the [Docs](Guides/Usage.md)_ 🥴   
-Aside from discovering how to remove that _shocking build error_ from the 👆 code example, in the **Docs** you'll quickly figure out how to:
+### _"RTFM isn't a joke..."_    
+Aside from discovering how to remove that _shocking build error_ from the 👆 code example, in the **[Docs](Guides/Usage.md)** you'll quickly figure out how to:
   - *persistently store* your objects,
   - *load them back* into your app,
   - *catch nasty errors* along the way
   -  (**COMMING SOON**) _fine grain_ fetch or store process
   - dirtly little secrets about the Fridge
+  
+Oh yeah, `Fridge` can ofer way way more, _but it's alllll in the **Docs** _ 🥴
 
 # Installation
 Using `Swift Package Manager` is by far the sexiest way to install silly `Fridge`.  
@@ -164,7 +169,7 @@ Don't be affraid to start any [discussions](https://github.com/vexy/Fridge/discu
 
 ---   
 (**FRIDGE IS UNDER ACTIVE DEVELOPMENT ALMOST REACHING v1.0**)  
-Fridge **BETA** release : *v0.8.7 ( UTC2022-03-01 )*
+Fridge **BETA** release : *v0.8.8 ( UTC2022-03-03 )*
 
 Copyright © 2016 Veljko Tekelerović | MIT license  
 **PGP:** `6302 D860 B74C BD34 6482 DBA2 5187 66D0 8213 DBC0`

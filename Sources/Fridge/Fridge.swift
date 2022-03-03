@@ -65,20 +65,22 @@ extension Fridge {
     }
     
     /// Tries to unfreeze an object from persistant storage.
-    public static func unfreeze<D: Decodable>(_ key: String) throws -> D {
+    public static func unfreeze🪅🎉<D: Decodable>(_ key: String) throws -> D {
         let unfreezer = Freezer()
-        do {
-            let unfrozenObject: D = try unfreezer.unfreeze(identifier: key)
-            return unfrozenObject
-        } catch {
-            throw FreezingErrors.dataStoringError
-        }
+        let unfrozenObject: D = try unfreezer.unfreeze(identifier: key) // propagate any Errors further
+        return unfrozenObject
+    }
+}
+
+//MARK: - Utilities
+extension Fridge {
+    /// Returns `true` if Fridge contains object with given key
+    public static func isFrozen🔬(_ key: String) -> Bool {
+        FridgeCompartment(key: key).alreadyExist
     }
     
     /// Drops an object from persistant storage.
-    public static func dr🕳p(_ key: String) {
-//        #warning("Incomplete implementation")
-        //try to drop an item from storage
+    public static func drop🗑(_ key: String) {
         FridgeCompartment(key: key).remove()
     }
 }

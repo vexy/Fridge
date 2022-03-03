@@ -57,7 +57,7 @@ final class FridgeTests: XCTestCase {
     
     /// Tests weather Fridge can load the object from the surface level
     func testCanUnfreeeObject() throws {
-        let retrievedObject: FridgeTestObject = try Fridge.unfreeze(FridgeTestObject.IDENTIFIER)
+        let retrievedObject: FridgeTestObject = try Fridge.unfreeze🪅🎉(FridgeTestObject.IDENTIFIER)
         XCTAssert(retrievedObject.string_field == "Some f🧊ncy string")
         XCTAssert(retrievedObject.int_field == Int.max)
         XCTAssert(retrievedObject.arr_field[0] == 0xA)
@@ -89,7 +89,7 @@ final class FridgeTests: XCTestCase {
     
     override class func tearDown() {
         //just dump used storage
-        Fridge.dr🕳p(FridgeTestObject.IDENTIFIER)
+        Fridge.drop🗑(FridgeTestObject.IDENTIFIER)
         print("\n** <Fridge.Tests> Test object removed from the file system **\n")
     }
 }
