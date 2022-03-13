@@ -6,7 +6,6 @@
 //
 
 import Foundation
-//import SwiftBSON
 import BSONCoder
 
 /// Utility class providing write/read BSON functionality
@@ -23,7 +22,6 @@ final class BSONConverter {
         let rawBSONData = try BSONEncoder().encode(object).toData() //will throw further
         
         // now flush the data to a file
-        print("Writing to: \(_rawFilePath)")
         try rawBSONData.write(to: _rawFilePath)
     }
     
@@ -31,7 +29,6 @@ final class BSONConverter {
     func read<T: Decodable>() throws -> T { //} -> BSONDoc {
         // prepare input stream
         let rawBSONData = try Data(contentsOf: _rawFilePath)
-        print("Reading from: \(_rawFilePath)")
         
         let realObject = try BSONDecoder().decode(T.self, from: rawBSONData)
         return realObject

@@ -5,7 +5,7 @@ In short, following guide describes **how to**:
   - [load/store an object](#data-handling)
   - [handle errors](#error-handling)
   
-
+Checkout architecture overview in separate [diagram](Guides/Fridge.diagram.md) file.  
 For more information, you can always check provided, `in-code` documentation.  
 
 ---  

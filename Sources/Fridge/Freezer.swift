@@ -29,7 +29,7 @@
 import Foundation
 
 // MARK: -
-final class Freezer {
+final internal class Freezer {
     /// Freezes an object into Fridge persistant storage. Any new object will overwrite previously stored object
     func freeze<T: Encodable>(object: T, identifier: String) throws { //async ?
         do {
@@ -59,7 +59,6 @@ final class Freezer {
             let storedObject: T = try reader.read()
             return storedObject
         } catch {
-            print("THROW HAPPENED")
             throw FreezingErrors.dataReadingError
         }
     }

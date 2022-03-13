@@ -29,7 +29,7 @@ import Foundation
 
 @available(macOS 12.0, *)
 @available(iOS 15.0, *)
-final class Grabber {
+final internal class Grabber {
     func grab<D: Decodable>(from url: URL) async throws -> D {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
