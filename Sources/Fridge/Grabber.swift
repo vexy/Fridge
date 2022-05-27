@@ -43,7 +43,8 @@ final internal class Grabber {
     }
     
     func grab<D: Decodable>(using urlRequest: URLRequest) async throws -> D {
-        guard let rawData = try? await URLSession.shared.data(for: urlRequest).0 else { throw FridgeErrors.grabFailed
+        guard let rawData = try? await URLSession.shared.data(for: urlRequest).0 else {
+            throw FridgeErrors.grabFailed
         }
         guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
             throw FridgeErrors.grabFailed
@@ -51,5 +52,33 @@ final internal class Grabber {
         
         // return decoded object
         return decodedObject
+    }
+    
+    
+    func push<E: Encodable, D: Decodable>(object: E, urlString: String) async throws -> D {
+        //construct a JSON based URLRequest
+        guard let urlObject = URL(string: urlString) else { throw FridgeErrors.decodingFailed }
+        var request = URLRequest(url: urlObject)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Fridge.grab", forHTTPHeaderField: "User-Agent")
+        
+        // serialize given object and attach it to request body
+        guard let serializedObject = try? JSONEncoder().encode(object.self) else {
+            throw FridgeErrors.decodingFailed
+        }
+        request.httpBody = serializedObject
+        
+        //execute request and wait for response
+        guard let responseRawData = try? await URLSession.shared.data(for: request).0 else {
+            throw FridgeErrors.pushFailed
+        }
+        
+        // try to decode the data into given respose object
+        guard let decodedResponse = try? JSONDecoder().decode(D.self, from: responseRawData) else {
+            throw FridgeErrors.decodingFailed
+        }
+        
+        return decodedResponse
     }
 }
