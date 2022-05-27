@@ -3,12 +3,15 @@
 </h1>
 
 <p align="center">
-    <code>Fridge</code> - <b>Lightweight</b>, <b>asnyc</b> and <i>extreeemely simple</i> to use fetch or store mechanism.</b>
-    <br>
-    Let your fancy <code>struct</code>(s) raise and shine again, while focusing on 💬 🥊🤖⭐️🗝 <i>other important stuff</i>.<br><br>
+  <b>Fridge</b> - perhaps the silliest <code>Swift5 async/await</code> fetch-and-store implementation you'll ever see !<br>
+  Let your fancy <code>struct</code>(s) raise and shine again, allowing you to focus on 💬 🥊🤖⭐️🗝 <i>stuff</i>.<br><br>
 </p>
-<br><br>
 
+<p align="center">
+    <a href="https://stackexchange.com/users/215166"><img src="https://stackexchange.com/users/flair/215166.png?theme=clean" width="208" height="58" alt="profile for Vexy on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Vexy on Stack Exchange, a network of free, community-driven Q&amp;A sites">
+    </a>
+</p>
+<br>
 <table style="width:100%">
   <!-- <tr>
     <th># HEADERS HIDDEN #</th>
@@ -42,6 +45,10 @@
     <img alt="Issues" src="https://img.shields.io/github/issues/vexy/fridge">
   </a>
   <img src="https://img.shields.io/github/languages/code-size/vexy/fridge?color=g">
+</p>
+<br><br>
+<p align="center">
+    <code>Fridge</code> - <b>Lightweight</b>, <b>fast</b> and extreeemely <b>simple to use fetch or store mechanism.</b><br>
 </p>
 <br><br>
 
@@ -161,20 +168,8 @@ Don't be affraid to start any [discussions](https://github.com/vexy/Fridge/discu
 [Issues](https://github.com/vexy/Fridge/issues) section is a good way to start, if you stumble upon the way.  
 
 ---   
-
-<p align="center">
-  <b>Fridge</b> - perhaps the silliest <code>Swift5 async/await</code> fetch-and-store implementation you'll ever see !<br>
-</p>
-
-
-**FRIDGE IS UNDER ACTIVE DEVELOPMENT ALMOST REACHING v1.0**  
-Fridge **BETA** release : *v0.8.9 ( UTC2022-05-20 )*
+(**FRIDGE IS UNDER ACTIVE DEVELOPMENT ALMOST REACHING v1.0**)  
+Fridge **BETA** release : *v0.8.8 ( UTC2022-03-03 )*
 
 Copyright © 2016 Veljko Tekelerović | MIT license  
-**PGP:** `6302D860 B74CBD34 6482DBA2 518766D0 8213DBC0`
-
-<p align="center">
-    <a href="https://stackexchange.com/users/215166"><img src="https://stackexchange.com/users/flair/215166.png?theme=clean" width="208" height="58" alt="profile for Vexy on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Vexy on Stack Exchange, a network of free, community-driven Q&amp;A sites">
-    </a>
-</p>
-<br>
+**PGP:** `6302 D860 B74C BD34 6482 DBA2 5187 66D0 8213 DBC0`
