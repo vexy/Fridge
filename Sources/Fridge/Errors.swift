@@ -8,7 +8,9 @@
 import Foundation
 
 enum FridgeErrors: Error {
+    //add case grabFailed(reason: Error) or similar
     case grabFailed
+    case decodingFailed
 }
 
 enum FreezingErrors: Error {

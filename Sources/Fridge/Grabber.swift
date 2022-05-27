@@ -31,34 +31,25 @@ import Foundation
 @available(iOS 15.0, *)
 final internal class Grabber {
     func grab<D: Decodable>(from url: URL) async throws -> D {
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            
-            // try to serialize the data
-            guard let decodedObject = try? JSONDecoder().decode(D.self, from: data) else {
-                throw FridgeErrors.grabFailed
-            }
-            
-            // return grabbed object
-            return decodedObject
-        } catch {
+        guard let rawData = try? await URLSession.shared.data(from: url).0 else {
             throw FridgeErrors.grabFailed
         }
+        guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
+            throw FridgeErrors.decodingFailed
+        }
+        
+        // return decoded object
+        return decodedObject
     }
     
     func grab<D: Decodable>(using urlRequest: URLRequest) async throws -> D {
-        do {
-            let (data, _) = try await URLSession.shared.data(for: urlRequest)
-            
-            // serialize returned data
-            guard let decodedObject = try? JSONDecoder().decode(D.self, from: data) else {
-                throw FridgeErrors.grabFailed
-            }
-            
-            // finally returned real object
-            return decodedObject
-        } catch {
+        guard let rawData = try? await URLSession.shared.data(for: urlRequest).0 else { throw FridgeErrors.grabFailed
+        }
+        guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
             throw FridgeErrors.grabFailed
         }
+        
+        // return decoded object
+        return decodedObject
     }
 }
