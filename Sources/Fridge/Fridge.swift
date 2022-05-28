@@ -49,6 +49,13 @@ extension Fridge {
         let theObject: D = try await grb.grab(using: urlRequest)
         return theObject
     }
+    
+    /// Tries to push an object to a given URL, returning the structured response
+    public static func push📡<E: Encodable, D: Decodable>(_ object: E, to: String) async throws -> D {
+        let pusher = Grabber()
+        let pushResponseObject: D = try await pusher.push(object: object, urlString: to)
+        return pushResponseObject
+    }
 }
 
 //MARK: - Object persistent storage

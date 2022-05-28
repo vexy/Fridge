@@ -35,7 +35,7 @@ let package = Package(
                 .product(name: "bsoncoder", package: "BSONCoder")
             ],
             exclude: [
-                "../../Guides/",
+                "../../Guides",
                 "../../README.md"
             ]
         ),

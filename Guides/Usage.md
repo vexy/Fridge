@@ -1,18 +1,19 @@
 
 # 👨‍🚀 Fridge Usage Guide
-In short, following guide describes **how to**:
+Following guide describes **how to**:
   - [fetch data from network](#network-fetching)
   - [load/store an object](#data-handling)
   - [handle errors](#error-handling)
   
-Checkout architecture overview in separate [diagram](Guides/Fridge.diagram.md) file.  
-For more information, you can always check provided, `in-code` documentation.  
+Checkout _architecture overview_ in separate [diagram](Guides/Fridge.diagram.md) file.
+Find out different wasy to easily use`Fridge` in provided [playground file](Guides/Examples/Fridge-basics).  
+For deeper information, you can check `in-code` documentation.  
 
 ---  
 
 ## Network fetching  
 With Fridge, network fetching is performed in just 3 steps:
-1. Make sure your desired `struct` conforms to `Decodable`
+1. Conform your desired `struct` to `Decodable`
 2. Define `URL` endpoint where your model resides
 2. Await for Fridge to `grab🔮(...)` the object
 
@@ -96,4 +97,16 @@ If your store identifier cannot be found `Fridge` will throw an Error. Check the
 ## ⛔️ Error Handling
 Each of the Fridge method, is internally marked with `throws` keyword. Here's what you can deal with:
 
-// list all errors here
+```Swift
+enum FridgeErrors: Error {
+    case grabFailed
+    case pushFailed
+    case decodingFailed
+}
+```
+
+You can expect `FridgeErrors` on following calls:
+  - `grab🔮`
+
+_NOTE:_
+Fridge error model is not yet final. You may expect different error message or structures before `v1.0` release.
