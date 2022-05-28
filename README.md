@@ -44,63 +44,51 @@
 </p>
 
 # 💠 Library interface
-`Fridge` is a freezing device ❄️. It has to keep things cool enough, exposing following icy interface.
+`Fridge` is a freezing device ❄️. It has to keep things cool enough, exposing just icy interface.
 
-### Async/Await networking
+### Networking
   - `Fridge.grab🔮(from: URL)` -> Grabs your model from the network endpoint (_iOS 15+ only_)
   - `Fridge.push📡(object, to)` -> Pushes (sends) your model to designated network endpoint (_iOS 15+ only_)
   
-Fridge is supported by `async/await` and is here to reduce the pain of:
+Fridge is supported by Swift5 `async/await` model and is here to reduce the pain of:
   - fetching _your stuff_ from the network,
   - parsing or decoding (JSON) data,
   - doing boring _error checking_
   - and yeah... good old **closures**.
 
-With Fridge, you can even _say goodbye to closures and CoreData_ if you want!    
+With Fridge, you can even _say goodbye to closures and CoreData_ if you want!  
 
-### Persistant storage
+Checkout [documentation](Guides/Usage.md) for more information.    
+
+### Persistant (local) storage
   - `Fridge.freeze🧊(object, identifier)` -> Safely "freezes" your `struct` to persistant store
   - `Fridge.unfreeze🪅🎉(identifier)` -> "Unfreezes" (previously frozen), `struct` giving you control of it
-  -  `Fridge.isFrozen🔬(identifier)` -> Quickly check if your `Fridge` have been loaded with certain `struct`
 
 Fridge storage mechanics are built on Foundation principles and use `BSON` as internal storage mechanism. All you have to do is to conform your struct to `Encodable` and you're ready to go, Fridge will take care of the rest.  
-Checkout internal documentation for more information.  
+  
+Checkout [documentation](Guides/Usage.md) for more information.  
 
-# Code examples
-> _Talking is cheap. Show me the code._ - Linus Torvalds
-
+# Quick code examples
 ```Swift
 // Make your fancy struct conform to Decodable
 struct GHRepo: Decodable {
     var name: String
     var repositoryURL: URL
+    // other fields
 }
 
-// Call grab🔮 method...
+// Await for grab🔮 method...
 let myRepo: GHRepo = try await Fridge.grab🔮(from: URL("https://github.com/vexy/")!)
 
 // Then, at your will
 print(myRepo)
 print(myRepo.name)
-```
+```  
 
-# Documentation
-> _RTFM isn't a joke..._ 🥴 
-    
-In the **[Docs](Guides/Usage.md)** you'll quickly figure out how to:
-  - *easily fetch object* from the network,
-  - *persistently store* your objects,
-  - *load them back* into your app,
-  - *catch nasty errors* along the way
-  - all other dirtly little secrets about the Fridge
-  
-Check [usage examples](Guides/Examples) or entire [Guides](Guides/) collection for more goodies.  
-`Xcode Playground` file can be found [here](Guides/Examples/Fridge-basics).
-For a bigger picture overview, feel free to check [architecture](Guides/Fridge.diagram.md) diagrams... ∰      
+> _Talking is cheap. Show me the code._ - Linus Torvalds
 
-# Installation
-Using `Swift Package Manager` is by far the sexiest way to install `Fridge`.  
-Update both `dependencies` and `targets` section in your `Package.swift`, to look something like this:  
+# Installation instructions
+Using `Swift Package Manager` is by far the sexiest way to install `Fridge`.
 
 ```Swift
 // swift-tools-version:5.3
@@ -109,13 +97,15 @@ import PackageDescription
 let package = Package(
     name: "YOUR-PACKAGE",
     dependencies: [
-        .package(url: "https://github.com/vexy/Fridge.git", .upToNextMajor(from: "0.8.7"))
+        .package(url: "https://github.com/vexy/Fridge.git", .upToNextMajor(from: "0.9"))
     ],
     targets: [
         .target(name: "YOUR-TARGET", dependencies: ["Fridge"])
     ]
 )
 ```
+*NOTE*: Make sure to update both `dependencies` and `targets` section in your `Package.swift` with your own target name.  
+
   
 Quick links:
 ```
@@ -150,6 +140,21 @@ Checkout official [Swift.org](https://www.swift.org/) website, for supporting ea
 ## External dependencies
 Fridge uses [BSONCoder v0.9](https://github.com/vexy/bsoncoder) - Copyright by [Vexy](https://github.com/vexy).  
 Check original library licencing information under licencing section in README file.
+
+# Documentation
+> _RTFM isn't a joke..._ 🥴 
+    
+In the **[Docs](Guides/Usage.md)** you'll quickly figure out how to:
+  - *easily fetch object* from the network,
+  - *persistently store* your objects,
+  - *load them back* into your app,
+  - *catch nasty errors* along the way
+  - all other dirtly little secrets about the Fridge
+  
+Check [usage examples](Guides/Examples) or entire [Guides](Guides/) collection for more goodies.  
+`Xcode Playground` file can be found [here](Guides/Examples/Fridge-basics.playground).
+For a bigger picture overview, feel free to check [architecture](Guides/Fridge.diagram.md) diagrams... ∰      
+
 
 # Contribution guidelines
 If you like Fridge, feel free to fire a [pull request](https://github.com/vexy/Fridge/pulls).

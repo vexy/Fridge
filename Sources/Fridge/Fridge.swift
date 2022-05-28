@@ -36,24 +36,74 @@ public struct Fridge {
 @available(macOS 12.0, *)
 @available(iOS 15.0, *)
 extension Fridge {
-    /// Tries to grab an object from a given `URL`
+    /**
+     Tries to grab an object from a given URL returning Foundation based type.
+     
+     Function expect that returning object conforms to `Decodable`.
+     If it fails to parse an object it will throw and error.
+    
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.8`
+    - SeeAlso: [FridgeErrors](errors.swift)
+    */
     public static func grab🔮<D: Decodable>(from url: URL) async throws -> D {
         let grabster = Grabber()
         let grabbedObject: D = try await grabster.grab(from: url)
         return grabbedObject
     }
     
-    /// Tries to grab an object using given `URLRequest`
+    
+    /**
+     Tries to grab an object using provided `URLRequest` returning foundation based type.
+    
+     Function expect that returning object conforms to `Decodable`.
+     If it fails to parse an object it will throw and error.
+   
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.8`
+    - SeeAlso: [FridgeErrors](Errors.swift)
+    */
     public static func grab🔮<D: Decodable>(using urlRequest: URLRequest) async throws -> D {
         let grb = Grabber()
         let theObject: D = try await grb.grab(using: urlRequest)
         return theObject
     }
     
-    /// Tries to push an object to a given URL, returning the structured response
+    /**
+     Tries to push an object to a given URL string returning Foundation based response.
+    
+     Function expect that both provided object conforms to `Encodable` and return type conforms to `Decodable`. Failing to provided conformance would result in throwing an error.
+   
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.9`
+    - SeeAlso: [FridgeErrors](Errors.swift)
+    */
     public static func push📡<E: Encodable, D: Decodable>(_ object: E, to: String) async throws -> D {
         let pusher = Grabber()
         let pushResponseObject: D = try await pusher.push(object: object, urlString: to)
+        return pushResponseObject
+    }
+    
+    /**
+     Tries to push an object using provided `URLRequest` returning Foundation based response.
+    
+     Function expect that both provided object conforms to `Encodable` and return type conforms to `Decodable`. Failing to provided conformance would result in throwing an error.
+   
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.9`
+    - SeeAlso: [FridgeErrors](Errors.swift)
+    */
+    public static func push📡<E: Encodable, D: Decodable>(_ object: E, using request: URLRequest) async throws -> D {
+        let pusher = Grabber()
+        let pushResponseObject: D = try await pusher.push(object: object, urlRequest: request)
         return pushResponseObject
     }
 }
@@ -94,14 +144,23 @@ extension Fridge {
 
 //MARK: - Extra goodies
 extension Fridge {
-    /// This method is methodically designed to raise your moral my dear friend. Use it ONLY in emergency
-    public static func greetFellowProgrammers() {
+    /**
+     This method is **methodically designed** to raise your moral my dear friend. 🧿
+    
+     Use it **ONLY** in emergency or if you get struck by *Imposture Syndrom*.
+     #imposturesyndrom
+   
+    - Author: Vexy - https://github.com//vexy
+    - Since: `Fridge 0.1`
+    - SeeAlso: Other work done by [Vexy](https://github.com//vexy)
+    */
+    public static func greetFellowProgrammers🤠() {
         let theText =
         """
-                            ❄️ Freezyall !
-          Be greeted by Fridge creator, wherever he is in the 🌍 now !
-          Remember 🧠
-          Your hard work will pay off, just keep (git) pushing !
+                            ❄️ !! Freezyall !! ❄️
+          Be greeted by **Fridge creator**, wherever he is in the 🌍 now !
+          **Remember 🧠**
+          Your hard work will pay off, just keep (*git*) pushing !
 
           Yours truly,
           Vex - The Fridge grandpa
@@ -110,8 +169,16 @@ extension Fridge {
         print(theText)
     }
     
-    /// Computes unix timestamp of a Fridge update. Method may throw occasionally.
-    public static func willFrigeBeUpdatedSoon() throws -> Bool {
+    /**
+     Computes unix timestamp of a `Fridge` next update - in a peculiar way.
+    
+     Method may throw occasionally...
+   
+    - Author: Vexy - https://github.com//vexy
+    - Since: `Fridge 0.1`
+    - SeeAlso: Other work done by [Vexy](https://github.com//vexy)
+    */
+    public static func willFrigeBeUpdatedSoon😧() throws -> Bool {
         enum whoKnows: Error { case unknownAnswer }
         throw whoKnows.unknownAnswer
     }

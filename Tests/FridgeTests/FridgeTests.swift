@@ -71,7 +71,7 @@ final class FridgeTests: XCTestCase {
     */
     func testAmIInsane🤔() {
         //let's see...
-        Fridge.greetFellowProgrammers()
+        Fridge.greetFellowProgrammers🤠()
         XCTAssertTrue(true == true)     ///🤯
         
         /*
