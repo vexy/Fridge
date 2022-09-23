@@ -40,25 +40,26 @@ internal struct FridgeCompartment {
     }
     
     /// Returns `URL` based file path of this compartment
-    var filePath: URL {
-        //get documents directory
+    var objectPath: URL {
+        // TODO: Alter between DocumentsDirectory and CacheDirectory later
         guard let documentDirectoryURL = _fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             fatalError("<Fridge.Storage> Unable to compute DocumentsDirectory path")
         }
-        
-        let finalName = "\(key)\(BLOB_EXTENSION)"
-        let finalURL = documentDirectoryURL.appendingPathComponent(finalName)
-        return finalURL
+        return documentDirectoryURL.appendingPathComponent(storageName)
+    }
+    
+    /// Returns the compartment name formatted by key and static identifier
+    private var storageName: String {
+        key + BLOB_EXTENSION
     }
     
     /// Returns `true` if raw data already exists at this compartment, `false` otherwise
     var alreadyExist: Bool {
-        _fileManager.fileExists(atPath: filePath.path)
+        _fileManager.fileExists(atPath: objectPath.path)
     }
-    
     
     /// Removes compartment from persistent storage
     func remove() {
-        try? _fileManager.removeItem(atPath: filePath.path)
+        try? _fileManager.removeItem(atPath: objectPath.path)
     }
 }
