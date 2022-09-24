@@ -110,7 +110,7 @@ extension Fridge {
 
 //MARK: - Object persistent storage
 extension Fridge {
-    /// Tries to freeze an object into persistant storage (if possible).
+    /// Tries to freeze an object into persistant storage.
     public static func freeze🧊<E: Encodable>(_ object: E, id: String) throws {
         let freezer = Freezer()
         do {
@@ -121,10 +121,30 @@ extension Fridge {
         }
     }
     
+    /// Tries to freeze array of objects into persistant storage.
+    public static func freeze🧊<C: Codable>(_ objects: [C], id: String) throws {
+        let freezer = Freezer()
+        do {
+            try freezer.freeze(objects: objects, identifier: id)
+        } catch let err {
+            print("<Fridge.Freezer> Error occured: \(err.localizedDescription)")
+            throw FreezingErrors.dataStoringError
+        }
+    }
+    
+//MARK: --
+    
     /// Tries to unfreeze an object from persistant storage.
     public static func unfreeze🪅🎉<D: Decodable>(_ key: String) throws -> D {
         let unfreezer = Freezer()
         let unfrozenObject: D = try unfreezer.unfreeze(identifier: key) // propagate any Errors further
+        return unfrozenObject
+    }
+    
+    /// Tries to unfreeze an array of objects from persistant storage.
+    public static func unfreeze🪅🎉<C: Codable>(_ key: String) throws -> [C] {
+        let unfreezer = Freezer()
+        let unfrozenObject: [C] = try unfreezer.unfreeze(identifier: key) // propagate any Errors further
         return unfrozenObject
     }
 }

@@ -9,15 +9,79 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    name: Fridge library testing suite
+    name: Fridge warmup build
 
     steps:
     - uses: actions/checkout@v2
-    - name: pure swift build
+    - name: Pure swift build
       run: swift build -v
-    - name: Test - iOS Simulator 8
-      run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
-    - name: Test - iOS Simulator 11
-      run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11"
-    - name: Test - iOS Simulator 12
-      run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12"
+
+  tests-ios:
+    runs-on: macos-latest
+    name: Fridge test destination`:` iOS
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: iOS Simulator SE
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone SE"
+    - name: iOS Simulator iPod touch
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone iPod touch"
+    - name: iOS Simulator 8
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
+    - name: iOS Simulator 11
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11"
+    - name: iOS Simulator 11 Pro
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11 Pro"
+    - name: iOS Simulator 11 Pro Max
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11 Pro Max"
+    - name: iOS Simulator 12
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12"
+    - name: iOS Simulator 12 Pro
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12 Pro"
+    - name: iOS Simulator 12 Pro Max
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12 Pro Max"
+
+  tests-macos:
+    runs-on: macos-latest
+    name: Fridge test destination`:` macOS
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Mac x86_64
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64"
+    - name: Mac Catalyst
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64,variant=Mac Catalyst"
+    - name: DriverKit
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64,variant=DriverKit"
+
+  tests-watchos:
+    runs-on: macos-latest
+    name: Fridge test destination`:` watchOS
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Apple Watch Series 5 - 40mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 40mm"
+    - name: Apple Watch Series 5 - 44mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm"
+    - name: Apple Watch Series 6 - 40mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 6 - 40mm"
+    - name: Apple Watch Series 6 - 44mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 6 - 44mm"
+    - name: Apple Watch Series 7 - 41mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 7 - 41mm"
+    - name: Apple Watch Series 7 - 45mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm"
+
+  tests-tvos:
+    runs-on: macos-latest
+    name: Fridge test destination`:` tvOS
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Apple TV
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=tvOS Simulator,name=Apple TV"
+    - name: Apple TV 4k
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=tvOS Simulator,name=Apple TV 4k (2nd generation)"
+    - name: Apple TV 4k (at 1080p)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=tvOS Simulator,name=Apple TV 4k (at 1080p) (2nd generation)"

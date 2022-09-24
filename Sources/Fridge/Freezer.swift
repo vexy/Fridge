@@ -62,6 +62,8 @@ final internal class Freezer {
         }
     }
     
+//MARK: --
+    
     /// Unfreezes an object from Fridge persistant storage.
     func unfreeze<T: Decodable>(identifier: String) throws -> T {
         do {
