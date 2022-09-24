@@ -104,8 +104,6 @@ let package = Package(
     ]
 )
 ```
-*NOTE*: Make sure to update both `dependencies` and `targets` section in your `Package.swift` with your own target name.  
-
   
 Quick links:
 ```
@@ -165,7 +163,7 @@ Don't be affraid to start any [discussions](https://github.com/vexy/Fridge/discu
 
 ---   
 (**FRIDGE IS UNDER ACTIVE DEVELOPMENT ALMOST REACHING v1.0**)  
-Fridge **BETA** release : *v0.9 ( UTC2022-05-28 )*
+Fridge **BETA** release : *v0.9.3 ( UTC2022-09-24 )*
 
 Copyright © 2016 Veljko Tekelerović | MIT license  
 **PGP:** `6302 D860 B74C BD34 6482 DBA2 5187 66D0 8213 DBC0`
