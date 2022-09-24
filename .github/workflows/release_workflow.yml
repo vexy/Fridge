@@ -9,21 +9,15 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    name: Swift and xcodebuild release build
+    name: Release build
 
     steps:
     - uses: actions/checkout@v2
     - name: Swift build
       run: swift build -v
-    - name: xcodebuild build - iPhone 8
+    - name: iPhone 8
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
-    - name: xcodebuild build - iPhone 11
+    - name: iPhone 11
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11"
-    - name: xcodebuild build - iPhone 12
+    - name: iPhone 12
       run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12"
-    - name: iOS testing - iPhone 8
-      run: xcodebuild test-without-building -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
-#    - name: xcodebuild tvOS testing
-#      run: xcodebuild test-without-building -scheme Fridge -destination "platform=tvOS Simulator,name=Apple TV 4K (at 1080p) (2nd generation)
-#    - name: xcodebuild watchOS
-#      run: xcodebuild build-for-testing -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
