@@ -37,12 +37,14 @@ public struct Fridge {
 @available(iOS 15.0, *)
 extension Fridge {
     /**
-     Tries to grab an object from a given URL returning Foundation based type.
+     Tries to grab an object from a given `URL` endpoint returning Foundation based type.
      
      Function expect that returning object conforms to `Decodable`.
      If it fails to parse an object it will throw and error.
     
     - Returns: Foundation based `Decodable` object
+    - Parameters:
+       - url: Fully formated `URL` of a desired endpoint
     - Throws: `FridgeErrors` depending on the condidion of the failure
     - Author: Vexy (https://github.com//vexy)
     - Since: `Fridge 0.8`
@@ -62,6 +64,8 @@ extension Fridge {
      If it fails to parse an object it will throw and error.
    
     - Returns: Foundation based `Decodable` object
+    - Parameters:
+       - urlRequest: Fully formated `URLRequest` of a desired endpoint
     - Throws: `FridgeErrors` depending on the condidion of the failure
     - Author: Vexy (https://github.com//vexy)
     - Since: `Fridge 0.8`
@@ -74,9 +78,9 @@ extension Fridge {
     }
     
     /**
-     Tries to push an object to a given URL string returning Foundation based response.
+     Tries to push an object to a given `URL` string returning Foundation based response.
     
-     Function expect that both provided object conforms to `Encodable` and return type conforms to `Decodable`. Failing to provided conformance would result in throwing an error.
+     Function expect that both provide object conforms to `Encodable` and return type conforms to `Decodable`. Failing to provide conformance will result in throwing an error.
    
     - Returns: Foundation based `Decodable` object
     - Throws: `FridgeErrors` depending on the condidion of the failure
@@ -93,7 +97,7 @@ extension Fridge {
     /**
      Tries to push an object using provided `URLRequest` returning Foundation based response.
     
-     Function expect that both provided object conforms to `Encodable` and return type conforms to `Decodable`. Failing to provided conformance would result in throwing an error.
+     Function expect that both provided object conforms to `Encodable` and return type conforms to `Decodable`. Failing to provide conformance will result in throwing an error.
    
     - Returns: Foundation based `Decodable` object
     - Throws: `FridgeErrors` depending on the condidion of the failure
@@ -110,7 +114,17 @@ extension Fridge {
 
 //MARK: - Object persistent storage
 extension Fridge {
-    /// Tries to freeze an object into persistant storage.
+    /**
+     Tries to freeze given object into persistant storage.
+   
+     Function expect that both provided object conforms to `Encodable`. Failing to provide conformance will result in throwing an error.
+  
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.9`
+    - SeeAlso: [FridgeErrors](Errors.swift)
+    */
     public static func freeze🧊<E: Encodable>(_ object: E, id: String) throws {
         let freezer = Freezer()
         do {
@@ -121,7 +135,17 @@ extension Fridge {
         }
     }
     
-    /// Tries to freeze array of objects into persistant storage.
+    /**
+     Tries to freeze an array of given object into persistant storage.
+   
+     Function expect that passed array conforms to `Codable`. Failing to provide conformance will result in throwing an error.
+  
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.9.3`
+    - SeeAlso: [FridgeErrors](Errors.swift)
+    */
     public static func freeze🧊<C: Codable>(_ objects: [C], id: String) throws {
         let freezer = Freezer()
         do {
@@ -134,14 +158,34 @@ extension Fridge {
     
 //MARK: --
     
-    /// Tries to unfreeze an object from persistant storage.
+    /**
+     Tries to unfreeze an object from persistant storage.
+   
+     Function expect that passed object conforms to `Decodable`. Failing to provide conformance will result in throwing an error.
+  
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.9`
+    - SeeAlso: [FridgeErrors](Errors.swift)
+    */
     public static func unfreeze🪅🎉<D: Decodable>(_ key: String) throws -> D {
         let unfreezer = Freezer()
         let unfrozenObject: D = try unfreezer.unfreeze(identifier: key) // propagate any Errors further
         return unfrozenObject
     }
     
-    /// Tries to unfreeze an array of objects from persistant storage.
+    /**
+     Tries to unfreeze an array of objects from persistant storage.
+   
+     Function expect that both passed object conforms to `Codable` and resulting structure conforms to `Codable`. Failing to provide conformance will result in throwing an error.
+  
+    - Returns: Foundation based `Decodable` object
+    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Author: Vexy (https://github.com//vexy)
+    - Since: `Fridge 0.9.3`
+    - SeeAlso: [FridgeErrors](Errors.swift)
+    */
     public static func unfreeze🪅🎉<C: Codable>(_ key: String) throws -> [C] {
         let unfreezer = Freezer()
         let unfrozenObject: [C] = try unfreezer.unfreeze(identifier: key) // propagate any Errors further
