@@ -1,4 +1,4 @@
-name: Fridge tests
+name: Fridge tvOS tests
 
 on:
   push:

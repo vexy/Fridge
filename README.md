@@ -23,12 +23,45 @@
             <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/vexy/Fridge?color=green&display_name=release&label=Latest%20release">
         </a>
     </td>
-    <td><a href="https://github.com/vexy/Fridge/search?l=swift"><img alt="Github top language" src="https://img.shields.io/github/languages/top/vexy/Fridge"></a></td>
-    <td><img alt="Platforms" src="https://img.shields.io/badge/Platform-iOS%2C%20macOS%2C%20tvOS%2C%20watchOS-blue"></td>
-    <td><a href="https://github.com/vexy/Fridge/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/vexy/Fridge"></a></td>
+    <td>
+      <img alt="Platforms" src="https://img.shields.io/badge/Platform-iOS%2C%20macOS%2C%20tvOS%2C%20watchOS-blue"></td>
+    <td>
+      <a href="https://github.com/vexy/Fridge/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/vexy/Fridge"></a>
+    </td>
   </tr>
 </table>
 </p>
+
+---
+
+<table style="width:100%">
+  <!-- <tr>
+    <th># HEADERS HIDDEN #</th>
+  </tr> -->
+  <tr style="outline: thin; vertical-align: middle">
+    <td>
+        <a href="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml">
+            <img alt="Tets build" src="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml/badge.svg">
+        </a>
+    </td>
+    <td>
+        <a href="https://github.com/vexy/Fridge/actions/workflows/macos_workflow.yml">
+            <img alt="MacOS build" src="https://github.com/vexy/Fridge/actions/workflows/macos_workflow.yml/badge.svg">
+        </a>
+    <td>
+    <td>
+        <a href="https://github.com/vexy/Fridge/actions/workflows/tvos_tests.yml">
+            <img alt="TvOS build" src="https://github.com/vexy/Fridge/actions/workflows/tvos_tests.yml/badge.svg">
+        </a>
+    <td>
+    <td>
+        <a href="https://github.com/vexy/Fridge/actions/workflows/watchos_tests.yml">
+            <img alt="TvOS build" src="https://github.com/vexy/Fridge/actions/workflows/watchos_tests.yml/badge.svg">
+        </a>
+    <td>
+  </tr>
+</table>
+
 
 ---
 

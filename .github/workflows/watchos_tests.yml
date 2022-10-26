@@ -1,4 +1,4 @@
-name: Fridge tests
+name: Fridge watchOS tests
 
 on:
   push:
