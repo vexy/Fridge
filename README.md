@@ -44,48 +44,69 @@
 </p>
 
 # 💠 Library interface
-`Fridge` is a freezing device ❄️. It has to keep things cool enough, exposing just icy interface.
+`Fridge` is a freezing device ❄️. It **has** to keep things cool enough, exposing just icy interface.
 
 ### Networking
-  - `Fridge.grab🔮(from: URL)` -> Grabs your model from the network endpoint (_iOS 15+ only_)
-  - `Fridge.push📡(object, to)` -> Pushes (sends) your model to designated network endpoint (_iOS 15+ only_)
+|Method|Description|
+|-|-|
+`Fridge.grab🔮(from: URL)`|Grabs your model from the network endpoint (_iOS 15+ only_)|
+|`Fridge.push📡(object, to)`|Pushes (sends) your model to designated network endpoint (_iOS 15+ only_)|
   
-Fridge is supported by Swift5 `async/await` model and is here to reduce the pain of:
+Fridge networking model supports `async/await` philosophy and is here to reduce the pain of:
   - fetching _your stuff_ from the network,
   - parsing or decoding (JSON) data,
   - doing boring _error checking_
   - and yeah... good old **closures**.
 
-With Fridge, you can even _say goodbye to closures and CoreData_ if you want!  
+With Fridge, you can even _say goodbye to closures and CoreData_ if you want! 🤷🏻‍♂️
 
 Checkout [documentation](Guides/Usage.md) for more information.    
 
 ### Persistant (local) storage
-  - `Fridge.freeze🧊(object, identifier)` -> Safely "freezes" your `struct` to persistant store
-  - `Fridge.unfreeze🪅🎉(identifier)` -> "Unfreezes" (previously frozen), `struct` giving you control of it
+|Method|Description|
+|-|-|
+`Fridge.freeze🧊(object, identifier)`|Safely "freezes" your `struct` to persistant store|
+|`Fridge.unfreeze🪅🎉(identifier)`|"Unfreezes" (previously frozen), `struct` giving you control of it|
 
 Fridge storage mechanics are built on Foundation principles and use `BSON` as internal storage mechanism. All you have to do is to conform your struct to `Encodable` and you're ready to go, Fridge will take care of the rest.  
   
 Checkout [documentation](Guides/Usage.md) for more information.  
 
-# Quick code examples
+# Quick code example
 ```Swift
-// Make your fancy struct conform to Decodable
+// 1. Conform your fancy struct to Decodable
 struct GHRepo: Decodable {
     var name: String
     var repositoryURL: URL
-    // other fields
+    // ... other fields
 }
 
-// Await for grab🔮 method...
-let myRepo: GHRepo = try await Fridge.grab🔮(from: URL("https://github.com/vexy/")!)
+do {
+  // 2. Await for grab🔮 method...
+  let myRepo: GHRepo = try await Fridge.grab🔮(from: URL("https://github.com/vexy/")!)
+} catch let err {
+  print("Naaah.. Something bad happened: \(err)")
+}
 
-// Then, at your will
+// 3. Then, at your will, use myRepo as any other Foundation object
 print(myRepo)
 print(myRepo.name)
+
+// ... something ...
+
+// 4. Later on...
+do {
+  try Fridge.freeze🧊(myRepo, id: "myIdentifier")
+} catch let e {
+  print("Whoops... Here: \(e)")
+}
 ```  
 
 > _Talking is cheap. Show me the code._ - Linus Torvalds
+
+Here is some **real world** usage of `Fridge`:  
+  - [**Clmn** - _Beautiful macOS app that operates with tasks in columns_](https://github.com/igr/Clmn)
+  - [Playground examples of Fridge practical usage](/Guides/Examples/Fridge%20basics.playground/Contents.swift)
 
 # Installation instructions
 Using `Swift Package Manager` is by far the sexiest way to install `Fridge`.
