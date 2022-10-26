@@ -26,5 +26,5 @@ jobs:
       run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64"
     - name: Mac Catalyst
       run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64,variant=Mac Catalyst"
-    - name: DriverKit
-      run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64,variant=DriverKit"
+    # - name: DriverKit
+    #   run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64,variant=DriverKit"

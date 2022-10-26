@@ -25,7 +25,7 @@ jobs:
     - name: iPhone SE (2nd generation)
       run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone SE (2nd generation)"
     - name: iPod touch (7th generation)
-      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone iPod touch (7th generation)"
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPod touch (7th generation)"
     - name: iPhone 8
       run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
     - name: iPhone 11

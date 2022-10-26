@@ -34,10 +34,10 @@
 
 ---
 
+<!-- 
+BELOW IS THE TABLE OF RELEASE AND TEST PLANS. FIX BEFORE PUBLISHING
+
 <table style="width:100%">
-  <!-- <tr>
-    <th># HEADERS HIDDEN #</th>
-  </tr> -->
   <tr style="outline: thin; vertical-align: middle">
     <td>
         <a href="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml">
@@ -62,8 +62,8 @@
   </tr>
 </table>
 
-
 ---
+-->
 
 <br>
 <p align="center">
