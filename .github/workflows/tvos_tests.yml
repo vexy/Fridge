@@ -1,0 +1,30 @@
+name: Fridge tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main, development ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    name: Fridge warmup build
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pure swift build
+      run: swift build -v
+
+  tests-tvos:
+    runs-on: macos-latest
+    name: Destination -> tvOS
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Apple TV
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=tvOS Simulator,name=Apple TV"
+    - name: Apple TV 4k
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=tvOS Simulator,name=Apple TV 4k (2nd generation)"
+    - name: Apple TV 4k (at 1080p)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=tvOS Simulator,name=Apple TV 4k (at 1080p) (2nd generation)"
