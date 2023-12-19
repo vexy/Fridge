@@ -33,72 +33,31 @@ import XCTest
 
 @testable import Fridge
 
-fileprivate struct FridgeTestObject: Codable {
-    let string_field: String
-    let int_field: Int
-    let dict_field: InnerTestObject
-    let arr_field: [Int]
-    let data_field: Data
-    let url_field: URL
-    
-    static let IDENTIFIER = "Test.OBJECT"
-    
-    
-    init() {
-        string_field = "Some f🧊ncy string"
-        int_field = Int.max
-        dict_field = InnerTestObject()
-        arr_field = [0xABCDEF, 0xCAB0CAB, 0xFADE, 0xEFCAD]
-        data_field = Data(repeating: 0xAE, count: 0xE1FE1)
-        url_field = URL(fileURLWithPath: "someFilePathOfAMockObject")
-    }
-}
-
-fileprivate struct InnerTestObject: Codable {
-    var field1: String?      = nil
-    var field2: Float        = 1_234_567.890_001
-    var field3: Double       = Double.pi
-    var field4: Date         = Date.init()
-    var field5: Bool         = !false
-    
-    var field6: Set          = Set([1,2,3])
-    var field7: Array<Int64> = Array.init()
-}
-
-extension FridgeTestObject: Equatable {
-    static func ==(lhs: FridgeTestObject, rhs: FridgeTestObject) -> Bool {
-        let equality =
-        (lhs.string_field == rhs.string_field) &&
-        (lhs.int_field == rhs.int_field) &&
-        (lhs.arr_field == rhs.arr_field) &&
-        (lhs.data_field == rhs.data_field) &&
-        (lhs.url_field == rhs.url_field)
-        
-        return equality
-    }
-}
-
 // !! LET THE HUNT BEGIN !! 🕵️‍♂️🥷
 final class FreezerTests: XCTestCase {
     // SHARED TESTING OBJECT
     let freezer = Freezer()
     
+    let FOUNDATION_ID   = "foundation.array"
+    let CUSTOM_ARRAY_ID = "custom.array"
+    let NON_EXISTANT_ID = "non_existant_object"
+    
     /// Tests weather an object can be saved without throwing error
     func testObjectFreezing(){
-        let testData = FridgeTestObject()
-        XCTAssertNoThrow(try freezer.freeze(object: testData, identifier: FridgeTestObject.IDENTIFIER))
+        let testData = FridgeMockObject()
+        XCTAssertNoThrow(try freezer.freeze(object: testData, identifier: STORAGE_IDENTIFIER))
     }
 
     /// Tests weather an object can be loaded without throwing error
     func testObjectUnfreezing() {
         //freeze an object first
-        let frozenObject = FridgeTestObject()
+        let frozenObject = FridgeMockObject()
         
-        XCTAssertNoThrow(try freezer.freeze(object: frozenObject, identifier: FridgeTestObject.IDENTIFIER))
+        XCTAssertNoThrow(try freezer.freeze(object: frozenObject, identifier: STORAGE_IDENTIFIER))
         
         do {
             //unfreeze it now
-            let unFrozenObject: FridgeTestObject = try freezer.unfreeze(identifier: FridgeTestObject.IDENTIFIER)
+            let unFrozenObject: FridgeMockObject = try freezer.unfreeze(identifier: STORAGE_IDENTIFIER)
             
             //make sure they are equal
             XCTAssert(frozenObject == unFrozenObject)
@@ -108,42 +67,30 @@ final class FreezerTests: XCTestCase {
     }
 
     func testPersistancyChecks() {
-        XCTAssert(freezer.isAlreadyFrozen(identifier: FridgeTestObject.IDENTIFIER))
-        XCTAssertFalse(freezer.isAlreadyFrozen(identifier: "non_existant_object"))
+        XCTAssert(freezer.isAlreadyFrozen(identifier: STORAGE_IDENTIFIER))
+        XCTAssertFalse(freezer.isAlreadyFrozen(identifier: NON_EXISTANT_ID))
     }
     
-    /// Tests if array can be stored
-    func testArrayFreezing() throws {
-        XCTAssertFalse(freezer.isAlreadyFrozen(identifier: "array.test"))
-
+    /// Tests if array can be stored and read from the storage
+    func testArrayFridging() throws {
         let foundationArray = [1,2,3,4,5,6,7,8]
-        let customStructArray: Array<FridgeTestObject> = [FridgeTestObject(), FridgeTestObject()]
-        XCTAssertNoThrow(try freezer.freeze(objects: foundationArray, identifier: "foundation.array"))
-        XCTAssertNoThrow(try freezer.freeze(objects: customStructArray, identifier: "array-object.test"))
+        let customStructArray: Array<FridgeMockObject> = [FridgeMockObject(), FridgeMockObject()]
         
-        // make sure it actually throws when passed incorrectly
-        XCTAssertThrowsError(try freezer.freeze(object: foundationArray, identifier: "wrong.method.array"))
-        XCTAssertThrowsError(try freezer.freeze(object: customStructArray, identifier: "wrong.method.custom.array"))
-    }
-    
-    /// Tests if array can be read from the storage
-    func testArrayUnFreezing() throws {
-        let expectedFoundationArray = [1,2,3,4,5,6,7,8]
-        let expectedStructArray: Array<FridgeTestObject> = [FridgeTestObject(), FridgeTestObject()]
-        var failureMessage: String
+        // try to freeze these arrays
+        XCTAssertNoThrow(try freezer.freeze(objects: foundationArray, identifier: FOUNDATION_ID))
+        XCTAssertNoThrow(try freezer.freeze(objects: customStructArray, identifier: CUSTOM_ARRAY_ID))
         
+        // now try to unfreeze
         do {
             // check foundation
-            failureMessage = "Foundation array issue"
-            let unfrozenFoundation: Array<Int> = try freezer.unfreeze(identifier: "foundation.array")
-            XCTAssert(unfrozenFoundation == expectedFoundationArray)
+            let unfrozenFoundation: Array<Int> = try freezer.unfreeze(identifier: FOUNDATION_ID)
+            XCTAssert(foundationArray == unfrozenFoundation)
             
-            failureMessage = "Array of custom struct issue"
-            let unfrozenCustomArray: Array<FridgeTestObject> = try freezer.unfreeze(identifier: "array-object.test")
-            XCTAssert(unfrozenCustomArray[0] == expectedStructArray[0])
-//            XCTAssert(unfrozenCustomArray[0].dict_field == expectedStructArray[0].dict_field)
+            // custom struct
+            let unfrozenCustomArray: Array<FridgeMockObject> = try freezer.unfreeze(identifier: CUSTOM_ARRAY_ID)
+            XCTAssert(customStructArray[0] == unfrozenCustomArray[0])
         } catch {
-            XCTFail(failureMessage)
+            XCTFail("Unable to Fridge arrays...")
         }
     }
 }

@@ -29,35 +29,16 @@ import Foundation
 
 @testable import Fridge
 
-fileprivate struct FridgeTestObject: Codable {
-    let string_field: String
-    let int_field: Int
-    let arr_field: [Int]
-    let data_field: Data
-    let url_field: URL
-    
-    static let IDENTIFIER = "Fridge-TestObject"
-    
-    
-    init() {
-        string_field = "Some f🧊ncy string"
-        int_field = Int.max
-        arr_field = [0xA, 0xB, 0xC, Int.random(in: Int.min...Int.max)]
-        data_field = Data(repeating: 0x00FF, count: 0xAABBCC)
-        url_field = URL(fileURLWithPath: "someFilePathOfAMockObject")
-    }
-}
-
 final class FridgeTests: XCTestCase {
     /// Tests weather Fridge can save the object from the surface level
     func testCanFreezeObject() throws {
-        let testObject = FridgeTestObject()
-        try Fridge.freeze🧊(testObject, id: FridgeTestObject.IDENTIFIER)
+        let testObject = FridgeMockObject()
+        try Fridge.freeze🧊(testObject, id: STORAGE_IDENTIFIER)
     }
     
     /// Tests weather Fridge can load the object from the surface level
     func testCanUnfreeeObject() throws {
-        let retrievedObject: FridgeTestObject = try Fridge.unfreeze🪅🎉(FridgeTestObject.IDENTIFIER)
+        let retrievedObject: FridgeMockObject = try Fridge.unfreeze🪅🎉(STORAGE_IDENTIFIER)
         XCTAssert(retrievedObject.string_field == "Some f🧊ncy string")
         XCTAssert(retrievedObject.int_field == Int.max)
         XCTAssert(retrievedObject.arr_field[0] == 0xA)
@@ -89,7 +70,7 @@ final class FridgeTests: XCTestCase {
     
     override class func tearDown() {
         //just dump used storage
-        Fridge.drop🗑(FridgeTestObject.IDENTIFIER)
+        Fridge.drop🗑(STORAGE_IDENTIFIER)
         print("\n** <Fridge.Tests> Test object removed from the file system **\n")
     }
 }
