@@ -23,17 +23,13 @@ let package = Package(
     products: [
         .library(name: "Fridge", targets: ["Fridge"]),
     ],
-    dependencies: [
-        .package(name: "BSONCoder", url: "https://github.com/vexy/bsoncoder", branch: "main")
-    ],
+    dependencies: [],
     
     // Output target
     targets: [
         .target(
             name: "Fridge",
-            dependencies: [
-                .product(name: "bsoncoder", package: "BSONCoder")
-            ],
+            dependencies: [],
             exclude: [
                 "../../Guides",
                 "../../README.md"
