@@ -37,7 +37,7 @@ final internal class Grabber {
             throw FridgeErrors.networkingIssues(reason: "Networking failed")
         }
         guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
-            throw FridgeErrors.parsingIssues(reason: "Unable to parse data.")
+            throw FridgeErrors.decodingIssues(reason: "Unable to parse data.")
         }
         // return decoded object
         return decodedObject
@@ -48,7 +48,7 @@ final internal class Grabber {
             throw FridgeErrors.networkingIssues(reason: "Networking failed")
         }
         guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
-            throw FridgeErrors.parsingIssues(reason: "Unable to parse data.")
+            throw FridgeErrors.decodingIssues(reason: "Unable to parse data.")
         }
         // return decoded object
         return decodedObject
@@ -95,7 +95,7 @@ final internal class Grabber {
 extension Grabber {
     /// Constructs a JSON based `URLRequest` from given url `String`
     private func constructURLRequest(from string: String) throws -> URLRequest {
-        guard let urlObject = URL(string: string) else { throw FridgeErrors.parsingIssues(reason: "Decoding failed.") }
+        guard let urlObject = URL(string: string) else { throw FridgeErrors.decodingIssues(reason: "Decoding failed.") }
         var request = URLRequest(url: urlObject)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -106,7 +106,7 @@ extension Grabber {
     /// Serialize given object and attach it to request body
     private func serializeObject<E: Encodable>(_ objectToSerialize: E) throws -> Data {
         guard let serializedObject = try? JSONEncoder().encode(objectToSerialize.self) else {
-            throw FridgeErrors.parsingIssues(reason: "Decoding failed.")
+            throw FridgeErrors.decodingIssues(reason: "Decoding failed.")
         }
         return serializedObject
     }
@@ -114,7 +114,7 @@ extension Grabber {
     /// Tries to decode given data into given `Decodable` object
     private func deserializeData<D: Decodable>(_ rawData: Data) throws -> D {
         guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
-            throw FridgeErrors.parsingIssues(reason: "Decoding failed")
+            throw FridgeErrors.decodingIssues(reason: "Decoding failed")
         }
         return decodedObject
     }

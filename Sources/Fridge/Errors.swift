@@ -10,5 +10,6 @@ import Foundation
 enum FridgeErrors: Error {
     case networkingIssues(reason: String)
     case storageIssues(reason: String)
-    case parsingIssues(reason: String)
+    case decodingIssues(reason: String)
+    case invalidIdentifier
 }

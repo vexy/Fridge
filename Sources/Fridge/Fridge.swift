@@ -28,8 +28,26 @@
 import Foundation
 
 /*      PUBLIC  *   FRIDGE  *   INTERFACE        */
+
+/**
+ Fast, lightweight and _extremely_ flexible **fetch and store** mechanism
+ 
+ Source code: [Fridge @ github](https://github.com//vexy//Fridge)
+ 
+- Author: **Vexy**
+- Since: Fridge `0.1`
+*/
 public struct Fridge {
-    // ADD OTHER STUFF HERE
+    static subscript<D: Decodable> (identifier: String) -> D {
+        /// Tries to return frozen object given object odentifier
+        get throws {
+            // try to unfreeze the object using given identifier
+            guard let unfrozenObject: D = try? Fridge.unfreeze🪅🎉(identifier) else {
+                throw FridgeErrors.invalidIdentifier
+            }
+            return unfrozenObject
+        }
+    }
 }
 
 //MARK: - Network object fetching (iOS 15+ only)
