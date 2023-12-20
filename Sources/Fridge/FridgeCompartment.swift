@@ -48,7 +48,14 @@ internal struct FridgeCompartment {
     /// Returns `URL` based file path of this compartment
     var objectURLPath: URL {
         // TODO: Alter between DocumentsDirectory and CacheDirectory later
-        guard let documentDirectoryURL = _fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        let searchPath : FileManager.SearchPathDirectory
+        #if os(tvOS) || os(watchOS)
+            searchPath = .applicationSupportDirectory
+        #else
+            searchPath = .documentDirectory
+        #endif
+        
+        guard let documentDirectoryURL = _fileManager.urls(for: searchPath, in: .userDomainMask).first else {
             fatalError("<Fridge.Storage> Unable to compute DocumentsDirectory path")
         }
         return documentDirectoryURL.appendingPathComponent(storageName)
@@ -70,7 +77,15 @@ internal struct FridgeCompartment {
 extension FridgeCompartment {
     /// Tries to store object raw data to the system storage
     func store(data: Data) throws {
+        // create file if it doesn't exist
+        if !alreadyExist {
+            _fileManager.createFile(atPath: objectURLPath.path, contents: data, attributes: nil)
+            print("*** \tCreating new file at: \(objectURLPath). Size: \(data.count) bytes")
+            return
+        }
+        
         do {
+            print("Writing to: \(objectURLPath)")
             try data.write(to: objectURLPath, options: .atomic)
         } catch {
             // transform any error into generic write error

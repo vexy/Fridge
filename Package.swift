@@ -14,9 +14,10 @@ let package = Package(
     
     // Supported platforms
     platforms: [
-        .iOS(.v11),
-        .macOS(.v10_14),
-        .tvOS(.v11)
+        .iOS(.v13),
+        .watchOS(.v2),
+        .macOS(.v10_15),
+        .tvOS(.v9)
     ],
     
     // Product definitions

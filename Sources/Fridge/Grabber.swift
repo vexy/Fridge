@@ -27,8 +27,10 @@
 
 import Foundation
 
-@available(macOS 12.0, *)
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(watchOS 8.0, *)
+@available(tvOS 15.0, *)
 final internal class Grabber {
     func grab<D: Decodable>(from url: URL) async throws -> D {
         guard let rawData = try? await URLSession.shared.data(from: url).0 else {
@@ -85,8 +87,11 @@ final internal class Grabber {
 }
 
 //MARK: - Private helpers
-@available(macOS 12.0, *)
+//@available(macOS 12.0, *)
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(watchOS 8.0, *)
+@available(tvOS 15.0, *)
 extension Grabber {
     /// Constructs a JSON based `URLRequest` from given url `String`
     private func constructURLRequest(from string: String) throws -> URLRequest {

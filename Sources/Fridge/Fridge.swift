@@ -33,8 +33,10 @@ public struct Fridge {
 }
 
 //MARK: - Network object fetching (iOS 15+ only)
-@available(macOS 12.0, *)
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(watchOS 8.0, *)
+@available(tvOS 15.0, *)
 extension Fridge {
     /**
      Tries to grab an object from a given `URL` endpoint returning Foundation based type.
