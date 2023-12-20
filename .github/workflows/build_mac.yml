@@ -1,0 +1,21 @@
+name: Fridge Mac build
+
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ main, development ]
+
+jobs:
+  tests-macos:
+    runs-on: macos-latest
+    name: macOS Simulators
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Mac x86_64
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64"
+    - name: Mac Catalyst
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64,variant=Mac Catalyst"
+    - name: DriverKit
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=macOS,arch=x86_64,variant=DriverKit"
