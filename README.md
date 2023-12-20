@@ -36,7 +36,7 @@
 ## 💠 Library description
 `Fridge` is a freezing device ❄️ so it **has** to keep things cool enough, exposing just icy interface.
 
-Fridge is designed to _reduce the pain with most common software operations_ such as **[fetching](#networking-🕸)** and **[storing](#persistant-local-storage-💾)** data. Or something like this:
+Fridge is designed to _reduce the pain with most common software operations_ such as **[fetching](#networking)** and **[storing](#persistant-local-storage)** data. Or something like this:
   - fetching _your stuff_ from the network,
   - parsing or decoding (JSON) data,
   - doing boring _error checking_
@@ -52,7 +52,7 @@ Checkout [documentation](Docs/Usage.md) for more information.
 
 > _Talking is cheap. Show me the code._ - Linus Torvalds
 
-## Networking 🕸
+## 🕸 Networking
 ```Swift
 // define your endpoint
 let endpoint = URL("https://github.com/vexy/")!
@@ -79,7 +79,7 @@ do {
 Checkout more [_documentation on networking_](Docs/Usage.md#network-fetching) or start with basic [code **examples**](Docs/Examples/).
   
 
-## Persistant (local) storage 💾
+## 💾 Persistant (local) storage
 
 Fridge storage mechanics are built on Foundation principles and use `BSON` as internal storage mechanism. All you have to do is to conform your struct to `Encodable` and you're ready to go, Fridge will take care of the rest.  
   
