@@ -11,7 +11,12 @@ For deeper information, you can check `in-code` documentation.
 
 ---  
 
-## Network fetching  
+## Network fetching
+|Method|Description|
+|-|-|
+`Fridge.grab🔮(from: URL)`|Grabs your model from the network endpoint (_iOS 15+ only_)|
+|`Fridge.push📡(object, to)`|Pushes (sends) your model to designated network endpoint (_iOS 15+ only_)|
+
 With Fridge, network fetching is performed in just 3 steps:
 1. Conform your desired `struct` to `Decodable`
 2. Define `URL` endpoint where your model resides

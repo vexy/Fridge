@@ -3,145 +3,110 @@
 </h1>
 
 <p align="center">
-  <b>Fridge</b> - extremely simple <code>async/await</code> fetch-and-store implementation you'll ever see !<br>
-  Let your fancy <code>struct</code>(s) raise and shine again, allowing you to focus on 💬 🥊🤖⭐️🗝 <i>stuff</i>.<br><br>
-</p>
-<br><br>
-
-<table style="width:100%">
-  <!-- <tr>
-    <th># HEADERS HIDDEN #</th>
-  </tr> -->
-  <tr style="outline: thin; vertical-align: middle">
-    <td>
-        <a href=https://github.com/vexy/Fridge/actions/workflows/release_workflow.yml">
-            <img alt="Release build" src="https://github.com/vexy/Fridge/actions/workflows/release_workflow.yml/badge.svg">
-        </a>
-    </td>
-    <td>
-        <a href="https://github.com/vexy/Fridge/releases">
-            <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/vexy/Fridge?color=green&display_name=release&label=Latest%20release">
-        </a>
-    </td>
-    <td>
-      <img alt="Platforms" src="https://img.shields.io/badge/Platform-iOS%2C%20macOS%2C%20tvOS%2C%20watchOS-blue"></td>
-    <td>
-      <a href="https://github.com/vexy/Fridge/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/vexy/Fridge"></a>
-    </td>
-  </tr>
-</table>
+  <b>Fridge</b> is <code>Swift</code> based freezing device.<br>
+  It helps you <b>fetch-n-store</b> data without major hassle.<br><br>
+  <i>Lightweight, Async/Await friendly, Zero dependency, <code>Foundation</code> based.</i>
+  
+  <div align="center", style="border: 0.15px dashed yellow; padding: 1px">
+      <a href="https://github.com/vexy/Fridge/releases">
+        <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/vexy/Fridge?color=green&display_name=release&label=Latest%20release">
+      </a>
+      <img src="https://img.shields.io/github/languages/code-size/vexy/fridge?color=g">
+      <a href="https://github.com/vexy/Fridge/blob/master/LICENSE">
+        <img alt="License" src="https://img.shields.io/github/license/vexy/Fridge">
+      </a>
+  </div>
 </p>
 
----
-
-<!-- 
-BELOW IS THE TABLE OF RELEASE AND TEST PLANS. FIX BEFORE PUBLISHING
-
-<table style="width:100%">
-  <tr style="outline: thin; vertical-align: middle">
-    <td>
-        <a href="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml">
-            <img alt="Tets build" src="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml/badge.svg">
-        </a>
-    </td>
-    <td>
-        <a href="https://github.com/vexy/Fridge/actions/workflows/macos_workflow.yml">
-            <img alt="MacOS build" src="https://github.com/vexy/Fridge/actions/workflows/macos_workflow.yml/badge.svg">
-        </a>
-    <td>
-    <td>
-        <a href="https://github.com/vexy/Fridge/actions/workflows/tvos_tests.yml">
-            <img alt="TvOS build" src="https://github.com/vexy/Fridge/actions/workflows/tvos_tests.yml/badge.svg">
-        </a>
-    <td>
-    <td>
-        <a href="https://github.com/vexy/Fridge/actions/workflows/watchos_tests.yml">
-            <img alt="TvOS build" src="https://github.com/vexy/Fridge/actions/workflows/watchos_tests.yml/badge.svg">
-        </a>
-    <td>
-  </tr>
-</table>
-
----
--->
-
-<br>
 <p align="center">
+  <h3>Supported platforms</h3>
+  <img alt="Platforms" src="https://img.shields.io/badge/Platform-iOS%2C%20macOS%2C%20tvOS%2C%20watchOS-blue">
+  <a href="https://github.com/vexy/Fridge/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/vexy/fridge">
+  </a>
+  <h3>Tests</h3>
+  <a href=https://github.com/vexy/Fridge/actions/workflows/release_workflow.yml">
+      <img alt="Release build" src="https://github.com/vexy/Fridge/actions/workflows/release_workflow.yml/badge.svg">
+  </a>
   <a href="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml">
     <img alt="Tets build" src="https://github.com/vexy/Fridge/actions/workflows/tests_workflow.yml/badge.svg">
   </a>
-  <a href="https://github.com/vexy/Fridge/issues">
-    <img alt="Issues" src="https://img.shields.io/github/issues/vexy/fridge">
-  </a>
-  <img src="https://img.shields.io/github/languages/code-size/vexy/fridge?color=g">
 </p>
 
-# 💠 Library interface
-`Fridge` is a freezing device ❄️. It **has** to keep things cool enough, exposing just icy interface.
+## 💠 Library description
+`Fridge` is a freezing device ❄️ so it **has** to keep things cool enough, exposing just icy interface.
 
-### Networking
-|Method|Description|
-|-|-|
-`Fridge.grab🔮(from: URL)`|Grabs your model from the network endpoint (_iOS 15+ only_)|
-|`Fridge.push📡(object, to)`|Pushes (sends) your model to designated network endpoint (_iOS 15+ only_)|
-  
-Fridge networking model supports `async/await` philosophy and is here to reduce the pain of:
+Fridge is designed to _reduce the pain with most common software operations_ such as **[fetching](#networking-🕸)** and **[storing](#persistant-local-storage-💾)** data. Or something like this:
   - fetching _your stuff_ from the network,
   - parsing or decoding (JSON) data,
   - doing boring _error checking_
-  - and yeah... good old **closures**.
+  - storing _the stuff_ somewhere on disk
+  - doing boring _error checking_ again
+  - invoking more than 1 dependency for this (not using `Fridge`)
+  - and yeah... even cursing old **closures**.
+  - (not)doing tests
 
-With Fridge, you can even _say goodbye to closures and CoreData_ if you want! 🤷🏻‍♂️
+Fridge is so `async/await` friendly and designed with simplicity and flexibility in hand. With Fridge, you can even _say goodbye to closures and CoreData_ if you want! 🤷🏻‍♂️
 
-Checkout [documentation](Guides/Usage.md) for more information.    
-
-### Persistant (local) storage
-|Method|Description|
-|-|-|
-`Fridge.freeze🧊(object, identifier)`|Safely "freezes" your `struct` to persistant store|
-|`Fridge.unfreeze🪅🎉(identifier)`|"Unfreezes" (previously frozen), `struct` giving you control of it|
-
-Fridge storage mechanics are built on Foundation principles and use `BSON` as internal storage mechanism. All you have to do is to conform your struct to `Encodable` and you're ready to go, Fridge will take care of the rest.  
-  
-Checkout [documentation](Guides/Usage.md) for more information.  
-
-# Quick code example
-```Swift
-// 1. Conform your fancy struct to Decodable
-struct GHRepo: Decodable {
-    var name: String
-    var repositoryURL: URL
-    // ... other fields
-}
-
-do {
-  // 2. Await for grab🔮 method...
-  let myRepo: GHRepo = try await Fridge.grab🔮(from: URL("https://github.com/vexy/")!)
-} catch let err {
-  print("Naaah.. Something bad happened: \(err)")
-}
-
-// 3. Then, at your will, use myRepo as any other Foundation object
-print(myRepo)
-print(myRepo.name)
-
-// ... something ...
-
-// 4. Later on...
-do {
-  try Fridge.freeze🧊(myRepo, id: "myIdentifier")
-} catch let e {
-  print("Whoops... Here: \(e)")
-}
-```  
+Checkout [documentation](Docs/Usage.md) for more information.
 
 > _Talking is cheap. Show me the code._ - Linus Torvalds
 
-Here is some **real world** usage of `Fridge`:  
-  - [**Clmn** - _Beautiful macOS app that operates with tasks in columns_](https://github.com/igr/Clmn)
-  - [Playground examples of Fridge practical usage](/Guides/Examples/Fridge%20basics.playground/Contents.swift)
+## Networking 🕸
+```Swift
+// define your endpoint
+let endpoint = URL("https://github.com/vexy/")!
 
-# Installation instructions
+// conform your fancy struct to Decodable
+struct GitHubRepoObject: Decodable {
+  var name: String
+  var repositoryURL: URL
+  
+  // ... some other fields
+}
+
+// use Fridge to grab🔮 data from the network endpoint
+do {
+  let myRepo: GitHubRepoObject = try await Fridge.grab🔮(from: endpoint)
+  
+  // do something with your object
+  print(myRepo)
+  print(myRepo.name)
+} catch let err {
+  print("Naaah.. Something bad happened: \(err)")
+}
+```
+Checkout more [_documentation on networking_](Docs/Usage.md#network-fetching) or start with basic [code **examples**](Docs/Examples/).
+  
+
+## Persistant (local) storage 💾
+
+Fridge storage mechanics are built on Foundation principles and use `BSON` as internal storage mechanism. All you have to do is to conform your struct to `Encodable` and you're ready to go, Fridge will take care of the rest.  
+  
+
+```Swift
+// conform your fancy struct to Decodable
+struct GitHubRepoObject: Decodable {
+  var name: String
+  var repositoryURL: URL
+}
+
+// freeze it to local storage in just on line
+do {
+  try Fridge.freeze🧊(myRepo, id: "myIdentifier")
+} catch let e {
+  print("Whoops... Can't freeze because: \(e)")
+}
+```  
+
+Checkout [documentation](Docs/Usage.md) for more information.  
+
+# Real world use cases
+Here is some **real world** usage of `Fridge`:  
+  - [Clmn](https://github.com/igr/Clmn) - Beautiful macOS app that operates with tasks in columns
+  - [Sample code](/Docs/Examples) - with Fridge in practical usage
+
+## Installation instructions
 Using `Swift Package Manager` is by far the sexiest way to install `Fridge`.
 
 ```Swift
@@ -166,7 +131,7 @@ url: "https://github.com/vexy/Fridge.git"
 branch: "main"
 ```
 
-## Minimum versions required
+### Minimum versions required
 For `Fridge` to work in full capacity, following Swift & iOS configuration is _recommended_:
   - Xcode `13.1+`
   - Swift `5.5`
@@ -190,13 +155,14 @@ That may be helpfull for `Xcode 12.x`, assuming `Swift 5.x` is installed.
 Checkout official [Swift.org](https://www.swift.org/) website, for supporting earlier than minimums and other info.
 
 ## External dependencies
-Fridge uses [BSONCoder v0.9](https://github.com/vexy/bsoncoder) - Copyright by [Vexy](https://github.com/vexy).  
-Check original library licencing information under licencing section in README file.
+
+Since `v1.0` Fridge **does not** use anything other than Foundation provided `JSONEncoder`.  
+Up to `v0.9.2` Fridge used [BSONCoder v0.9](https://github.com/vexy/bsoncoder) as main encoding device.  
 
 # Documentation
 > _RTFM isn't a joke..._ 🥴 
     
-In the **[Docs](Guides/Usage.md)** you'll quickly figure out how to:
+In the **[Docs](Docs/Usage.md)** you'll quickly figure out how to:
   - *easily fetch object* from the network,
   - *persistently store* your objects,
   - *load them back* into your app,
