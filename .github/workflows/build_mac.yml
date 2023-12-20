@@ -2,7 +2,7 @@ name: Fridge Mac build
 
 on:
   push:
-    branches: [ development ]
+    branches: [ main, development ]
   pull_request:
     branches: [ main, development ]
 
