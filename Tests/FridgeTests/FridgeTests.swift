@@ -45,6 +45,13 @@ final class FridgeTests: XCTestCase {
         XCTAssert(retrievedObject.arr_field[1] == 0xB)
         XCTAssert(retrievedObject.arr_field[2] == 0xC)
     }
+    
+    func testThrowsOnInvalidIdentifier() {
+        do {
+            let _: String = try Fridge.unfreeze🪅🎉("some.non.existing.key")
+            XCTFail("Should'ev failed")
+        } catch { }
+    }
 
 //MARK:-
     /*

@@ -120,40 +120,44 @@ extension Fridge {
      Function expect that both provided object conforms to `Encodable`. Failing to provide conformance will result in throwing an error.
   
     - Returns: Foundation based `Decodable` object
-    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Throws: `FridgeErrors` depending on the condidion of the failure or `JSONEncodingError` in case of JSON parsing issues
     - Author: Vexy (https://github.com//vexy)
     - Since: `Fridge 0.9`
     - SeeAlso: [FridgeErrors](Errors.swift)
     */
     public static func freeze🧊<E: Encodable>(_ object: E, id: String) throws {
-        let freezer = Freezer()
-        do {
-            try freezer.freeze(object: object, identifier: id)
-        } catch let err {
-            print("<Fridge.Freezer> Error occured: \(err.localizedDescription)")
-            throw FreezingErrors.dataStoringError
-        }
+        // initialize the compartment with given ID
+        let freezingCompartment = FridgeCompartment(key: id)
+        
+        // try to encode the data
+        let objectData = try JSONEncoder().encode(object)
+        
+        // flush the data into the disk
+        // rethrow errors if any
+        try freezingCompartment.store(data: objectData)
     }
     
     /**
      Tries to freeze an array of given object into persistant storage.
    
-     Function expect that passed array conforms to `Codable`. Failing to provide conformance will result in throwing an error.
+     Function expect that passed array conforms to `Encodable`. Failing to provide conformance will result in throwing an error.
   
     - Returns: Foundation based `Decodable` object
-    - Throws: `FridgeErrors` depending on the condidion of the failure
+    - Throws: `FridgeErrors` depending on the condidion of the failure or `JSONEncodingError` in case of JSON parsing issues
     - Author: Vexy (https://github.com//vexy)
     - Since: `Fridge 0.9.3`
     - SeeAlso: [FridgeErrors](Errors.swift)
     */
-    public static func freeze🧊<C: Codable>(_ objects: [C], id: String) throws {
-        let freezer = Freezer()
-        do {
-            try freezer.freeze(objects: objects, identifier: id)
-        } catch let err {
-            print("<Fridge.Freezer> Error occured: \(err.localizedDescription)")
-            throw FreezingErrors.dataStoringError
-        }
+    public static func freeze🧊<C: Encodable>(_ objects: [C], id: String) throws {
+        // initialize the compartment with given ID
+        let freezingCompartment = FridgeCompartment(key: id)
+        
+        // try to encode the data
+        let objectsData = try JSONEncoder().encode(objects)
+        
+        // flush the data into the disk
+        // rethrow errors if any
+        try freezingCompartment.store(data: objectsData)
     }
     
 //MARK: --
@@ -170,9 +174,16 @@ extension Fridge {
     - SeeAlso: [FridgeErrors](Errors.swift)
     */
     public static func unfreeze🪅🎉<D: Decodable>(_ key: String) throws -> D {
-        let unfreezer = Freezer()
-        let unfrozenObject: D = try unfreezer.unfreeze(identifier: key) // propagate any Errors further
-        return unfrozenObject
+        // setup compartment
+        let unfreezingCompartment = FridgeCompartment(key: key)
+        
+        // try to load raw data
+        let rawData = try unfreezingCompartment.load()
+        
+        // try to perform data decoding
+        let decodedData = try JSONDecoder().decode(D.self, from: rawData)
+        //
+        return decodedData
     }
     
     /**
@@ -187,9 +198,16 @@ extension Fridge {
     - SeeAlso: [FridgeErrors](Errors.swift)
     */
     public static func unfreeze🪅🎉<C: Codable>(_ key: String) throws -> [C] {
-        let unfreezer = Freezer()
-        let unfrozenObject: [C] = try unfreezer.unfreeze(identifier: key) // propagate any Errors further
-        return unfrozenObject
+        // setup compartment
+        let unfreezingCompartment = FridgeCompartment(key: key)
+        
+        // try to load raw data
+        let rawData = try unfreezingCompartment.load()
+        
+        // try to perform data decoding
+        let decodedData = try JSONDecoder().decode([C].self, from: rawData)
+        //
+        return decodedData
     }
 }
 

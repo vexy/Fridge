@@ -8,19 +8,7 @@
 import Foundation
 
 enum FridgeErrors: Error {
-    //add case grabFailed(reason: Error) or similar
-    case grabFailed
-    case pushFailed
-    case decodingFailed
-}
-
-enum FreezingErrors: Error {
-    case dataStoringError
-    case dataReadingError
-    case unexpected
-}
-
-enum FridgeStreamError: Error {
-    case streamReadError
-    case streamWriteError
+    case networkingIssues(reason: String)
+    case storageIssues(reason: String)
+    case parsingIssues(reason: String)
 }
