@@ -1,0 +1,47 @@
+name: Fridge iOS build
+
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ main, development ]
+
+jobs:
+  tests-ios:
+    runs-on: macos-latest
+    name: iOS Simulators (iPhone,iPad) 
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: iPhone 8
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 8"
+    - name: iPhone 11
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11"
+    - name: iPhone 11 Pro
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11 Pro"
+    - name: iPhone 11 Pro Max
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 11 Pro Max"
+    - name: iPhone 12
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12"
+    - name: iPhone 12 Pro
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12 Pro"
+    - name: iPhone 12 Pro Max
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPhone 12 Pro Max"
+    - name: iPad (9th generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad (9th generation)"
+    - name: iPad (10th generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad (10th generation)"
+    - name: iPad Air (4th generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad Air (4th generation)"
+    - name: iPad Air (5th generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad Air (5th generation)"
+    - name: iPad Pro (9.7-inch)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad Pro (9.7-inch)"
+    - name: iPad Pro (11-inch) (3rd generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad Pro (11-inch) (3rd generation)"
+    - name: iPad Pro (11-inch) (4th generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad Pro (11-inch) (4th generation)"
+    - name: iPad Pro (12.9-inch) (4th generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation)"
+    - name: iPad Pro (12.9-inch) (5th generation)
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation)"
