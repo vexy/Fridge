@@ -31,7 +31,7 @@ let package = Package(
             name: "Fridge",
             dependencies: [],
             exclude: [
-                "../../Guides",
+                "../../Docs",
                 "../../README.md"
             ]
         ),
