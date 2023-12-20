@@ -1,0 +1,27 @@
+name: Fridge watchOS build
+
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ main, development ]
+
+jobs:
+  tests-watchos:
+    runs-on: macos-latest
+    name: Destination -> watchOS
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Apple Watch Series 5 - 40mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 40mm"
+    - name: Apple Watch Series 5 - 44mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm"
+    - name: Apple Watch Series 6 - 40mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 6 - 40mm"
+    - name: Apple Watch Series 6 - 44mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 6 - 44mm"
+    - name: Apple Watch Series 7 - 41mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 7 - 41mm"
+    - name: Apple Watch Series 7 - 45mm
+      run: xcodebuild clean test -scheme "Fridge" -destination "platform=watchOS Simulator,name=Apple Watch Series 7 - 45mm"
