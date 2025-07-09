@@ -34,32 +34,67 @@ internal struct FridgeCompartment {
     // key used to identify raw content
     private let key: String
     
-    /// Retuns new `FridgeCompartment` with given `key` identifier
+    /// Retuns new `FridgeCompartment` with given `key` identifier.
+    /// Automatically removes (overwrites) any previous instances previously used.
     init(key: String) {
         self.key = key
     }
     
+    /// Returns the compartment name formatted by key and internal file type identifier
+    private var storageName: String {
+        key + BLOB_EXTENSION
+    }
+    
     /// Returns `URL` based file path of this compartment
-    var objectPath: URL {
+    var objectURLPath: URL {
         // TODO: Alter between DocumentsDirectory and CacheDirectory later
-        guard let documentDirectoryURL = _fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        let searchPath : FileManager.SearchPathDirectory
+        #if os(tvOS) || os(watchOS)
+            searchPath = .applicationSupportDirectory
+        #else
+            searchPath = .documentDirectory
+        #endif
+        
+        guard let documentDirectoryURL = _fileManager.urls(for: searchPath, in: .userDomainMask).first else {
             fatalError("<Fridge.Storage> Unable to compute DocumentsDirectory path")
         }
         return documentDirectoryURL.appendingPathComponent(storageName)
     }
     
-    /// Returns the compartment name formatted by key and static identifier
-    private var storageName: String {
-        key + BLOB_EXTENSION
-    }
-    
     /// Returns `true` if raw data already exists at this compartment, `false` otherwise
     var alreadyExist: Bool {
-        _fileManager.fileExists(atPath: objectPath.path)
+        _fileManager.fileExists(atPath: objectURLPath.path)
     }
     
     /// Removes compartment from persistent storage
     func remove() {
-        try? _fileManager.removeItem(atPath: objectPath.path)
+        if alreadyExist {
+            try? _fileManager.removeItem(atPath: objectURLPath.path)
+        }
+    }
+}
+
+extension FridgeCompartment {
+    /// Tries to store object raw data to the system storage
+    func store(data: Data) throws {
+        // create file if it doesn't exist
+        if !alreadyExist {
+            _fileManager.createFile(atPath: objectURLPath.path, contents: data, attributes: nil)
+            print("*** \tCreating new file at: \(objectURLPath). Size: \(data.count) bytes")
+            return
+        }
+        
+        do {
+            print("Writing to: \(objectURLPath)")
+            try data.write(to: objectURLPath, options: .atomic)
+        } catch {
+            // transform any error into generic write error
+            throw FridgeErrors.storageIssues(reason: "Writing to data file failed.")
+        }
+    }
+    
+    /// Tries to load raw data from the system storage
+    func load() throws -> Data {
+        return try Data(contentsOf: objectURLPath)
     }
 }

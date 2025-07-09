@@ -1,21 +1,12 @@
-name: Fridge tvOS tests
+name: Fridge tvOS build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, development ]
   pull_request:
     branches: [ main, development ]
 
 jobs:
-  build:
-    runs-on: macos-latest
-    name: Fridge warmup build
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Pure swift build
-      run: swift build -v
-
   tests-tvos:
     runs-on: macos-latest
     name: Destination -> tvOS

@@ -27,15 +27,17 @@
 
 import Foundation
 
-@available(macOS 12.0, *)
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(watchOS 8.0, *)
+@available(tvOS 15.0, *)
 final internal class Grabber {
     func grab<D: Decodable>(from url: URL) async throws -> D {
         guard let rawData = try? await URLSession.shared.data(from: url).0 else {
-            throw FridgeErrors.grabFailed
+            throw FridgeErrors.networkingIssues(reason: "Networking failed")
         }
         guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
-            throw FridgeErrors.decodingFailed
+            throw FridgeErrors.decodingIssues(reason: "Unable to parse data.")
         }
         // return decoded object
         return decodedObject
@@ -43,10 +45,10 @@ final internal class Grabber {
     
     func grab<D: Decodable>(using urlRequest: URLRequest) async throws -> D {
         guard let rawData = try? await URLSession.shared.data(for: urlRequest).0 else {
-            throw FridgeErrors.grabFailed
+            throw FridgeErrors.networkingIssues(reason: "Networking failed")
         }
         guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
-            throw FridgeErrors.grabFailed
+            throw FridgeErrors.decodingIssues(reason: "Unable to parse data.")
         }
         // return decoded object
         return decodedObject
@@ -85,23 +87,26 @@ final internal class Grabber {
 }
 
 //MARK: - Private helpers
-@available(macOS 12.0, *)
+//@available(macOS 12.0, *)
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(watchOS 8.0, *)
+@available(tvOS 15.0, *)
 extension Grabber {
     /// Constructs a JSON based `URLRequest` from given url `String`
     private func constructURLRequest(from string: String) throws -> URLRequest {
-        guard let urlObject = URL(string: string) else { throw FridgeErrors.decodingFailed }
+        guard let urlObject = URL(string: string) else { throw FridgeErrors.decodingIssues(reason: "Decoding failed.") }
         var request = URLRequest(url: urlObject)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Fridge.grab", forHTTPHeaderField: "User-Agent")
+        request.setValue("Fridge.Grabber", forHTTPHeaderField: "User-Agent")
         return request
     }
     
     /// Serialize given object and attach it to request body
     private func serializeObject<E: Encodable>(_ objectToSerialize: E) throws -> Data {
         guard let serializedObject = try? JSONEncoder().encode(objectToSerialize.self) else {
-            throw FridgeErrors.decodingFailed
+            throw FridgeErrors.decodingIssues(reason: "Decoding failed.")
         }
         return serializedObject
     }
@@ -109,7 +114,7 @@ extension Grabber {
     /// Tries to decode given data into given `Decodable` object
     private func deserializeData<D: Decodable>(_ rawData: Data) throws -> D {
         guard let decodedObject = try? JSONDecoder().decode(D.self, from: rawData) else {
-            throw FridgeErrors.decodingFailed
+            throw FridgeErrors.decodingIssues(reason: "Decoding failed")
         }
         return decodedObject
     }
