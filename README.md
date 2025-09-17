@@ -36,7 +36,7 @@
 ## 💠 Library description
 `Fridge` is a freezing device ❄️ so it **has** to keep things cool enough, exposing just icy interface.
 
-Fridge is designed to _reduce the pain with most common software operations_ such as **[fetching](#networking)** and **[storing](#persistant-local-storage)** data. Or something like this:
+Fridge is designed to _reduce the pain with most common software operations_ such as **[fetching](#-networking)** and **[storing](#-persistant-local-storage)** data. Or something like this:
   - fetching _your stuff_ from the network,
   - parsing or decoding (JSON) data,
   - doing boring _error checking_
@@ -183,10 +183,11 @@ Don't be affraid to start any [discussions](https://github.com/vexy/Fridge/discu
 
 ---   
 (**FRIDGE IS UNDER ACTIVE DEVELOPMENT ALMOST REACHING v1.0**)  
-Fridge **BETA** release : *v0.9.3 ( UTC2022-09-24 )*
+Fridge **BETA** release : *v0.9.4 ( UTC2025-09-17 )*
 
 Copyright © 2016 Veljko Tekelerović | MIT license  
-**PGP:** `6302 D860 B74C BD34 6482 DBA2 5187 66D0 8213 DBC0`
+**PGP:** `5BC7 030E A038 0EA4 BB8A 470E 9F44 75B4 CF37 D56A`  
+`6302 D860 B74C BD34 6482 DBA2 5187 66D0 8213 DBC0`  
 
 
 <p align="center">

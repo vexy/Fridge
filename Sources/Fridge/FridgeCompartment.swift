@@ -65,22 +65,15 @@ internal struct FridgeCompartment {
     var alreadyExist: Bool {
         _fileManager.fileExists(atPath: objectURLPath.path)
     }
-    
-    /// Removes compartment from persistent storage
-    func remove() {
-        if alreadyExist {
-            try? _fileManager.removeItem(atPath: objectURLPath.path)
-        }
-    }
 }
 
 extension FridgeCompartment {
     /// Tries to store object raw data to the system storage
     func store(data: Data) throws {
         // create file if it doesn't exist
-        if !alreadyExist {
-            _fileManager.createFile(atPath: objectURLPath.path, contents: data, attributes: nil)
+        guard !alreadyExist else {
             print("*** \tCreating new file at: \(objectURLPath). Size: \(data.count) bytes")
+            _fileManager.createFile(atPath: objectURLPath.path, contents: data, attributes: nil)
             return
         }
         
@@ -96,5 +89,12 @@ extension FridgeCompartment {
     /// Tries to load raw data from the system storage
     func load() throws -> Data {
         return try Data(contentsOf: objectURLPath)
+    }
+
+    /// Removes compartment from persistent storage
+    func remove() {
+        if alreadyExist {
+            try? _fileManager.removeItem(atPath: objectURLPath.path)
+        }
     }
 }
