@@ -62,6 +62,7 @@ struct PublicInterfaceTests {
         #expect(retrievedObject.arr_field[0] == 0xA)
         #expect(retrievedObject.arr_field[1] == 0xB)
         #expect(retrievedObject.arr_field[2] == 0xC)
+        #expect(retrievedObject.bool_field == false)
     }
 
     @Test("Throws on invalid identifier")
