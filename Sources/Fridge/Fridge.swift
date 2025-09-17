@@ -38,7 +38,7 @@ import Foundation
 - Since: Fridge `0.1`
 */
 public struct Fridge {
-    static subscript<D: Decodable> (identifier: String) -> D {
+    public static subscript<D: Decodable> (identifier: String) -> D {
         /// Tries to return frozen object given object odentifier
         get throws {
             // try to unfreeze the object using given identifier
